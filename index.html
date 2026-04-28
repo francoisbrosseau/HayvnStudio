@@ -1,1 +1,573 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hayvn Studio | Home Staging & Real Estate Photography</title>
+  <meta name="description" content="Hayvn Studio offers home staging, interior styling, and real estate photography in Quintana Roo, Mexico — Cancun, Tulum, Playa del Carmen and surrounding areas." />  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">  <style>
+    :root {
+      --black: #090807;
+      --charcoal: #11100e;
+      --soft-black: #171512;
+      --gold: #c9a35b;
+      --gold-light: #e4c981;
+      --cream: #f4efe6;
+      --muted: #c9beb0;
+      --text: #fff8ec;
+      --line: rgba(201, 163, 91, 0.35);
+      --glass: rgba(255, 248, 236, 0.07);
+      --shadow: 0 28px 80px rgba(0,0,0,.45);
+      --radius: 24px;
+    }
 
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      background: radial-gradient(circle at top left, #292116 0%, var(--black) 42%, #040403 100%);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .08;
+      z-index: 999;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: rgba(9, 8, 7, .72);
+      border-bottom: 1px solid rgba(201,163,91,.22);
+    }
+
+    .nav {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--gold-light);
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--gold);
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      box-shadow: inset 0 0 22px rgba(201,163,91,.16);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      color: var(--muted);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
+
+    .nav-links a:hover { color: var(--gold-light); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 46px;
+      padding: 0 20px;
+      border-radius: 999px;
+      border: 1px solid var(--gold);
+      background: linear-gradient(135deg, #d7b56d, #9c7834);
+      color: #100d08;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: 12px;
+      box-shadow: 0 12px 35px rgba(201,163,91,.2);
+      cursor: pointer;
+    }
+
+    .btn.secondary {
+      background: rgba(255,255,255,.04);
+      color: var(--gold-light);
+      box-shadow: none;
+    }
+
+    .hero {
+      position: relative;
+      padding: 82px 0 72px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(9,8,7,.92), rgba(9,8,7,.62), rgba(9,8,7,.22)),
+        url("images/kitchen-after.jpg") center/cover no-repeat;
+      opacity: .72;
+      z-index: -2;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 28px;
+      border: 1px solid rgba(201,163,91,.34);
+      border-radius: 28px;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      align-items: center;
+      gap: 46px;
+    }
+
+    .eyebrow {
+      color: var(--gold-light);
+      text-transform: uppercase;
+      letter-spacing: .24em;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Cormorant Garamond', serif;
+      line-height: .95;
+      margin: 0;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: clamp(54px, 8vw, 112px);
+      max-width: 760px;
+      letter-spacing: -.04em;
+    }
+
+    h1 span, h2 span { color: var(--gold-light); }
+
+    .hero-copy {
+      max-width: 680px;
+      margin: 24px 0 30px;
+      color: #ded4c6;
+      font-size: clamp(17px, 2vw, 21px);
+      line-height: 1.65;
+    }
+
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    .contact-card {
+      background: linear-gradient(180deg, rgba(17,16,14,.88), rgba(17,16,14,.72));
+      border: 1px solid rgba(201,163,91,.32);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-card h3 {
+      font-size: 38px;
+      margin-bottom: 18px;
+    }
+
+    .contact-row {
+      display: flex;
+      gap: 12px;
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      color: var(--cream);
+      line-height: 1.45;
+    }
+
+    .contact-row:last-child { border-bottom: 0; }
+    .icon { color: var(--gold-light); width: 24px; flex: 0 0 24px; }
+
+    section { padding: 86px 0; }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 28px;
+      margin-bottom: 34px;
+    }
+
+    h2 { font-size: clamp(42px, 5.6vw, 78px); max-width: 760px; }
+    .section-text { max-width: 560px; color: var(--muted); line-height: 1.7; }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .service {
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.025));
+      border: 1px solid rgba(201,163,91,.22);
+      border-radius: var(--radius);
+      padding: 26px;
+      min-height: 260px;
+    }
+
+    .service h3 { font-size: 34px; margin: 16px 0 12px; }
+    .service p { color: var(--muted); line-height: 1.65; margin: 0; }
+    .service-number { color: var(--gold-light); letter-spacing: .18em; font-size: 12px; font-weight: 800; }
+
+    .gallery {
+      display: grid;
+      gap: 34px;
+    }
+
+    .project {
+      border: 1px solid rgba(201,163,91,.26);
+      background: rgba(255,255,255,.035);
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .project-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+      padding: 22px 24px;
+      border-bottom: 1px solid rgba(201,163,91,.18);
+    }
+
+    .project-title h3 { font-size: 34px; }
+    .tag { color: var(--gold-light); font-size: 12px; text-transform: uppercase; letter-spacing: .16em; }
+
+    .before-after {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .shot { position: relative; min-height: 300px; background: #000; }
+    .shot img {
+      width: 100%;
+      height: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+    }
+
+    .label {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(9,8,7,.72);
+      border: 1px solid rgba(201,163,91,.4);
+      color: var(--gold-light);
+      font-weight: 800;
+      font-size: 11px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      backdrop-filter: blur(10px);
+    }
+
+    .form-wrap {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 30px;
+      align-items: stretch;
+    }
+
+    .form-info, form {
+      background: linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.03));
+      border: 1px solid rgba(201,163,91,.26);
+      border-radius: 30px;
+      padding: 28px;
+    }
+
+    .form-info h3 { font-size: 44px; margin-bottom: 14px; }
+    .form-info p { color: var(--muted); line-height: 1.7; }
+
+    .fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .field.full { grid-column: 1 / -1; }
+    label {
+      display: block;
+      color: var(--gold-light);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid rgba(201,163,91,.24);
+      background: rgba(0,0,0,.28);
+      color: var(--text);
+      border-radius: 16px;
+      padding: 14px 15px;
+      font: inherit;
+      outline: none;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--gold-light);
+      box-shadow: 0 0 0 4px rgba(201,163,91,.12);
+    }
+
+    textarea { min-height: 140px; resize: vertical; }
+    input[type="file"] { padding: 12px; color: var(--muted); }
+
+    footer {
+      padding: 36px 0;
+      border-top: 1px solid rgba(201,163,91,.22);
+      color: var(--muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hero { padding-top: 54px; }
+      .hero-grid, .form-wrap, .services { grid-template-columns: 1fr; }
+      .section-head { display: block; }
+      .section-text { margin-top: 16px; }
+      .before-after { grid-template-columns: 1fr; }
+      .fields { grid-template-columns: 1fr; }
+      .hero::after { inset: 14px; border-radius: 20px; }
+      section { padding: 62px 0; }
+    }
+
+    @media (max-width: 520px) {
+      .container { width: min(100% - 22px, 1180px); }
+      .nav { height: 66px; }
+      .brand { letter-spacing: .12em; font-size: 13px; }
+      .btn { width: 100%; }
+      .hero-actions .btn { width: auto; flex: 1 1 180px; }
+      .project-title { align-items: start; flex-direction: column; }
+      .contact-card, .form-info, form { padding: 20px; border-radius: 22px; }
+      .service { min-height: auto; }
+    }
+  </style></head>
+<body>
+  <div class="grain"></div>  <header>
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="Hayvn Studio home">
+        <span class="brand-mark">H</span>
+        <span>Hayvn Studio</span>
+      </a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#services">Services</a>
+        <a href="#portfolio">Before & After</a>
+        <a href="#project">Submit Your Project</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="btn" href="#project">Start Project</a>
+    </div>
+  </header>  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Quintana Roo • Mexico</div>
+          <h1>Transforming spaces <span>into experiences.</span></h1>
+          <p class="hero-copy">Home staging, interior styling, and real estate photography designed to make buyers feel the value before they ever read the listing.</p>
+          <div class="hero-actions">
+            <a class="btn" href="#portfolio">View Transformations</a>
+            <a class="btn secondary" href="mailto:hayvnstudio@gmail.com">Email Us</a>
+          </div>
+        </div><aside class="contact-card" id="contact" aria-label="Contact information">
+      <h3>Book the vision.</h3>
+      <div class="contact-row"><span class="icon">✉</span><a href="mailto:hayvnstudio@gmail.com">hayvnstudio@gmail.com</a></div>
+      <div class="contact-row"><span class="icon">☎</span><a href="tel:+14432922342">+1 443 292 2342</a></div>
+      <div class="contact-row"><span class="icon">◎</span><a href="https://hayvnstudio.com">Hayvnstudio.com</a></div>
+      <div class="contact-row"><span class="icon">⌖</span><span>Quintana Roo, Mexico<br>Cancun | Tulum | Playa del Carmen & surrounding areas</span></div>
+    </aside>
+  </div>
+</section>
+
+<section id="services">
+  <div class="container">
+    <div class="section-head">
+      <h2>Design that sells. <span>Photography that stops the scroll.</span></h2>
+      <p class="section-text">We create cohesive, elevated spaces for listings, rentals, investment properties, and homes that need a stronger first impression.</p>
+    </div>
+
+    <div class="services">
+      <article class="service">
+        <div class="service-number">01</div>
+        <h3>Home Staging</h3>
+        <p>We turn empty, dated, or underwhelming rooms into warm, desirable spaces that help buyers connect emotionally.</p>
+      </article>
+      <article class="service">
+        <div class="service-number">02</div>
+        <h3>Interior Styling</h3>
+        <p>Color, texture, lighting, decor, and furniture direction — styled with intention so every room feels finished and premium.</p>
+      </article>
+      <article class="service">
+        <div class="service-number">03</div>
+        <h3>Real Estate Photography</h3>
+        <p>Clean, polished, high-impact photography that makes your listing look professional from the first thumbnail.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="portfolio">
+  <div class="container">
+    <div class="section-head">
+      <h2>Before & after <span>transformations.</span></h2>
+      <p class="section-text">Replace the image file names below with your final image files inside an <strong>images</strong> folder. The layout is already ready for desktop and mobile.</p>
+    </div>
+
+    <div class="gallery">
+      <article class="project">
+        <div class="project-title"><h3>Living Room</h3><span class="tag">Modern & Classy</span></div>
+        <div class="before-after">
+          <div class="shot"><span class="label">Before</span><img src="images/living-before.jpg" alt="Outdated townhouse living room before staging"></div>
+          <div class="shot"><span class="label">After</span><img src="images/living-after.jpg" alt="Modern cozy staged living room after transformation"></div>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-title"><h3>Kitchen</h3><span class="tag">Luxury Upgrade</span></div>
+        <div class="before-after">
+          <div class="shot"><span class="label">Before</span><img src="images/kitchen-before.jpg" alt="Outdated kitchen before renovation and staging"></div>
+          <div class="shot"><span class="label">After</span><img src="images/kitchen-after.jpg" alt="Modern luxurious kitchen after transformation"></div>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-title"><h3>Master Bedroom</h3><span class="tag">Cozy Luxury</span></div>
+        <div class="before-after">
+          <div class="shot"><span class="label">Before</span><img src="images/bedroom-before.jpg" alt="Outdated traditional master bedroom before staging"></div>
+          <div class="shot"><span class="label">After</span><img src="images/bedroom-after.jpg" alt="Modern cozy luxury master bedroom after staging"></div>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-title"><h3>Bathroom</h3><span class="tag">Spa Inspired</span></div>
+        <div class="before-after">
+          <div class="shot"><span class="label">Before</span><img src="images/bathroom-before.jpg" alt="Outdated beige bathroom before remodel concept"></div>
+          <div class="shot"><span class="label">After</span><img src="images/bathroom-after.jpg" alt="Modern luxury bathroom after transformation"></div>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-title"><h3>Entry Hallway</h3><span class="tag">First Impression</span></div>
+        <div class="before-after">
+          <div class="shot"><span class="label">Before</span><img src="images/hallway-before.jpg" alt="Basic entry hallway before staging"></div>
+          <div class="shot"><span class="label">After</span><img src="images/hallway-after.jpg" alt="Modern warm entry hallway after staging"></div>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-title"><h3>Basement Lounge</h3><span class="tag">Family Space</span></div>
+        <div class="before-after">
+          <div class="shot"><span class="label">Before</span><img src="images/basement-before.jpg" alt="Outdated finished basement before staging"></div>
+          <div class="shot"><span class="label">After</span><img src="images/basement-after.jpg" alt="Modern cozy basement lounge after transformation"></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="project">
+  <div class="container form-wrap">
+    <div class="form-info">
+      <div class="eyebrow">Submit your project</div>
+      <h3>Tell us what needs to change.</h3>
+      <p>Send your contact details, photos, budget range, and what you would like to achieve. We’ll review the project and respond with the next steps.</p>
+      <p><strong>Note:</strong> This static GitHub Pages form needs a form service like Formspree, Getform, or Netlify Forms to receive submissions.</p>
+    </div>
+
+    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" enctype="multipart/form-data">
+      <div class="fields">
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" placeholder="Your name" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="you@email.com" required>
+        </div>
+        <div class="field">
+          <label for="phone">Phone</label>
+          <input id="phone" name="phone" type="tel" placeholder="Optional">
+        </div>
+        <div class="field">
+          <label for="budget">Budget</label>
+          <select id="budget" name="budget" required>
+            <option value="">Select range</option>
+            <option>$500 - $1,500</option>
+            <option>$1,500 - $3,000</option>
+            <option>$3,000 - $5,000</option>
+            <option>$5,000+</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label for="photos">Photos</label>
+          <input id="photos" name="photos" type="file" accept="image/*" multiple>
+        </div>
+        <div class="field full">
+          <label for="message">What would you like?</label>
+          <textarea id="message" name="message" placeholder="Tell us about the property, rooms, timeline, and desired result." required></textarea>
+        </div>
+      </div>
+      <br>
+      <button class="btn" type="submit">Submit Project</button>
+    </form>
+  </div>
+</section>
+
+  </main>  <footer>
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> Hayvn Studio. All rights reserved.</div>
+      <div>Home Staging • Interior Styling • Real Estate Photography</div>
+    </div>
+  </footer>  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script></body>
+        </html>
