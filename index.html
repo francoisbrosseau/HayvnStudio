@@ -162,13 +162,23 @@
     }
 
     .eyebrow {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 10px;
       color: var(--gold-2);
-      text-transform: uppercase;
-      letter-spacing: .22em;
       font-size: 11px;
-      font-weight: 900;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
       margin-bottom: 20px;
-      line-height: 1.65;
+    }
+
+    .eyebrow span {
+      padding: 6px 10px;
+      border: 1px solid rgba(234,208,140,.35);
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+      backdrop-filter: blur(6px);
     }
 
     h1, h2, h3 {
@@ -402,7 +412,11 @@
     <section class="hero">
       <div class="container hero-grid">
         <div>
-          <div class="eyebrow">Home Staging • Interior Styling • Real Estate Photography</div>
+          <div class="eyebrow">
+            <span>Home Staging</span>
+            <span>Interior Styling</span>
+            <span>Real Estate Photography</span>
+          </div>
           <h1>Elevated spaces. Unforgettable first impressions.</h1>
           <p class="hero-copy">Hayvn Studio transforms homes, rentals, and listings into warm, refined visual experiences that make every room feel intentional, desirable, and ready to be remembered.</p>
           <div class="hero-actions">
@@ -550,4 +564,21 @@
         </div>
         <div class="field full">
           <label for="message">What would you like?</label>
-      
+          <textarea id="message" name="message" placeholder="Tell us about the property, rooms, timeline, and desired result." required></textarea>
+        </div>
+      </div>
+      <br>
+      <button class="btn" type="submit">Submit Project</button>
+    </form>
+  </div>
+</section>
+
+  </main>  <footer>
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> Hayvn Studio</div>
+      <div>Home Staging • Interior Styling • Real Estate Photography</div>
+    </div>
+  </footer>  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script></body>
+</html>
