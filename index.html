@@ -1,11 +1,16 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hayvn Studio | Home Staging & Real Estate Photography</title>
-  <meta name="description" content="Hayvn Studio offers home staging, interior styling, and real estate photography in Quintana Roo, Mexico — Cancun, Tulum, Playa del Carmen and surrounding areas." />  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <meta name="description" content="Hayvn Studio offers home staging, interior styling, and real estate photography in Quintana Roo, Mexico — Cancun, Tulum, Playa del Carmen and surrounding areas." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">  <style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <style>
     :root {
       --black: #070604;
       --charcoal: #10100e;
@@ -43,6 +48,76 @@
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
+    .intro {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at center, rgba(201,163,91,.10), transparent 34%),
+        rgba(4, 4, 3, .98);
+      transition: opacity 1.25s ease, visibility 1.25s ease;
+    }
+
+    .intro.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .intro-card {
+      width: min(680px, calc(100% - 36px));
+      text-align: center;
+      transform: translateY(10px) scale(.96);
+      opacity: 0;
+      animation: introRise 1.15s ease forwards;
+    }
+
+    .intro-logo {
+      width: min(520px, 84vw);
+      margin: 0 auto;
+      filter: drop-shadow(0 0 34px rgba(201,163,91,.35));
+    }
+
+    .intro-card p {
+      margin: 20px 0 28px;
+      color: var(--gold-2);
+      text-transform: uppercase;
+      letter-spacing: .22em;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.8;
+    }
+
+    .intro-btn {
+      min-height: 48px;
+      padding: 0 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(234,208,140,.6);
+      background: rgba(255,255,255,.04);
+      color: var(--gold-2);
+      font-weight: 900;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .intro.playing .intro-card {
+      animation: logoBloom 2.45s ease forwards;
+    }
+
+    @keyframes introRise {
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes logoBloom {
+      0% { opacity: 1; transform: scale(1); }
+      35% { opacity: 1; transform: scale(1.18); }
+      68% { opacity: 1; transform: scale(1.18); }
+      100% { opacity: 0; transform: scale(1.28); }
+    }
+
     img { display: block; max-width: 100%; }
     a { color: inherit; text-decoration: none; }
     .container { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
@@ -57,7 +132,7 @@
     }
 
     .nav {
-      height: 74px;
+      height: 88px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -72,10 +147,10 @@
     }
 
     .brand-logo {
-      height: 42px;
+      height: 58px;
       width: auto;
       object-fit: contain;
-      filter: drop-shadow(0 8px 22px rgba(201,163,91,.22));
+      filter: drop-shadow(0 8px 22px rgba(201,163,91,.28));
     }
 
     .brand-fallback {
@@ -126,7 +201,7 @@
 
     .hero {
       position: relative;
-      min-height: calc(100vh - 74px);
+      min-height: calc(100vh - 88px);
       display: grid;
       align-items: center;
       padding: 86px 0 76px;
@@ -371,8 +446,8 @@
 
     @media (max-width: 640px) {
       .container { width: min(100% - 24px, 1160px); }
-      .nav { height: 66px; }
-      .brand-logo { height: 35px; max-width: 190px; }
+      .nav { height: 76px; }
+      .brand-logo { height: 48px; max-width: 230px; }
       .nav .btn { display: none; }
       .hero { padding: 34px 0 44px; }
       .hero::after { inset: 10px; border-radius: 22px; }
@@ -392,8 +467,18 @@
       .fields { grid-template-columns: 1fr; }
       footer { font-size: 13px; }
     }
-  </style></head>
+  </style>
+</head>
 <body>
+  <div class="intro" id="intro">
+    <div class="intro-card">
+      <img src="images/hayvn-logo-gold.png" alt="Hayvn Studio logo" class="intro-logo">
+      <p>Home Staging • Interior Styling • Real Estate Photography</p>
+      <button class="intro-btn" id="enterSite" type="button">Enter Hayvn Studio</button>
+    </div>
+  </div>
+
+  <audio id="introMusic" src="audio/intro-music.mp3" preload="auto"></audio>
   <header>
     <div class="container nav">
       <a class="brand" href="#top" aria-label="Hayvn Studio home">
@@ -408,7 +493,9 @@
       </nav>
       <a class="btn" href="#project">Start Project</a>
     </div>
-  </header>  <main id="top">
+  </header>
+
+  <main id="top">
     <section class="hero">
       <div class="container hero-grid">
         <div>
@@ -423,162 +510,186 @@
             <a class="btn" href="#portfolio">View Transformations</a>
             <a class="btn ghost" href="#project">Submit Your Project</a>
           </div>
-        </div><aside class="contact-panel" id="contact">
-      <div class="contact-top">
-        <div class="eyebrow">Contact</div>
-        <h3>Let’s elevate the listing.</h3>
-        <p>Serving Quintana Roo with refined staging, styling, and real estate visuals.</p>
+        </div>
+
+        <aside class="contact-panel" id="contact">
+          <div class="contact-top">
+            <div class="eyebrow">Contact</div>
+            <h3>Let’s elevate the listing.</h3>
+            <p>Serving Quintana Roo with refined staging, styling, and real estate visuals.</p>
+          </div>
+          <div class="contact-list">
+            <div class="contact-row"><span class="icon">✉</span><a href="mailto:hayvnstudio@gmail.com">hayvnstudio@gmail.com</a></div>
+            <div class="contact-row"><span class="icon">☎</span><a href="tel:+14432922342">+1 443 292 2342</a></div>
+            <div class="contact-row"><span class="icon">◎</span><a href="https://hayvnstudio.com">Hayvnstudio.com</a></div>
+            <div class="contact-row"><span class="icon">⌖</span><span>Quintana Roo, Mexico<br>Cancun • Tulum • Playa del Carmen • Surrounding areas</span></div>
+          </div>
+        </aside>
       </div>
-      <div class="contact-list">
-        <div class="contact-row"><span class="icon">✉</span><a href="mailto:hayvnstudio@gmail.com">hayvnstudio@gmail.com</a></div>
-        <div class="contact-row"><span class="icon">☎</span><a href="tel:+14432922342">+1 443 292 2342</a></div>
-        <div class="contact-row"><span class="icon">◎</span><a href="https://hayvnstudio.com">Hayvnstudio.com</a></div>
-        <div class="contact-row"><span class="icon">⌖</span><span>Quintana Roo, Mexico<br>Cancun • Tulum • Playa del Carmen • Surrounding areas</span></div>
-      </div>
-    </aside>
-  </div>
-</section>
+    </section>
 
-<section id="services">
-  <div class="container">
-    <div class="section-head">
-      <h2>One brand. Three ways to make the property unforgettable.</h2>
-      <p class="section-text">The goal is not just to make rooms look better. The goal is to make buyers, renters, and investors feel the potential immediately.</p>
-    </div>
+    <section id="services">
+      <div class="container">
+        <div class="section-head">
+          <h2>One brand. Three ways to make the property unforgettable.</h2>
+          <p class="section-text">The goal is not just to make rooms look better. The goal is to make buyers, renters, and investors feel the potential immediately.</p>
+        </div>
 
-    <div class="services">
-      <article class="service">
-        <small>01</small>
-        <h3>Home Staging</h3>
-        <p>Furniture, layout, color, and decor direction that turns ordinary rooms into spaces people remember.</p>
-      </article>
-      <article class="service">
-        <small>02</small>
-        <h3>Interior Styling</h3>
-        <p>Warm modern styling with luxury details — clean, cozy, intentional, and never overdone.</p>
-      </article>
-      <article class="service">
-        <small>03</small>
-        <h3>Real Estate Photography</h3>
-        <p>Professional listing images that capture the transformation and make the property feel premium online.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section id="portfolio">
-  <div class="container">
-    <div class="section-head">
-      <h2>Before and after transformations.</h2>
-      <p class="section-text">Use the exact file names below in your repository. Create a folder named <strong>images</strong> and drop your photos inside it.</p>
-    </div>
-
-    <div class="gallery">
-      <article class="project">
-        <div class="project-title"><h3>Living Room</h3><span class="tag">Modern & Classy</span></div>
-        <div class="before-after">
-          <div class="shot"><span class="label">Before</span><img src="images/living-room-before.jpg" alt="Living room before staging"></div>
-          <div class="shot"><span class="label">After</span><img src="images/living-room-after.jpg" alt="Living room after staging"></div>
-        </div>
-      </article>
-
-      <article class="project">
-        <div class="project-title"><h3>Kitchen</h3><span class="tag">Luxury Upgrade</span></div>
-        <div class="before-after">
-          <div class="shot"><span class="label">Before</span><img src="images/kitchen-before.jpg" alt="Kitchen before staging"></div>
-          <div class="shot"><span class="label">After</span><img src="images/kitchen-after.jpg" alt="Kitchen after staging"></div>
-        </div>
-      </article>
-
-      <article class="project">
-        <div class="project-title"><h3>Master Bedroom</h3><span class="tag">Cozy Luxury</span></div>
-        <div class="before-after">
-          <div class="shot"><span class="label">Before</span><img src="images/master-bedroom-before.jpg" alt="Master bedroom before staging"></div>
-          <div class="shot"><span class="label">After</span><img src="images/master-bedroom-after.jpg" alt="Master bedroom after staging"></div>
-        </div>
-      </article>
-
-      <article class="project">
-        <div class="project-title"><h3>Bathroom</h3><span class="tag">Spa Inspired</span></div>
-        <div class="before-after">
-          <div class="shot"><span class="label">Before</span><img src="images/bathroom-before.jpg" alt="Bathroom before staging"></div>
-          <div class="shot"><span class="label">After</span><img src="images/bathroom-after.jpg" alt="Bathroom after staging"></div>
-        </div>
-      </article>
-
-      <article class="project">
-        <div class="project-title"><h3>Entry Hallway</h3><span class="tag">First Impression</span></div>
-        <div class="before-after">
-          <div class="shot"><span class="label">Before</span><img src="images/hallway-before.jpg" alt="Entry hallway before staging"></div>
-          <div class="shot"><span class="label">After</span><img src="images/hallway-after.jpg" alt="Entry hallway after staging"></div>
-        </div>
-      </article>
-
-      <article class="project">
-        <div class="project-title"><h3>Basement Lounge</h3><span class="tag">Family Space</span></div>
-        <div class="before-after">
-          <div class="shot"><span class="label">Before</span><img src="images/basement-before.jpg" alt="Basement before staging"></div>
-          <div class="shot"><span class="label">After</span><img src="images/basement-after.jpg" alt="Basement after staging"></div>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section id="project">
-  <div class="container form-wrap">
-    <div class="form-info">
-      <div class="eyebrow">Submit Your Project</div>
-      <h3>Send the rooms. We’ll shape the vision.</h3>
-      <p>Upload photos, share your budget, and tell us what needs to happen. This is built for home owners, Airbnb hosts, investors, and real estate professionals.</p>
-      <p><strong>Important:</strong> GitHub Pages needs a form service to receive submissions. Replace <strong>YOUR_FORM_ID</strong> in the form action with your Formspree ID.</p>
-    </div>
-
-    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" enctype="multipart/form-data">
-      <div class="fields">
-        <div class="field">
-          <label for="name">Name</label>
-          <input id="name" name="name" type="text" placeholder="Your name" required>
-        </div>
-        <div class="field">
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" placeholder="you@email.com" required>
-        </div>
-        <div class="field">
-          <label for="phone">Phone</label>
-          <input id="phone" name="phone" type="tel" placeholder="Optional">
-        </div>
-        <div class="field">
-          <label for="budget">Budget</label>
-          <select id="budget" name="budget" required>
-            <option value="">Select range</option>
-            <option>$500 - $1,500</option>
-            <option>$1,500 - $3,000</option>
-            <option>$3,000 - $5,000</option>
-            <option>$5,000+</option>
-          </select>
-        </div>
-        <div class="field full">
-          <label for="photos">Photos</label>
-          <input id="photos" name="photos" type="file" accept="image/*" multiple>
-        </div>
-        <div class="field full">
-          <label for="message">What would you like?</label>
-          <textarea id="message" name="message" placeholder="Tell us about the property, rooms, timeline, and desired result." required></textarea>
+        <div class="services">
+          <article class="service">
+            <small>01</small>
+            <h3>Home Staging</h3>
+            <p>Furniture, layout, color, and decor direction that turns ordinary rooms into spaces people remember.</p>
+          </article>
+          <article class="service">
+            <small>02</small>
+            <h3>Interior Styling</h3>
+            <p>Warm modern styling with luxury details — clean, cozy, intentional, and never overdone.</p>
+          </article>
+          <article class="service">
+            <small>03</small>
+            <h3>Real Estate Photography</h3>
+            <p>Professional listing images that capture the transformation and make the property feel premium online.</p>
+          </article>
         </div>
       </div>
-      <br>
-      <button class="btn" type="submit">Submit Project</button>
-    </form>
-  </div>
-</section>
+    </section>
 
-  </main>  <footer>
+    <section id="portfolio">
+      <div class="container">
+        <div class="section-head">
+          <h2>Before and after transformations.</h2>
+          <p class="section-text">Use the exact file names below in your repository. Create a folder named <strong>images</strong> and drop your photos inside it.</p>
+        </div>
+
+        <div class="gallery">
+          <article class="project">
+            <div class="project-title"><h3>Living Room</h3><span class="tag">Modern & Classy</span></div>
+            <div class="before-after">
+              <div class="shot"><span class="label">Before</span><img src="images/living-room-before.jpg" alt="Living room before staging"></div>
+              <div class="shot"><span class="label">After</span><img src="images/living-room-after.jpg" alt="Living room after staging"></div>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-title"><h3>Kitchen</h3><span class="tag">Luxury Upgrade</span></div>
+            <div class="before-after">
+              <div class="shot"><span class="label">Before</span><img src="images/kitchen-before.jpg" alt="Kitchen before staging"></div>
+              <div class="shot"><span class="label">After</span><img src="images/kitchen-after.jpg" alt="Kitchen after staging"></div>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-title"><h3>Master Bedroom</h3><span class="tag">Cozy Luxury</span></div>
+            <div class="before-after">
+              <div class="shot"><span class="label">Before</span><img src="images/master-bedroom-before.jpg" alt="Master bedroom before staging"></div>
+              <div class="shot"><span class="label">After</span><img src="images/master-bedroom-after.jpg" alt="Master bedroom after staging"></div>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-title"><h3>Bathroom</h3><span class="tag">Spa Inspired</span></div>
+            <div class="before-after">
+              <div class="shot"><span class="label">Before</span><img src="images/bathroom-before.jpg" alt="Bathroom before staging"></div>
+              <div class="shot"><span class="label">After</span><img src="images/bathroom-after.jpg" alt="Bathroom after staging"></div>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-title"><h3>Entry Hallway</h3><span class="tag">First Impression</span></div>
+            <div class="before-after">
+              <div class="shot"><span class="label">Before</span><img src="images/hallway-before.jpg" alt="Entry hallway before staging"></div>
+              <div class="shot"><span class="label">After</span><img src="images/hallway-after.jpg" alt="Entry hallway after staging"></div>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-title"><h3>Basement Lounge</h3><span class="tag">Family Space</span></div>
+            <div class="before-after">
+              <div class="shot"><span class="label">Before</span><img src="images/basement-before.jpg" alt="Basement before staging"></div>
+              <div class="shot"><span class="label">After</span><img src="images/basement-after.jpg" alt="Basement after staging"></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="project">
+      <div class="container form-wrap">
+        <div class="form-info">
+          <div class="eyebrow">Submit Your Project</div>
+          <h3>Send the rooms. We’ll shape the vision.</h3>
+          <p>Upload photos, share your budget, and tell us what needs to happen. This is built for home owners, Airbnb hosts, investors, and real estate professionals.</p>
+          <p><strong>Important:</strong> GitHub Pages needs a form service to receive submissions. Replace <strong>YOUR_FORM_ID</strong> in the form action with your Formspree ID.</p>
+        </div>
+
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" enctype="multipart/form-data">
+          <div class="fields">
+            <div class="field">
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" placeholder="Your name" required>
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="you@email.com" required>
+            </div>
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" type="tel" placeholder="Optional">
+            </div>
+            <div class="field">
+              <label for="budget">Budget</label>
+              <select id="budget" name="budget" required>
+                <option value="">Select range</option>
+                <option>$500 - $1,500</option>
+                <option>$1,500 - $3,000</option>
+                <option>$3,000 - $5,000</option>
+                <option>$5,000+</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="photos">Photos</label>
+              <input id="photos" name="photos" type="file" accept="image/*" multiple>
+            </div>
+            <div class="field full">
+              <label for="message">What would you like?</label>
+              <textarea id="message" name="message" placeholder="Tell us about the property, rooms, timeline, and desired result." required></textarea>
+            </div>
+          </div>
+          <br>
+          <button class="btn" type="submit">Submit Project</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
     <div class="container footer-inner">
       <div>© <span id="year"></span> Hayvn Studio</div>
       <div>Home Staging • Interior Styling • Real Estate Photography</div>
     </div>
-  </footer>  <script>
+  </footer>
+
+  <script>
     document.getElementById("year").textContent = new Date().getFullYear();
-  </script></body>
+
+    const intro = document.getElementById("intro");
+    const enterSite = document.getElementById("enterSite");
+    const introMusic = document.getElementById("introMusic");
+
+    enterSite.addEventListener("click", async () => {
+      intro.classList.add("playing");
+
+      // Optional music: add your file at /audio/intro-music.mp3
+      if (introMusic) {
+        introMusic.volume = 0.45;
+        introMusic.play().catch(() => {});
+      }
+
+      setTimeout(() => {
+        intro.classList.add("hidden");
+      }, 2200);
+    });
+  </script>
+</body>
 </html>
