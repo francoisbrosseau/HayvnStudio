@@ -158,22 +158,52 @@
       box-shadow: inset 0 0 30px rgba(201,163,91,.055);
     }
 
-    .nav-links a, .lang-switch button {
-      width: 44px;
-      min-width: 44px;
-      height: 44px;
+    .nav-links a {
+      position: relative;
+      padding: 11px 15px;
+      border-radius: 999px;
+      color: var(--gold-2);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      transition: background .25s ease, color .25s ease, transform .25s ease;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover {
+      background: rgba(234,208,140,.09);
+      color: #fff2c9;
+      transform: translateY(-1px);
+    }
+
+    .n.lang-switch button.active {
+      border-color: rgba(234,208,140,.85);
+      background: rgba(234,208,140,.12);
+      box-shadow: inset 0 0 18px rgba(234,208,140,.08), 0 10px 24px rgba(0,0,0,.22);
+    }
+
+    .btn {   width: 42px;
+      min-width: 42px;
+      height: 42px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       border-radius: 999px;
-      border: 1px solid rgba(234,208,140,.34);
+      border: 1px solid rgba(234,208,140,.32);
       background: rgba(255,255,255,.035);
       cursor: pointer;
       letter-spacing: 0;
-      font-size: 20px;
+      font-size: 18px;
       line-height: 1;
       padding: 0;
-      box-shadow: inset 0 0 18px rgba(234,208,140,.035);
+      transition: background .25s ease, transform .25s ease, border-color .25s ease;
+    }
+
+    .lang-switch button:hover {
+      background: rgba(234,208,140,.09);
+      border-color: rgba(234,208,140,.75);
+      transform: translateY(-1px);
     }
 
     .lang-switch button.active {
@@ -506,6 +536,7 @@
         width: 100%;
         justify-self: stretch;
         justify-content: space-between;
+        display: flex;
       }
 
       .nav-right .btn { flex: 1; min-width: 0; }
@@ -526,7 +557,7 @@
       .intro-btn { width: auto; min-width: 220px; }
       .nav-links { padding: 8px; gap: 6px; }
       .nav-links a { padding: 10px 12px; font-size: 10px; letter-spacing: .10em; }
-      .lang-switch button { width: 39px; min-width: 39px; height: 39px; font-size: 18px; }
+      .lang-switch button { width: 39px; min-width: 39px; height: 39px; font-size: 17px; }
       .nav-right .btn { min-height: 42px; font-size: 10px; padding: 0 14px; }
       .hero-main-logo { width: min(520px, 94vw); }
       .hero-logo-wrap { margin-bottom: 46px; }
@@ -885,3 +916,4 @@
   </script>
 </body>
 </html>
+
