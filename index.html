@@ -597,7 +597,33 @@
       .fields { grid-template-columns: 1fr; }
       footer { font-size: 13px; }
     }
-  </style>
+  .lang-switch {
+      position: absolute;
+      top: 18px;
+      right: 24px;
+      display: flex;
+      gap: 8px;
+      z-index: 60;
+    }
+
+    .lang-switch button {
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      border: 1px solid rgba(234,208,140,.4);
+      background: rgba(0,0,0,.4);
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      transition: transform .2s ease, border-color .2s ease;
+    }
+
+    .lang-switch button:hover {
+      transform: scale(1.08);
+      border-color: var(--gold-2);
+    }
+
+</style>
 </head>
 <body>
   <div class="intro" id="intro">
@@ -610,6 +636,11 @@
 
   <audio id="introMusic" src="audio/intro-music.mp3" preload="auto"></audio>
   <header>
+    <div class="lang-switch">
+      <button data-lang="en">🇬🇧</button>
+      <button data-lang="fr">🇫🇷</button>
+      <button data-lang="es">🇪🇸</button>
+    </div>
     <div class="container nav">
       <nav class="nav-links" aria-label="Main navigation">
         <a href="#services">Services</a>
@@ -803,6 +834,30 @@
   </footer>
 
   <script>
+    const translations = {
+      en: {
+        headline: "Elevated spaces. Unforgettable first impressions.",
+        sub: "Hayvn Studio transforms homes into refined visual experiences.",
+      },
+      fr: {
+        headline: "Des espaces raffinés. Des premières impressions inoubliables.",
+        sub: "Hayvn Studio transforme les maisons en expériences visuelles élégantes.",
+      },
+      es: {
+        headline: "Espacios elevados. Primeras impresiones inolvidables.",
+        sub: "Hayvn Studio transforma hogares en experiencias visuales elegantes.",
+      }
+    };
+
+    document.querySelectorAll('.lang-switch button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const lang = btn.dataset.lang;
+        document.querySelector('h1').textContent = translations[lang].headline;
+        document.querySelector('.hero-copy').textContent = translations[lang].sub;
+      });
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
     document.getElementById("year").textContent = new Date().getFullYear();
 
     const intro = document.getElementById("intro");
