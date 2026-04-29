@@ -112,6 +112,38 @@
     }
 
     .intro-btn:hover { border-color: rgba(234,208,140,.95); background: rgba(234,208,140,.08); transform: translateY(-1px); }
+
+    .audio-toggle {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 70;
+      width: 46px;
+      height: 46px;
+      border-radius: 999px;
+      border: 1px solid rgba(234,208,140,.48);
+      background: rgba(7,6,4,.72);
+      color: var(--gold-2);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 14px 36px rgba(0,0,0,.36);
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 900;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform .25s ease, border-color .25s ease, background .25s ease;
+    }
+
+    .audio-toggle:hover {
+      transform: translateY(-2px);
+      border-color: rgba(234,208,140,.86);
+      background: rgba(234,208,140,.10);
+    }
+
+    .audio-toggle.muted {
+      opacity: .62;
+    }
     .intro.playing .intro-card { animation: logoCleanExit 1.8s ease forwards; }
     .intro.playing .intro-btn { opacity: 0; visibility: hidden; pointer-events: none; }
 
@@ -614,7 +646,9 @@
     </div>
   </div>
 
-  <audio id="introMusic" src="audio/intro-music.mp3" preload="auto"></audio>
+  <audio id="introMusic" src="audio/intro-reveal.mp3" preload="auto"></audio>
+  <audio id="backgroundMusic" src="audio/background-ambient.mp3" preload="auto" loop></audio>
+  <button class="audio-toggle" id="audioToggle" type="button" aria-label="Toggle music">♪</button>
 
   <header>
     <div class="container nav">
@@ -927,15 +961,60 @@
     const intro = document.getElementById("intro");
     const enterSite = document.getElementById("enterSite");
     const introMusic = document.getElementById("introMusic");
+    const backgroundMusic = document.getElementById("backgroundMusic");
+    const audioToggle = document.getElementById("audioToggle");
+    let audioMuted = localStorage.getItem("hayvn_audio_muted") === "true";
+
+    function applyAudioState() {
+      if (introMusic) introMusic.muted = audioMuted;
+      if (backgroundMusic) backgroundMusic.muted = audioMuted;
+      if (audioToggle) {
+        audioToggle.textContent = audioMuted ? "♪̸" : "♪";
+        audioToggle.classList.toggle("muted", audioMuted);
+      }
+    }
+
+    function fadeInAudio(audio, targetVolume = 0.16, duration = 1800) {
+      if (!audio || audioMuted) return;
+      audio.volume = 0;
+      audio.play().catch(() => {});
+      const start = performance.now();
+      function step(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        audio.volume = targetVolume * progress;
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    applyAudioState();
 
     enterSite.addEventListener("click", () => {
       intro.classList.add("playing");
+
       if (introMusic) {
-        introMusic.volume = 0.45;
+        introMusic.volume = 0.62;
+        introMusic.currentTime = 0;
         introMusic.play().catch(() => {});
       }
-      setTimeout(() => intro.classList.add("hidden"), 1700);
+
+      setTimeout(() => {
+        intro.classList.add("hidden");
+        fadeInAudio(backgroundMusic, 0.14, 2200);
+      }, 1700);
     });
+
+    if (audioToggle) {
+      audioToggle.addEventListener("click", () => {
+        audioMuted = !audioMuted;
+        localStorage.setItem("hayvn_audio_muted", String(audioMuted));
+        applyAudioState();
+
+        if (!audioMuted && intro.classList.contains("hidden")) {
+          fadeInAudio(backgroundMusic, 0.14, 900);
+        }
+      });
+    }
   </script>
 </body>
 </html>
