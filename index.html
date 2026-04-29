@@ -963,7 +963,8 @@
     const introMusic = document.getElementById("introMusic");
     const backgroundMusic = document.getElementById("backgroundMusic");
     const audioToggle = document.getElementById("audioToggle");
-    let audioMuted = localStorage.getItem("hayvn_audio_muted") === "true";
+    let audioMuted = false;
+    let siteEntered = false;
 
     function applyAudioState() {
       if (introMusic) introMusic.muted = audioMuted;
@@ -974,10 +975,13 @@
       }
     }
 
-    function fadeInAudio(audio, targetVolume = 0.16, duration = 1800) {
+    function fadeInAudio(audio, targetVolume = 0.16, duration = 600) {
       if (!audio || audioMuted) return;
+      audio.muted = false;
       audio.volume = 0;
-      audio.play().catch(() => {});
+      const playPromise = audio.play();
+      if (playPromise) playPromise.catch(() => {});
+
       const start = performance.now();
       function step(now) {
         const progress = Math.min((now - start) / duration, 1);
@@ -987,7 +991,7 @@
       requestAnimationFrame(step);
     }
 
-    function fadeOutAudio(audio, duration = 900) {
+    function fadeOutAudio(audio, duration = 650) {
       if (!audio) return;
       const startVolume = audio.volume || 0;
       const start = performance.now();
@@ -1004,44 +1008,60 @@
       requestAnimationFrame(step);
     }
 
-    applyAudioState();
-
-    // Browsers may block autoplay with sound. This tries to start the intro music immediately.
-    // If blocked, the first click/tap will unlock audio and the site will still continue smoothly.
-    if (introMusic && !audioMuted) {
+    function startIntroAudio() {
+      if (!introMusic || audioMuted || siteEntered) return;
+      introMusic.muted = false;
       introMusic.volume = 0.58;
       introMusic.currentTime = 0;
       introMusic.play().catch(() => {});
     }
 
+    function startBackgroundAudio() {
+      if (!backgroundMusic || audioMuted) return;
+      backgroundMusic.muted = false;
+      backgroundMusic.currentTime = 0;
+      fadeInAudio(backgroundMusic, 0.16, 450);
+    }
+
+    applyAudioState();
+
+    // Desktop browsers may allow this. Mobile browsers usually require the Enter click first.
+    startIntroAudio();
+
     enterSite.addEventListener("click", () => {
+      siteEntered = true;
+      audioMuted = false;
+      applyAudioState();
       intro.classList.add("playing");
 
-      // Stop the intro reveal music when entering the site.
-      fadeOutAudio(introMusic, 750);
-
-      // Start the background ambience immediately on the user click.
-      if (backgroundMusic && !audioMuted) {
-        backgroundMusic.currentTime = 0;
-        fadeInAudio(backgroundMusic, 0.14, 650);
-      }
+      fadeOutAudio(introMusic, 600);
+      startBackgroundAudio();
 
       setTimeout(() => {
         intro.classList.add("hidden");
       }, 1700);
     });
 
+    // Mobile fallback: unlock intro audio on the first touch anywhere on the intro screen.
+    intro.addEventListener("pointerdown", () => {
+      if (!siteEntered) startIntroAudio();
+    }, { once: true });
+
     if (audioToggle) {
       audioToggle.addEventListener("click", () => {
         audioMuted = !audioMuted;
-        localStorage.setItem("hayvn_audio_muted", String(audioMuted));
         applyAudioState();
 
-        if (!audioMuted) {
-          if (!intro.classList.contains("hidden")) {
-            introMusic.volume = 0.58;
-            introMusic.play().catch(() => {});
-          } else {
+        if (audioMuted) {
+          fadeOutAudio(introMusic, 350);
+          fadeOutAudio(backgroundMusic, 350);
+        } else if (siteEntered || intro.classList.contains("hidden")) {
+          startBackgroundAudio();
+        } else {
+          startIntroAudio();
+        }
+      });
+    } else {
             fadeInAudio(backgroundMusic, 0.14, 500);
           }
         } else {
