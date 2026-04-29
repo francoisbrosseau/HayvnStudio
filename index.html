@@ -66,17 +66,19 @@
     }
 
     .intro-card {
-      width: min(680px, calc(100% - 36px));
+      width: min(820px, calc(100% - 36px));
       text-align: center;
-      transform: translateY(10px) scale(.96);
-      opacity: 0;
-      animation: introRise 1.15s ease forwards;
+      transform: translateY(8px) scale(.98);
+      opacity: 1;
     }
 
     .intro-logo {
-      width: min(520px, 84vw);
+      width: min(720px, 92vw);
       margin: 0 auto;
-      filter: drop-shadow(0 0 34px rgba(201,163,91,.35));
+      opacity: 0;
+      transform: scale(.88);
+      filter: drop-shadow(0 0 42px rgba(201,163,91,.42));
+      animation: logoSlowAppear 2.4s ease forwards;
     }
 
     .intro-card p {
@@ -103,15 +105,21 @@
     }
 
     .intro.playing .intro-card {
-      animation: logoBloom 2.45s ease forwards;
+      animation: logoBloom 4.2s ease forwards;
     }
 
-    @keyframes introRise {
-      to { opacity: 1; transform: translateY(0) scale(1); }
+    @keyframes logoSlowAppear {
+      0% { opacity: 0; transform: scale(.82); }
+      100% { opacity: 1; transform: scale(1); }
+    }
     }
 
     @keyframes logoBloom {
       0% { opacity: 1; transform: scale(1); }
+      38% { opacity: 1; transform: scale(1.12); }
+      70% { opacity: 1; transform: scale(1.12); }
+      100% { opacity: 0; transform: scale(1.24); }
+    }
       35% { opacity: 1; transform: scale(1.18); }
       68% { opacity: 1; transform: scale(1.18); }
       100% { opacity: 0; transform: scale(1.28); }
@@ -231,13 +239,13 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 0 auto 48px;
+      margin: 0 auto 62px;
     }
 
     .hero-main-logo {
-      width: min(360px, 72vw);
+      width: min(520px, 82vw);
       height: auto;
-      filter: drop-shadow(0 18px 42px rgba(201,163,91,.25));
+      filter: drop-shadow(0 22px 48px rgba(201,163,91,.28));
     }
 
     .hero-grid {
@@ -459,7 +467,7 @@
       .container { width: min(100% - 24px, 1160px); }
       .nav { height: 64px; display: flex; justify-content: center; }
       .nav-links { display: none; }
-      .hero-main-logo { width: min(280px, 78vw); }
+      .hero-main-logo { width: min(360px, 84vw); }
       .nav .btn { display: none; }
       .nav .btn { display: none; }
       .hero { padding: 34px 0 44px; }
@@ -702,7 +710,7 @@
 
       setTimeout(() => {
         intro.classList.add("hidden");
-      }, 2200);
+      }, 3900);
     });
   </script>
 </body>
