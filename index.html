@@ -131,7 +131,9 @@
     header::before {
       content: "";
       position: absolute;
-      left: 0; right: 0; bottom: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
       height: 1px;
       background: linear-gradient(90deg, transparent, rgba(234,208,140,.75), transparent);
       opacity: .7;
@@ -160,6 +162,9 @@
 
     .nav-links a {
       position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       padding: 11px 15px;
       border-radius: 999px;
       color: var(--gold-2);
@@ -167,8 +172,8 @@
       font-weight: 900;
       letter-spacing: .13em;
       text-transform: uppercase;
-      transition: background .25s ease, color .25s ease, transform .25s ease;
       white-space: nowrap;
+      transition: background .25s ease, color .25s ease, transform .25s ease;
     }
 
     .nav-links a:hover {
@@ -177,27 +182,37 @@
       transform: translateY(-1px);
     }
 
-    .n.lang-switch button.active {
-      border-color: rgba(234,208,140,.85);
-      background: rgba(234,208,140,.12);
-      box-shadow: inset 0 0 18px rgba(234,208,140,.08), 0 10px 24px rgba(0,0,0,.22);
+    .nav-right {
+      grid-column: 3;
+      justify-self: end;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    .btn {   width: 42px;
+    .lang-switch {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .lang-switch button {
+      width: 42px;
       min-width: 42px;
       height: 42px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       border-radius: 999px;
-      border: 1px solid rgba(234,208,140,.32);
+      border: 1px solid rgba(234,208,140,.36);
       background: rgba(255,255,255,.035);
+      color: var(--gold-2);
       cursor: pointer;
-      letter-spacing: 0;
-      font-size: 18px;
+      font-size: 17px;
       line-height: 1;
       padding: 0;
-      transition: background .25s ease, transform .25s ease, border-color .25s ease;
+      box-shadow: inset 0 0 18px rgba(234,208,140,.035);
+      transition: background .25s ease, transform .25s ease, border-color .25s ease, box-shadow .25s ease;
     }
 
     .lang-switch button:hover {
@@ -207,10 +222,9 @@
     }
 
     .lang-switch button.active {
-      border-color: rgba(234,208,140,.9);
+      border-color: rgba(234,208,140,.88);
       background: rgba(234,208,140,.13);
-      box-shadow: inset 0 0 18px rgba(234,208,140,.10), 0 10px 24px rgba(0,0,0,.24);
-      transform: translateY(-1px);
+      box-shadow: inset 0 0 18px rgba(234,208,140,.08), 0 10px 24px rgba(0,0,0,.22);
     }
 
     .btn {
@@ -232,8 +246,17 @@
       transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
     }
 
-    .btn:hover { transform: translateY(-1px); filter: brightness(1.06); box-shadow: 0 24px 56px rgba(201,163,91,.22); }
-    .btn.ghost { background: rgba(255,255,255,.035); color: var(--gold-2); box-shadow: none; }
+    .btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.06);
+      box-shadow: 0 24px 56px rgba(201,163,91,.22);
+    }
+
+    .btn.ghost {
+      background: rgba(255,255,255,.035);
+      color: var(--gold-2);
+      box-shadow: none;
+    }
 
     .hero {
       position: relative;
@@ -602,12 +625,12 @@
         <a href="#contact" data-i18n="nav_contact">Contact</a>
       </nav>
       <div class="nav-right">
-        <div class="lang-switch" aria-label="Language selector">
-          <button class="flag-pill" type="button" data-lang="en" aria-label="English" title="English">🇬🇧</button>
-          <button class="flag-pill" type="button" data-lang="fr" aria-label="Français" title="Français">🇫🇷</button>
-          <button class="flag-pill" type="button" data-lang="es" aria-label="Español" title="Español">🇪🇸</button>
-        </div>
         <a class="btn" href="#project" data-i18n="start_project">Start Project</a>
+        <div class="lang-switch" aria-label="Language selector">
+          <button type="button" data-lang="en" aria-label="English">🇬🇧</button>
+          <button type="button" data-lang="fr" aria-label="Français">🇫🇷</button>
+          <button type="button" data-lang="es" aria-label="Español">🇪🇸</button>
+        </div>
       </div>
     </div>
   </header>
@@ -916,4 +939,3 @@
   </script>
 </body>
 </html>
-
