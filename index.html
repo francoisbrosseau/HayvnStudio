@@ -1018,11 +1018,16 @@
       intro.classList.add("playing");
 
       // Stop the intro reveal music when entering the site.
-      fadeOutAudio(introMusic, 900);
+      fadeOutAudio(introMusic, 750);
+
+      // Start the background ambience immediately on the user click.
+      if (backgroundMusic && !audioMuted) {
+        backgroundMusic.currentTime = 0;
+        fadeInAudio(backgroundMusic, 0.14, 650);
+      }
 
       setTimeout(() => {
         intro.classList.add("hidden");
-        fadeInAudio(backgroundMusic, 0.14, 2200);
       }, 1700);
     });
 
@@ -1037,7 +1042,7 @@
             introMusic.volume = 0.58;
             introMusic.play().catch(() => {});
           } else {
-            fadeInAudio(backgroundMusic, 0.14, 900);
+            fadeInAudio(backgroundMusic, 0.14, 500);
           }
         } else {
           fadeOutAudio(introMusic, 400);
