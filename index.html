@@ -597,7 +597,12 @@
       .nav-right .btn { flex: 1; min-width: 0; }
       .lang-switch { flex: 0 0 auto; }
       .hero { min-height: auto; padding: 64px 0 58px; }
-      .hero::before { background: linear-gradient(180deg, rgba(7,6,4,.88), rgba(7,6,4,.94)), url("images/kitchen-after.jpg") center/cover no-repeat; }
+      .hero::before {
+        background:
+          linear-gradient(180deg, rgba(7,6,4,.70), rgba(7,6,4,.82)),
+          url("images/kitchen-after.jpg") center/cover no-repeat;
+        opacity: .9;
+      }
       .hero-grid, .services, .form-wrap { grid-template-columns: 1fr; }
       .section-head { display: block; }
       .section-text { margin-top: 16px; }
@@ -1066,3 +1071,4 @@
   </script>
 </body>
 </html>
+
