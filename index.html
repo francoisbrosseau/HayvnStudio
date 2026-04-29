@@ -987,16 +987,38 @@
       requestAnimationFrame(step);
     }
 
+    function fadeOutAudio(audio, duration = 900) {
+      if (!audio) return;
+      const startVolume = audio.volume || 0;
+      const start = performance.now();
+      function step(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        audio.volume = startVolume * (1 - progress);
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          audio.pause();
+          audio.currentTime = 0;
+        }
+      }
+      requestAnimationFrame(step);
+    }
+
     applyAudioState();
+
+    // Browsers may block autoplay with sound. This tries to start the intro music immediately.
+    // If blocked, the first click/tap will unlock audio and the site will still continue smoothly.
+    if (introMusic && !audioMuted) {
+      introMusic.volume = 0.58;
+      introMusic.currentTime = 0;
+      introMusic.play().catch(() => {});
+    }
 
     enterSite.addEventListener("click", () => {
       intro.classList.add("playing");
 
-      if (introMusic) {
-        introMusic.volume = 0.62;
-        introMusic.currentTime = 0;
-        introMusic.play().catch(() => {});
-      }
+      // Stop the intro reveal music when entering the site.
+      fadeOutAudio(introMusic, 900);
 
       setTimeout(() => {
         intro.classList.add("hidden");
@@ -1010,8 +1032,16 @@
         localStorage.setItem("hayvn_audio_muted", String(audioMuted));
         applyAudioState();
 
-        if (!audioMuted && intro.classList.contains("hidden")) {
-          fadeInAudio(backgroundMusic, 0.14, 900);
+        if (!audioMuted) {
+          if (!intro.classList.contains("hidden")) {
+            introMusic.volume = 0.58;
+            introMusic.play().catch(() => {});
+          } else {
+            fadeInAudio(backgroundMusic, 0.14, 900);
+          }
+        } else {
+          fadeOutAudio(introMusic, 400);
+          fadeOutAudio(backgroundMusic, 400);
         }
       });
     }
