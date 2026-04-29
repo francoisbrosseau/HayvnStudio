@@ -192,6 +192,12 @@
       padding: 0 10px;
     }
 
+    .lang-switch button.active {
+      border-color: rgba(234,208,140,.85);
+      background: rgba(234,208,140,.12);
+      box-shadow: inset 0 0 18px rgba(234,208,140,.08), 0 10px 24px rgba(0,0,0,.22);
+    }
+
     .btn {
       display: inline-flex;
       align-items: center;
@@ -581,6 +587,7 @@
       </nav>
       <div class="nav-right">
         <div class="lang-switch" aria-label="Language selector">
+          <button type="button" data-lang="en" aria-label="English">🇬🇧</button>
           <button type="button" data-lang="fr" aria-label="Français">🇫🇷</button>
           <button type="button" data-lang="es" aria-label="Español">🇪🇸</button>
         </div>
@@ -853,23 +860,28 @@
     function setLanguage(lang) {
       const dictionary = translations[lang] || translations.en;
       document.documentElement.lang = lang;
+
       document.querySelectorAll("[data-i18n]").forEach(el => {
         const key = el.dataset.i18n;
         if (dictionary[key]) el.innerHTML = dictionary[key];
       });
+
       document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
         const key = el.dataset.i18nPlaceholder;
         if (dictionary[key]) el.placeholder = dictionary[key];
       });
-      localStorage.setItem("hayvn_lang", lang);
+
+      document.querySelectorAll("[data-lang]").forEach(button => {
+        button.classList.toggle("active", button.dataset.lang === lang);
+      });
     }
 
     document.querySelectorAll("[data-lang]").forEach(button => {
       button.addEventListener("click", () => setLanguage(button.dataset.lang));
     });
 
-    const savedLang = localStorage.getItem("hayvn_lang") || "en";
-    setLanguage(savedLang);
+    // Always load the website in English first. Visitors can switch language after entering.
+    setLanguage("en");
 
     document.getElementById("year").textContent = new Date().getFullYear();
 
