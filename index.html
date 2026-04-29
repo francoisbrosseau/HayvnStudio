@@ -963,19 +963,17 @@
     const introMusic = document.getElementById("introMusic");
     const backgroundMusic = document.getElementById("backgroundMusic");
     const audioToggle = document.getElementById("audioToggle");
-    let audioMuted = false;
-    let siteEntered = false;
 
-    function applyAudioState() {
-      if (introMusic) introMusic.muted = audioMuted;
-      if (backgroundMusic) backgroundMusic.muted = audioMuted;
-      if (audioToggle) {
-        audioToggle.textContent = audioMuted ? "♪̸" : "♪";
-        audioToggle.classList.toggle("muted", audioMuted);
-      }
+    let audioMuted = false;
+    let enteredSite = false;
+
+    function setAudioButton() {
+      if (!audioToggle) return;
+      audioToggle.textContent = audioMuted ? "♪̸" : "♪";
+      audioToggle.classList.toggle("muted", audioMuted);
     }
 
-    function playAudio(audio, volume = 0.5, restart = false) {
+    function safePlay(audio, volume, restart = false) {
       if (!audio || audioMuted) return;
       audio.muted = false;
       audio.volume = volume;
@@ -983,68 +981,64 @@
       audio.play().catch(() => {});
     }
 
-    function fadeOutAudio(audio, duration = 500) {
+    function stopAudio(audio) {
+      if (!audio) return;
+      audio.pause();
+      audio.currentTime = 0;
+    }
+
+    function fadeOut(audio, duration = 500) {
       if (!audio) return;
       const startVolume = audio.volume || 0;
       const start = performance.now();
 
-      function step(now) {
+      function tick(now) {
         const progress = Math.min((now - start) / duration, 1);
         audio.volume = startVolume * (1 - progress);
-
         if (progress < 1) {
-          requestAnimationFrame(step);
+          requestAnimationFrame(tick);
         } else {
-          audio.pause();
-          audio.currentTime = 0;
+          stopAudio(audio);
         }
       }
 
-      requestAnimationFrame(step);
+      requestAnimationFrame(tick);
     }
 
-    function fadeInBackground() {
+    function startIntroMusic() {
+      if (enteredSite || audioMuted) return;
+      safePlay(introMusic, 0.58, true);
+    }
+
+    function startBackgroundMusic() {
       if (!backgroundMusic || audioMuted) return;
       backgroundMusic.muted = false;
       backgroundMusic.currentTime = 0;
-      backgroundMusic.volume = 0;
+      backgroundMusic.volume = 0.16;
       backgroundMusic.play().catch(() => {});
-
-      const targetVolume = 0.16;
-      const duration = 450;
-      const start = performance.now();
-
-      function step(now) {
-        const progress = Math.min((now - start) / duration, 1);
-        backgroundMusic.volume = targetVolume * progress;
-        if (progress < 1) requestAnimationFrame(step);
-      }
-
-      requestAnimationFrame(step);
     }
 
-    applyAudioState();
+    setAudioButton();
 
-    // Desktop: try to start the intro music right away.
-    playAudio(introMusic, 0.58, true);
+    // Try desktop autoplay. Mobile browsers may block this until the first tap.
+    startIntroMusic();
 
-    // Mobile/tablet: unlock audio on the first tap anywhere, but do NOT block the Enter button.
-    function unlockIntroAudio() {
-      if (!siteEntered) playAudio(introMusic, 0.58, false);
-    }
+    // Mobile unlock: first tap on the intro area starts the intro audio.
+    intro.addEventListener("pointerdown", () => {
+      if (!enteredSite) safePlay(introMusic, 0.58, false);
+    }, { once: true });
 
-    window.addEventListener("pointerdown", unlockIntroAudio, { once: true });
-    window.addEventListener("touchstart", unlockIntroAudio, { once: true });
-
-    enterSite.addEventListener("click", (event) => {
+    enterSite.addEventListener("click", function (event) {
       event.preventDefault();
-      siteEntered = true;
+      event.stopPropagation();
+
+      enteredSite = true;
       audioMuted = false;
-      applyAudioState();
+      setAudioButton();
 
       intro.classList.add("playing");
-      fadeOutAudio(introMusic, 450);
-      fadeInBackground();
+      fadeOut(introMusic, 450);
+      startBackgroundMusic();
 
       setTimeout(() => {
         intro.classList.add("hidden");
@@ -1052,28 +1046,20 @@
     });
 
     if (audioToggle) {
-      audioToggle.addEventListener("click", () => {
+      audioToggle.addEventListener("click", function () {
         audioMuted = !audioMuted;
-        applyAudioState();
+        setAudioButton();
 
         if (audioMuted) {
-          fadeOutAudio(introMusic, 300);
-          fadeOutAudio(backgroundMusic, 300);
+          stopAudio(introMusic);
+          stopAudio(backgroundMusic);
           return;
         }
 
-        if (siteEntered || intro.classList.contains("hidden")) {
-          fadeInBackground();
+        if (enteredSite || intro.classList.contains("hidden")) {
+          startBackgroundMusic();
         } else {
-          playAudio(introMusic, 0.58, false);
-        }
-      });
-    } else {
-            fadeInAudio(backgroundMusic, 0.14, 500);
-          }
-        } else {
-          fadeOutAudio(introMusic, 400);
-          fadeOutAudio(backgroundMusic, 400);
+          safePlay(introMusic, 0.58, false);
         }
       });
     }
