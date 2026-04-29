@@ -159,43 +159,28 @@
     }
 
     .nav-links a, .lang-switch button {
-      position: relative;
-      border-radius: 999px;
-      color: var(--gold-2);
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: .13em;
-      text-transform: uppercase;
-      transition: background .25s ease, color .25s ease, transform .25s ease, border-color .25s ease;
-    }
-
-    .nav-links a { padding: 11px 15px; }
-    .nav-links a:hover, .lang-switch button:hover { background: rgba(234,208,140,.09); color: #fff2c9; transform: translateY(-1px); }
-
-    .nav-right {
-      grid-column: 3;
-      justify-self: end;
-      display: flex;
+      width: 44px;
+      min-width: 44px;
+      height: 44px;
+      display: inline-flex;
       align-items: center;
-      gap: 10px;
-    }
-
-    .lang-switch { display: flex; gap: 8px; }
-    .lang-switch button {
-      min-width: 42px;
-      height: 42px;
-      border: 1px solid rgba(234,208,140,.32);
+      justify-content: center;
+      border-radius: 999px;
+      border: 1px solid rgba(234,208,140,.34);
       background: rgba(255,255,255,.035);
       cursor: pointer;
       letter-spacing: 0;
-      font-size: 18px;
-      padding: 0 10px;
+      font-size: 20px;
+      line-height: 1;
+      padding: 0;
+      box-shadow: inset 0 0 18px rgba(234,208,140,.035);
     }
 
     .lang-switch button.active {
-      border-color: rgba(234,208,140,.85);
-      background: rgba(234,208,140,.12);
-      box-shadow: inset 0 0 18px rgba(234,208,140,.08), 0 10px 24px rgba(0,0,0,.22);
+      border-color: rgba(234,208,140,.9);
+      background: rgba(234,208,140,.13);
+      box-shadow: inset 0 0 18px rgba(234,208,140,.10), 0 10px 24px rgba(0,0,0,.24);
+      transform: translateY(-1px);
     }
 
     .btn {
@@ -541,7 +526,7 @@
       .intro-btn { width: auto; min-width: 220px; }
       .nav-links { padding: 8px; gap: 6px; }
       .nav-links a { padding: 10px 12px; font-size: 10px; letter-spacing: .10em; }
-      .lang-switch button { min-width: 39px; height: 39px; font-size: 17px; }
+      .lang-switch button { width: 39px; min-width: 39px; height: 39px; font-size: 18px; }
       .nav-right .btn { min-height: 42px; font-size: 10px; padding: 0 14px; }
       .hero-main-logo { width: min(520px, 94vw); }
       .hero-logo-wrap { margin-bottom: 46px; }
@@ -587,9 +572,9 @@
       </nav>
       <div class="nav-right">
         <div class="lang-switch" aria-label="Language selector">
-          <button type="button" data-lang="en" aria-label="English">🇬🇧</button>
-          <button type="button" data-lang="fr" aria-label="Français">🇫🇷</button>
-          <button type="button" data-lang="es" aria-label="Español">🇪🇸</button>
+          <button class="flag-pill" type="button" data-lang="en" aria-label="English" title="English">🇬🇧</button>
+          <button class="flag-pill" type="button" data-lang="fr" aria-label="Français" title="Français">🇫🇷</button>
+          <button class="flag-pill" type="button" data-lang="es" aria-label="Español" title="Español">🇪🇸</button>
         </div>
         <a class="btn" href="#project" data-i18n="start_project">Start Project</a>
       </div>
