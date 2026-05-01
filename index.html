@@ -11,7 +11,6 @@
   <style>
     :root{
       --black:#030302;
-      --gold:#d7ad5f;
       --gold-soft:#f1d48b;
     }
 
@@ -26,23 +25,18 @@
       font-family:system-ui,sans-serif;
     }
 
-    body{
-      background:
-        radial-gradient(circle at center, rgba(215,173,95,.08), transparent 45%),
-        #030302;
-    }
-
     .portal{
       position:relative;
       width:100vw;
       height:100vh;
       overflow:hidden;
+      background:#030302;
     }
 
     .portal-stage{
       position:relative;
-      width:100%;
-      height:100%;
+      width:100vw;
+      height:100vh;
       opacity:0;
       transform:scale(.985);
       animation:portalReveal 2.3s ease forwards;
@@ -65,49 +59,53 @@
       position:absolute;
       z-index:5;
       display:block;
-      border-radius:50%;
       cursor:pointer;
+      overflow:hidden;
+      outline:none;
+      border:none;
+      background:transparent;
       transition:transform .3s ease;
     }
 
     .portal-link::before{
       content:"";
       position:absolute;
-      left:50%;
-      top:50%;
-      width:72%;
-      height:72%;
-      transform:translate(-50%, -50%) scale(.92);
-      border-radius:50%;
+      width:100vw;
+      height:100vh;
+
+      left:calc(var(--x) * -1vw);
+      top:calc(var(--y) * -1vh);
+
+      background-image:url("images/hayvn-logo-gold.png");
+      background-size:contain;
+      background-position:center;
+      background-repeat:no-repeat;
+
       opacity:0;
       pointer-events:none;
-      transition:opacity .3s ease, transform .3s ease;
 
-      background:radial-gradient(
-        circle,
-        rgba(241,212,139,.22) 0%,
-        rgba(215,173,95,.13) 34%,
-        rgba(215,173,95,.05) 58%,
-        transparent 75%
-      );
+      filter:
+        brightness(1.9)
+        saturate(1.35)
+        drop-shadow(0 0 10px rgba(241,212,139,.65))
+        drop-shadow(0 0 24px rgba(215,173,95,.48));
 
-      box-shadow:
-        0 0 18px rgba(241,212,139,.38),
-        0 0 34px rgba(215,173,95,.24);
+      transition:opacity .28s ease;
     }
 
     .portal-link:hover::before,
     .portal-link:focus-visible::before{
       opacity:1;
-      transform:translate(-50%, -50%) scale(1);
     }
 
     .portal-link:hover,
     .portal-link:focus-visible{
-      transform:scale(1.018);
+      transform:scale(1.012);
     }
 
     .healing{
+      --x:8.8;
+      --y:43.8;
       left:8.8%;
       top:43.8%;
       width:24.8%;
@@ -115,6 +113,8 @@
     }
 
     .studio{
+      --x:37.5;
+      --y:43.8;
       left:37.5%;
       top:43.8%;
       width:24.8%;
@@ -122,6 +122,8 @@
     }
 
     .boudoir{
+      --x:66.2;
+      --y:43.8;
       left:66.2%;
       top:43.8%;
       width:24.8%;
@@ -159,9 +161,18 @@
     }
 
     @media (max-width:760px){
-      .portal-image{ object-fit:cover; }
+      .portal-image{
+        object-fit:cover;
+      }
+
+      .portal-link::before{
+        background-image:url("images/hayvn-portal-mobile.png");
+        background-size:cover;
+      }
 
       .healing{
+        --x:18;
+        --y:34;
         left:18%;
         top:34%;
         width:64%;
@@ -169,6 +180,8 @@
       }
 
       .studio{
+        --x:18;
+        --y:54;
         left:18%;
         top:54%;
         width:64%;
@@ -176,15 +189,12 @@
       }
 
       .boudoir{
+        --x:18;
+        --y:74;
         left:18%;
         top:74%;
         width:64%;
         height:17%;
-      }
-
-      .portal-link::before{
-        width:76%;
-        height:76%;
       }
 
       .audio-toggle{
@@ -236,7 +246,6 @@
 
     function startMusic(){
       if(muted) return;
-
       portalMusic.volume = 0.38;
       portalMusic.play().catch(() => {});
     }
