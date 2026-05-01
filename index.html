@@ -4,12 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hayvn | Three Paths. One Purpose.</title>
-  <meta name="description" content="Hayvn portal — Hayvn Healing, Hayvn Studio, and Hayvn Boudoir." />
 
   <link rel="preload" as="image" href="images/hayvn-logo-gold.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="images/hayvn-portal-mobile.png">
 
   <style>
     :root {
@@ -26,7 +23,7 @@
       min-height: 100%;
       background: var(--black);
       color: var(--cream);
-      font-family: Inter, system-ui, sans-serif;
+      font-family: system-ui, sans-serif;
       overflow: hidden;
     }
 
@@ -36,7 +33,6 @@
       inset: 0;
       background:
         radial-gradient(circle at center, rgba(215,173,95,.12), transparent 36%),
-        radial-gradient(circle at 50% 100%, rgba(215,173,95,.08), transparent 42%),
         #030302;
       z-index: 0;
     }
@@ -60,19 +56,14 @@
       filter: drop-shadow(0 0 34px rgba(215,173,95,.24));
     }
 
-    .portal-stage::after {
-      content: "";
-      position: absolute;
-      inset: -2%;
-      pointer-events: none;
-      border-radius: 26px;
-      background: radial-gradient(circle at center, transparent 48%, rgba(3,3,2,.36) 100%);
-      opacity: .6;
-    }
-
+    .portal-stage picture,
     .portal-image {
       width: 100%;
       height: 100%;
+      display: block;
+    }
+
+    .portal-image {
       object-fit: contain;
       user-select: none;
       -webkit-user-drag: none;
@@ -85,8 +76,8 @@
       border-radius: 999px;
       outline: none;
       cursor: pointer;
-      transition: box-shadow .35s ease, background .35s ease, transform .35s ease, border-color .35s ease;
       border: 1px solid transparent;
+      transition: box-shadow .35s ease, background .35s ease, transform .35s ease, border-color .35s ease;
     }
 
     .portal-link::before {
@@ -94,7 +85,7 @@
       position: absolute;
       inset: 0;
       border-radius: inherit;
-      background: radial-gradient(circle at center, rgba(241,212,139,.22), rgba(215,173,95,.08) 45%, transparent 72%);
+      background: radial-gradient(circle at center, rgba(241,212,139,.25), rgba(215,173,95,.08) 45%, transparent 72%);
       opacity: 0;
       transition: opacity .35s ease;
     }
@@ -134,6 +125,7 @@
       transform: translateX(-50%) translateY(0);
     }
 
+    /* DESKTOP CLICK AREAS */
     .healing {
       left: 2.6%;
       top: 43.2%;
@@ -155,36 +147,6 @@
       height: 49%;
     }
 
-    .audio-toggle {
-      position: fixed;
-      right: 18px;
-      bottom: 18px;
-      z-index: 20;
-      width: 46px;
-      height: 46px;
-      border-radius: 999px;
-      border: 1px solid rgba(241,212,139,.45);
-      background: rgba(3,3,2,.70);
-      color: var(--gold-soft);
-      backdrop-filter: blur(14px);
-      cursor: pointer;
-      font-size: 18px;
-      font-weight: 900;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 14px 36px rgba(0,0,0,.36);
-      transition: transform .25s ease, border-color .25s ease, background .25s ease;
-    }
-
-    .audio-toggle:hover {
-      transform: translateY(-2px);
-      border-color: rgba(241,212,139,.85);
-      background: rgba(215,173,95,.10);
-    }
-
-    .audio-toggle.muted { opacity: .62; }
-
     .hint {
       position: fixed;
       left: 50%;
@@ -192,7 +154,7 @@
       transform: translateX(-50%);
       z-index: 5;
       color: var(--gold-soft);
-      font-family: "Playfair Display", Georgia, serif;
+      font-family: Georgia, serif;
       font-size: clamp(24px, 3vw, 42px);
       font-weight: 700;
       letter-spacing: .08em;
@@ -222,10 +184,45 @@
     .hint::before { left: -42px; }
     .hint::after { right: -42px; animation-delay: .6s; }
 
+    .audio-toggle {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 20;
+      width: 46px;
+      height: 46px;
+      border-radius: 999px;
+      border: 1px solid rgba(241,212,139,.45);
+      background: rgba(3,3,2,.70);
+      color: var(--gold-soft);
+      backdrop-filter: blur(14px);
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 900;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 14px 36px rgba(0,0,0,.36);
+    }
+
+    .audio-toggle.muted { opacity: .62; }
+
     @keyframes portalReveal {
-      0% { opacity: 0; transform: scale(.92); filter: blur(10px) drop-shadow(0 0 0 rgba(215,173,95,0)); }
-      58% { opacity: 1; transform: scale(1.012); filter: blur(0) drop-shadow(0 0 46px rgba(215,173,95,.30)); }
-      100% { opacity: 1; transform: scale(1); filter: blur(0) drop-shadow(0 0 34px rgba(215,173,95,.22)); }
+      0% {
+        opacity: 0;
+        transform: scale(.92);
+        filter: blur(10px) drop-shadow(0 0 0 rgba(215,173,95,0));
+      }
+      58% {
+        opacity: 1;
+        transform: scale(1.012);
+        filter: blur(0) drop-shadow(0 0 46px rgba(215,173,95,.30));
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0) drop-shadow(0 0 34px rgba(215,173,95,.22));
+      }
     }
 
     @keyframes hintMagicIn {
@@ -254,40 +251,93 @@
       50% { opacity: 1; transform: translateY(-50%) scale(1.18) rotate(12deg); }
     }
 
+    /* MOBILE VERSION */
     @media (max-width: 760px) {
-      html, body { overflow: auto; }
+      html, body {
+        overflow: auto;
+      }
 
       .portal {
         min-height: 100svh;
-        padding: 18px 10px 70px;
+        padding: 0;
       }
 
       .portal-stage {
-        width: min(620px, 96vw);
-        max-width: 96vw;
+        width: 100vw;
+        height: 100svh;
+        aspect-ratio: auto;
       }
 
-      .portal-link::after { display: none; }
+      .portal-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .portal-link::after {
+        display: none;
+      }
+
+      /* MOBILE CLICK AREAS FOR VERTICAL IMAGE */
+      .healing {
+        left: 18%;
+        top: 34%;
+        width: 64%;
+        height: 17%;
+      }
+
+      .studio {
+        left: 18%;
+        top: 54%;
+        width: 64%;
+        height: 17%;
+      }
+
+      .boudoir {
+        left: 18%;
+        top: 74%;
+        width: 64%;
+        height: 17%;
+      }
 
       .hint {
         width: 100%;
         text-align: center;
-        bottom: 20px;
+        bottom: 18px;
         font-size: clamp(22px, 8vw, 32px);
       }
 
       .hint::before { left: 14px; }
       .hint::after { right: 14px; }
+
+      .audio-toggle {
+        width: 42px;
+        height: 42px;
+        right: 14px;
+        bottom: 14px;
+      }
     }
   </style>
 </head>
+
 <body>
   <main class="portal" aria-label="Hayvn portal">
     <div class="portal-stage">
-      <img class="portal-image" src="images/hayvn-logo-gold.png" alt="Hayvn — Three Paths. One Purpose." fetchpriority="high" decoding="async">
+      <picture>
+        <source media="(max-width: 760px)" srcset="images/hayvn-portal-mobile.png">
+        <img
+          class="portal-image"
+          src="images/hayvn-logo-gold.png"
+          alt="Hayvn — Three Paths. One Purpose."
+          fetchpriority="high"
+          decoding="async"
+        >
+      </picture>
 
       <a class="portal-link healing" href="https://hayvnhealing.com" data-title="Hayvn Healing" aria-label="Enter Hayvn Healing"></a>
-      <a class="portal-link studio" href="https://hayvnstudio.com/studio.html?skipIntro=1" data-title="Hayvn Studio" aria-label="Enter Hayvn Studio"></a>
+
+      <a class="portal-link studio" href="studio.html?skipIntro=1" data-title="Hayvn Studio" aria-label="Enter Hayvn Studio"></a>
+
       <a class="portal-link boudoir" href="https://hayvnboudoir.com" data-title="Hayvn Boudoir" aria-label="Enter Hayvn Boudoir"></a>
     </div>
   </main>
@@ -300,6 +350,7 @@
   <script>
     const portalMusic = document.getElementById("portalMusic");
     const audioToggle = document.getElementById("audioToggle");
+
     let muted = false;
 
     function updateAudioButton() {
@@ -323,8 +374,12 @@
     audioToggle.addEventListener("click", () => {
       muted = !muted;
       updateAudioButton();
-      if (!muted) startMusic();
-      else portalMusic.pause();
+
+      if (!muted) {
+        startMusic();
+      } else {
+        portalMusic.pause();
+      }
     });
   </script>
 </body>
