@@ -965,7 +965,9 @@
     const audioToggle = document.getElementById("audioToggle");
 
     let audioMuted = false;
-    let enteredSite = false;
+    const urlParams = new URLSearchParams(window.location.search);
+    const skipIntro = urlParams.get("skipIntro") === "1";
+    let enteredSite = skipIntro;
 
     function setAudioButton() {
       if (!audioToggle) return;
@@ -1020,13 +1022,20 @@
 
     setAudioButton();
 
-    // Try desktop autoplay. Mobile browsers may block this until the first tap.
-    startIntroMusic();
+    if (skipIntro) {
+      // Arriving from the portal: skip the second intro and show the Studio site immediately.
+      intro.classList.add("hidden");
+      intro.style.display = "none";
+      startBackgroundMusic();
+    } else {
+      // Opening studio.html directly: keep the cinematic Studio intro.
+      startIntroMusic();
 
-    // Mobile unlock: first tap on the intro area starts the intro audio.
-    intro.addEventListener("pointerdown", () => {
-      if (!enteredSite) safePlay(introMusic, 0.58, false);
-    }, { once: true });
+      // Mobile unlock: first tap on the intro area starts the intro audio.
+      intro.addEventListener("pointerdown", () => {
+        if (!enteredSite) safePlay(introMusic, 0.58, false);
+      }, { once: true });
+    }
 
     enterSite.addEventListener("click", function (event) {
       event.preventDefault();
