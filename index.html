@@ -65,44 +65,46 @@
       position:absolute;
       z-index:5;
       display:block;
-      border-radius:999px;
+      border-radius:50%;
       cursor:pointer;
-      transition:transform .35s ease;
+      transition:transform .3s ease;
     }
 
     .portal-link::before{
       content:"";
       position:absolute;
-      inset:0;
-      border-radius:999px;
+      left:50%;
+      top:50%;
+      width:72%;
+      height:72%;
+      transform:translate(-50%, -50%) scale(.92);
+      border-radius:50%;
       opacity:0;
-      transition:opacity .35s ease, transform .35s ease;
-      transform:scale(.92);
+      pointer-events:none;
+      transition:opacity .3s ease, transform .3s ease;
 
-      background:
-        radial-gradient(
-          circle at center,
-          rgba(241,212,139,.28) 0%,
-          rgba(215,173,95,.14) 38%,
-          rgba(215,173,95,.06) 58%,
-          transparent 74%
-        );
+      background:radial-gradient(
+        circle,
+        rgba(241,212,139,.22) 0%,
+        rgba(215,173,95,.13) 34%,
+        rgba(215,173,95,.05) 58%,
+        transparent 75%
+      );
 
-      filter:
-        blur(10px)
-        drop-shadow(0 0 22px rgba(241,212,139,.85))
-        drop-shadow(0 0 52px rgba(215,173,95,.65));
+      box-shadow:
+        0 0 18px rgba(241,212,139,.38),
+        0 0 34px rgba(215,173,95,.24);
     }
 
     .portal-link:hover::before,
     .portal-link:focus-visible::before{
       opacity:1;
-      transform:scale(1.04);
+      transform:translate(-50%, -50%) scale(1);
     }
 
     .portal-link:hover,
     .portal-link:focus-visible{
-      transform:scale(1.02);
+      transform:scale(1.018);
     }
 
     .healing{
@@ -178,6 +180,11 @@
         top:74%;
         width:64%;
         height:17%;
+      }
+
+      .portal-link::before{
+        width:76%;
+        height:76%;
       }
 
       .audio-toggle{
