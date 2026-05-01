@@ -13,47 +13,35 @@
       --black: #030302;
       --gold: #d7ad5f;
       --gold-soft: #f1d48b;
-      --cream: #f7ead1;
     }
 
     * { box-sizing: border-box; }
 
     html, body {
       margin: 0;
-      min-height: 100%;
+      width: 100%;
+      height: 100%;
       background: var(--black);
-      color: var(--cream);
-      font-family: system-ui, sans-serif;
       overflow: hidden;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(circle at center, rgba(215,173,95,.12), transparent 36%),
-        #030302;
-      z-index: 0;
+      font-family: system-ui, sans-serif;
     }
 
     .portal {
       position: relative;
-      z-index: 1;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: clamp(14px, 2.5vw, 34px);
+      width: 100vw;
+      height: 100vh;
+      background: #030302;
+      overflow: hidden;
     }
 
     .portal-stage {
       position: relative;
-      width: min(1080px, 90vw);
-      aspect-ratio: 1536 / 1024;
+      width: 100vw;
+      height: 100vh;
       opacity: 0;
-      transform: scale(.94);
-      animation: portalReveal 2.6s ease forwards;
-      filter: drop-shadow(0 0 34px rgba(215,173,95,.24));
+      transform: scale(.985);
+      animation: portalReveal 2.4s ease forwards;
+      filter: drop-shadow(0 0 34px rgba(215,173,95,.22));
     }
 
     .portal-stage picture,
@@ -85,7 +73,7 @@
       position: absolute;
       inset: 0;
       border-radius: inherit;
-      background: radial-gradient(circle at center, rgba(241,212,139,.25), rgba(215,173,95,.08) 45%, transparent 72%);
+      background: radial-gradient(circle at center, rgba(241,212,139,.26), rgba(215,173,95,.10) 45%, transparent 72%);
       opacity: 0;
       transition: opacity .35s ease;
     }
@@ -94,7 +82,7 @@
       content: attr(data-title);
       position: absolute;
       left: 50%;
-      bottom: -44px;
+      bottom: -42px;
       transform: translateX(-50%) translateY(8px);
       opacity: 0;
       white-space: nowrap;
@@ -109,12 +97,12 @@
 
     .portal-link:hover,
     .portal-link:focus-visible {
-      transform: translateY(-4px) scale(1.015);
-      border-color: rgba(241,212,139,.38);
+      transform: translateY(-4px) scale(1.018);
+      border-color: rgba(241,212,139,.42);
       box-shadow:
-        0 0 38px rgba(215,173,95,.26),
-        inset 0 0 44px rgba(215,173,95,.10);
-      background: rgba(215,173,95,.025);
+        0 0 42px rgba(215,173,95,.30),
+        inset 0 0 52px rgba(215,173,95,.13);
+      background: rgba(215,173,95,.03);
     }
 
     .portal-link:hover::before,
@@ -127,62 +115,25 @@
 
     /* DESKTOP CLICK AREAS */
     .healing {
-      left: 2.6%;
-      top: 43.2%;
-      width: 31.2%;
-      height: 49%;
+      left: 8.5%;
+      top: 43.5%;
+      width: 25.5%;
+      height: 45%;
     }
 
     .studio {
-      left: 34.4%;
-      top: 43.2%;
-      width: 31.2%;
-      height: 49%;
+      left: 37.3%;
+      top: 43.5%;
+      width: 25.5%;
+      height: 45%;
     }
 
     .boudoir {
-      left: 66.2%;
-      top: 43.2%;
-      width: 31.2%;
-      height: 49%;
+      left: 66.1%;
+      top: 43.5%;
+      width: 25.5%;
+      height: 45%;
     }
-
-    .hint {
-      position: fixed;
-      left: 50%;
-      bottom: 28px;
-      transform: translateX(-50%);
-      z-index: 5;
-      color: var(--gold-soft);
-      font-family: Georgia, serif;
-      font-size: clamp(24px, 3vw, 42px);
-      font-weight: 700;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      opacity: 0;
-      pointer-events: none;
-      text-shadow:
-        0 0 12px rgba(241,212,139,.45),
-        0 0 34px rgba(215,173,95,.35),
-        0 0 72px rgba(215,173,95,.18);
-      animation: hintMagicIn 1.6s ease forwards 2.4s, hintGlow 2.8s ease-in-out infinite 4s;
-    }
-
-    .hint::before,
-    .hint::after {
-      content: "✦";
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--gold-soft);
-      font-size: .55em;
-      opacity: .85;
-      text-shadow: 0 0 18px rgba(241,212,139,.7);
-      animation: starPulse 2.2s ease-in-out infinite;
-    }
-
-    .hint::before { left: -42px; }
-    .hint::after { right: -42px; animation-delay: .6s; }
 
     .audio-toggle {
       position: fixed;
@@ -210,13 +161,13 @@
     @keyframes portalReveal {
       0% {
         opacity: 0;
-        transform: scale(.92);
-        filter: blur(10px) drop-shadow(0 0 0 rgba(215,173,95,0));
+        transform: scale(.96);
+        filter: blur(8px) drop-shadow(0 0 0 rgba(215,173,95,0));
       }
-      58% {
+      60% {
         opacity: 1;
-        transform: scale(1.012);
-        filter: blur(0) drop-shadow(0 0 46px rgba(215,173,95,.30));
+        transform: scale(1.01);
+        filter: blur(0) drop-shadow(0 0 46px rgba(215,173,95,.28));
       }
       100% {
         opacity: 1;
@@ -225,60 +176,13 @@
       }
     }
 
-    @keyframes hintMagicIn {
-      0% { opacity: 0; transform: translateX(-50%) translateY(14px) scale(.94); filter: blur(8px); }
-      60% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1.04); filter: blur(0); }
-      100% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); filter: blur(0); }
-    }
-
-    @keyframes hintGlow {
-      0%, 100% {
-        text-shadow:
-          0 0 12px rgba(241,212,139,.42),
-          0 0 34px rgba(215,173,95,.32),
-          0 0 72px rgba(215,173,95,.16);
-      }
-      50% {
-        text-shadow:
-          0 0 18px rgba(241,212,139,.72),
-          0 0 48px rgba(215,173,95,.52),
-          0 0 98px rgba(215,173,95,.26);
-      }
-    }
-
-    @keyframes starPulse {
-      0%, 100% { opacity: .45; transform: translateY(-50%) scale(.86) rotate(0deg); }
-      50% { opacity: 1; transform: translateY(-50%) scale(1.18) rotate(12deg); }
-    }
-
     /* MOBILE VERSION */
     @media (max-width: 760px) {
-      html, body {
-        overflow: auto;
-      }
-
-      .portal {
-        min-height: 100svh;
-        padding: 0;
-      }
-
-      .portal-stage {
-        width: 100vw;
-        height: 100svh;
-        aspect-ratio: auto;
-      }
-
       .portal-image {
-        width: 100%;
-        height: 100%;
         object-fit: cover;
       }
 
-      .portal-link::after {
-        display: none;
-      }
-
-      /* MOBILE CLICK AREAS FOR VERTICAL IMAGE */
+      /* MOBILE CLICK AREAS */
       .healing {
         left: 18%;
         top: 34%;
@@ -300,15 +204,9 @@
         height: 17%;
       }
 
-      .hint {
-  width: 100%;
-  text-align: center;
-  bottom: 10px;
-  font-size: clamp(16px, 5vw, 24px);
-}
-
-      .hint::before { left: 14px; }
-      .hint::after { right: 14px; }
+      .portal-link::after {
+        display: none;
+      }
 
       .audio-toggle {
         width: 42px;
@@ -335,14 +233,10 @@
       </picture>
 
       <a class="portal-link healing" href="https://hayvnhealing.com" data-title="Hayvn Healing" aria-label="Enter Hayvn Healing"></a>
-
       <a class="portal-link studio" href="studio.html?skipIntro=1" data-title="Hayvn Studio" aria-label="Enter Hayvn Studio"></a>
-
       <a class="portal-link boudoir" href="https://hayvnboudoir.com" data-title="Hayvn Boudoir" aria-label="Enter Hayvn Boudoir"></a>
     </div>
   </main>
-
-  <div class="hint">Choose your path</div>
 
   <audio id="portalMusic" src="audio/intro-reveal.mp3" preload="auto" loop></audio>
   <button class="audio-toggle" id="audioToggle" type="button" aria-label="Toggle music">♪</button>
