@@ -9,272 +9,318 @@
   <link rel="preload" as="image" href="images/hayvn-portal-mobile.png">
 
   <style>
-    :root {
-      --black: #030302;
-      --gold: #d7ad5f;
-      --gold-soft: #f1d48b;
+    :root{
+      --black:#030302;
+      --gold:#d7ad5f;
+      --gold-soft:#f1d48b;
     }
 
-    * { box-sizing: border-box; }
-
-    html, body {
-      margin: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--black);
-      overflow: hidden;
-      font-family: system-ui, sans-serif;
+    *{
+      box-sizing:border-box;
     }
 
-    .portal {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      background: #030302;
-      overflow: hidden;
+    html,
+    body{
+      margin:0;
+      width:100%;
+      height:100%;
+      background:var(--black);
+      overflow:hidden;
+      font-family:system-ui,sans-serif;
     }
 
-    .portal-stage {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      opacity: 0;
-      transform: scale(.985);
-      animation: portalReveal 2.4s ease forwards;
-      filter: drop-shadow(0 0 34px rgba(215,173,95,.22));
+    body{
+      background:
+        radial-gradient(circle at center, rgba(215,173,95,.08), transparent 45%),
+        #030302;
+    }
+
+    .portal{
+      position:relative;
+      width:100vw;
+      height:100vh;
+      overflow:hidden;
+    }
+
+    .portal-stage{
+      position:relative;
+      width:100%;
+      height:100%;
+      opacity:0;
+      transform:scale(.985);
+      animation:portalReveal 2.3s ease forwards;
     }
 
     .portal-stage picture,
-    .portal-image {
-      width: 100%;
-      height: 100%;
-      display: block;
+    .portal-image{
+      width:100%;
+      height:100%;
+      display:block;
     }
 
-    .portal-image {
-      object-fit: contain;
-      user-select: none;
-      -webkit-user-drag: none;
+    .portal-image{
+      object-fit:contain;
+      user-select:none;
+      -webkit-user-drag:none;
     }
 
-    .portal-link {
-      position: absolute;
-      z-index: 3;
-      display: block;
-      border-radius: 999px;
-      outline: none;
-      cursor: pointer;
-      border: 1px solid transparent;
-      transition: box-shadow .35s ease, background .35s ease, transform .35s ease, border-color .35s ease;
+    /* CLICK ZONES */
+
+    .portal-link{
+      position:absolute;
+      z-index:5;
+      display:block;
+      border-radius:999px;
+      cursor:pointer;
+      transition:
+        transform .35s ease,
+        filter .35s ease;
     }
 
-    .portal-link::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      background: radial-gradient(circle at center, rgba(241,212,139,.26), rgba(215,173,95,.10) 45%, transparent 72%);
-      opacity: 0;
-      transition: opacity .35s ease;
-    }
-
-    .portal-link::after {
-      content: attr(data-title);
-      position: absolute;
-      left: 50%;
-      bottom: -42px;
-      transform: translateX(-50%) translateY(8px);
-      opacity: 0;
-      white-space: nowrap;
-      color: var(--gold-soft);
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      text-shadow: 0 0 16px rgba(215,173,95,.36);
-      transition: opacity .35s ease, transform .35s ease;
-    }
+    /* GLOW ONLY */
 
     .portal-link:hover,
-    .portal-link:focus-visible {
-      transform: translateY(-4px) scale(1.018);
-      border-color: rgba(241,212,139,.42);
-      box-shadow:
-        0 0 42px rgba(215,173,95,.30),
-        inset 0 0 52px rgba(215,173,95,.13);
-      background: rgba(215,173,95,.03);
+    .portal-link:focus-visible{
+      transform:scale(1.03);
+      filter:
+        drop-shadow(0 0 18px rgba(241,212,139,.75))
+        drop-shadow(0 0 42px rgba(215,173,95,.55));
     }
 
-    .portal-link:hover::before,
-    .portal-link:focus-visible::before,
-    .portal-link:hover::after,
-    .portal-link:focus-visible::after {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
+    /* DESKTOP ALIGNMENT */
+
+    .healing{
+      left:8.8%;
+      top:43.8%;
+      width:24.8%;
+      height:44%;
     }
 
-    /* DESKTOP CLICK AREAS */
-    .healing {
-      left: 8.5%;
-      top: 43.5%;
-      width: 25.5%;
-      height: 45%;
+    .studio{
+      left:37.5%;
+      top:43.8%;
+      width:24.8%;
+      height:44%;
     }
 
-    .studio {
-      left: 37.3%;
-      top: 43.5%;
-      width: 25.5%;
-      height: 45%;
+    .boudoir{
+      left:66.2%;
+      top:43.8%;
+      width:24.8%;
+      height:44%;
     }
 
-    .boudoir {
-      left: 66.1%;
-      top: 43.5%;
-      width: 25.5%;
-      height: 45%;
+    /* AUDIO */
+
+    .audio-toggle{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:20;
+
+      width:46px;
+      height:46px;
+
+      border:none;
+      border-radius:999px;
+
+      background:rgba(0,0,0,.45);
+      backdrop-filter:blur(12px);
+
+      color:var(--gold-soft);
+
+      cursor:pointer;
+
+      font-size:18px;
+      font-weight:900;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      transition:
+        transform .25s ease,
+        opacity .25s ease;
     }
 
-    .audio-toggle {
-      position: fixed;
-      right: 18px;
-      bottom: 18px;
-      z-index: 20;
-      width: 46px;
-      height: 46px;
-      border-radius: 999px;
-      border: 1px solid rgba(241,212,139,.45);
-      background: rgba(3,3,2,.70);
-      color: var(--gold-soft);
-      backdrop-filter: blur(14px);
-      cursor: pointer;
-      font-size: 18px;
-      font-weight: 900;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 14px 36px rgba(0,0,0,.36);
+    .audio-toggle:hover{
+      transform:scale(1.08);
     }
 
-    .audio-toggle.muted { opacity: .62; }
+    .audio-toggle.muted{
+      opacity:.55;
+    }
 
-    @keyframes portalReveal {
-      0% {
-        opacity: 0;
-        transform: scale(.96);
-        filter: blur(8px) drop-shadow(0 0 0 rgba(215,173,95,0));
+    @keyframes portalReveal{
+      0%{
+        opacity:0;
+        transform:scale(.96);
+        filter:blur(10px);
       }
-      60% {
-        opacity: 1;
-        transform: scale(1.01);
-        filter: blur(0) drop-shadow(0 0 46px rgba(215,173,95,.28));
+
+      60%{
+        opacity:1;
+        transform:scale(1.01);
+        filter:blur(0);
       }
-      100% {
-        opacity: 1;
-        transform: scale(1);
-        filter: blur(0) drop-shadow(0 0 34px rgba(215,173,95,.22));
+
+      100%{
+        opacity:1;
+        transform:scale(1);
+        filter:blur(0);
       }
     }
 
-    /* MOBILE VERSION */
-    @media (max-width: 760px) {
-      .portal-image {
-        object-fit: cover;
+    /* MOBILE */
+
+    @media (max-width:760px){
+
+      .portal-image{
+        object-fit:cover;
       }
 
-      /* MOBILE CLICK AREAS */
-      .healing {
-        left: 18%;
-        top: 34%;
-        width: 64%;
-        height: 17%;
+      .healing{
+        left:18%;
+        top:34%;
+        width:64%;
+        height:17%;
       }
 
-      .studio {
-        left: 18%;
-        top: 54%;
-        width: 64%;
-        height: 17%;
+      .studio{
+        left:18%;
+        top:54%;
+        width:64%;
+        height:17%;
       }
 
-      .boudoir {
-        left: 18%;
-        top: 74%;
-        width: 64%;
-        height: 17%;
+      .boudoir{
+        left:18%;
+        top:74%;
+        width:64%;
+        height:17%;
       }
 
-      .portal-link::after {
-        display: none;
-      }
-
-      .audio-toggle {
-        width: 42px;
-        height: 42px;
-        right: 14px;
-        bottom: 14px;
+      .audio-toggle{
+        width:42px;
+        height:42px;
+        right:14px;
+        bottom:14px;
       }
     }
   </style>
 </head>
 
 <body>
-  <main class="portal" aria-label="Hayvn portal">
+
+  <main class="portal">
+
     <div class="portal-stage">
+
       <picture>
-        <source media="(max-width: 760px)" srcset="images/hayvn-portal-mobile.png">
+        <source
+          media="(max-width:760px)"
+          srcset="images/hayvn-portal-mobile.png"
+        >
+
         <img
           class="portal-image"
           src="images/hayvn-logo-gold.png"
-          alt="Hayvn — Three Paths. One Purpose."
+          alt="Hayvn Portal"
           fetchpriority="high"
           decoding="async"
         >
       </picture>
 
-      <a class="portal-link healing" href="https://hayvnhealing.com" data-title="Hayvn Healing" aria-label="Enter Hayvn Healing"></a>
-      <a class="portal-link studio" href="studio.html?skipIntro=1" data-title="Hayvn Studio" aria-label="Enter Hayvn Studio"></a>
-      <a class="portal-link boudoir" href="https://hayvnboudoir.com" data-title="Hayvn Boudoir" aria-label="Enter Hayvn Boudoir"></a>
+      <!-- CLICK AREAS -->
+
+      <a
+        class="portal-link healing"
+        href="https://hayvnhealing.com"
+        aria-label="Hayvn Healing"
+      ></a>
+
+      <a
+        class="portal-link studio"
+        href="studio.html?skipIntro=1"
+        aria-label="Hayvn Studio"
+      ></a>
+
+      <a
+        class="portal-link boudoir"
+        href="https://hayvnboudoir.com"
+        aria-label="Hayvn Boudoir"
+      ></a>
+
     </div>
+
   </main>
 
-  <audio id="portalMusic" src="audio/intro-reveal.mp3" preload="auto" loop></audio>
-  <button class="audio-toggle" id="audioToggle" type="button" aria-label="Toggle music">♪</button>
+  <audio
+    id="portalMusic"
+    src="audio/intro-reveal.mp3"
+    preload="auto"
+    loop
+  ></audio>
+
+  <button
+    class="audio-toggle"
+    id="audioToggle"
+    type="button"
+    aria-label="Toggle music"
+  >♪</button>
 
   <script>
+
     const portalMusic = document.getElementById("portalMusic");
     const audioToggle = document.getElementById("audioToggle");
 
     let muted = false;
 
-    function updateAudioButton() {
+    function updateAudioButton(){
       audioToggle.textContent = muted ? "♪̸" : "♪";
       audioToggle.classList.toggle("muted", muted);
       portalMusic.muted = muted;
     }
 
-    function startMusic() {
-      if (muted) return;
+    function startMusic(){
+      if(muted) return;
+
       portalMusic.volume = 0.38;
+
       portalMusic.play().catch(() => {});
     }
 
     updateAudioButton();
+
     startMusic();
 
-    window.addEventListener("pointerdown", startMusic, { once: true });
-    window.addEventListener("touchstart", startMusic, { once: true });
+    window.addEventListener(
+      "pointerdown",
+      startMusic,
+      { once:true }
+    );
+
+    window.addEventListener(
+      "touchstart",
+      startMusic,
+      { once:true }
+    );
 
     audioToggle.addEventListener("click", () => {
+
       muted = !muted;
+
       updateAudioButton();
 
-      if (!muted) {
+      if(!muted){
         startMusic();
-      } else {
+      }else{
         portalMusic.pause();
       }
+
     });
+
   </script>
+
 </body>
 </html>
