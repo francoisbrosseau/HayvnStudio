@@ -141,22 +141,31 @@
       100%{opacity:1;transform:scale(1);filter:blur(0) brightness(1)}
     }
 
-    .healing-transition{
+    .transition-layer{
       position:fixed;inset:0;z-index:999;background:#030302;opacity:0;pointer-events:none;
       transition:opacity 1600ms ease;display:flex;align-items:center;justify-content:center;
     }
 
-    .healing-transition.active{opacity:1;pointer-events:auto}
+    .transition-layer.active{opacity:1;pointer-events:auto}
 
-    .healing-transition video{
+    .transition-layer video{
       width:100%;height:100%;object-fit:contain;background:#030302;
       opacity:0;transform:scale(.985);
       transition:opacity 1800ms ease,transform 2400ms ease;
     }
 
-    .healing-transition.active video{opacity:1;transform:scale(1)}
-    .healing-transition.fade-black{background:#000}
-    .healing-transition.fade-black video{opacity:0;transform:scale(1.012);transition:opacity 1600ms ease,transform 1600ms ease}
+    .transition-layer.active video.active-video{
+      opacity:1;
+      transform:scale(1);
+    }
+
+    .transition-layer.fade-black{background:#000}
+
+    .transition-layer.fade-black video.active-video{
+      opacity:0;
+      transform:scale(1.012);
+      transition:opacity 1600ms ease,transform 1600ms ease;
+    }
 
     @media (max-width:760px){
       .portal-stage{width:100vw;height:100svh}
@@ -167,7 +176,7 @@
       .studio{left:26%;top:54%}
       .boudoir{left:26%;top:74%}
       .audio-toggle{width:42px;height:42px;right:14px;bottom:14px}
-      .healing-transition video{object-fit:cover}
+      .transition-layer video{object-fit:cover}
     }
   </style>
 </head>
@@ -182,14 +191,15 @@
 
       <div class="hayvn-flash"></div>
 
-      <a class="portal-link healing" href="https://hayvnhealing.com" onclick="healingPortalExit(event,this.href)" aria-label="Hayvn Healing"></a>
-      <a class="portal-link studio" href="studio.html?skipIntro=1" onclick="portalExit(event,this.href)" aria-label="Hayvn Studio"></a>
+      <a class="portal-link healing" href="https://hayvnhealing.com" onclick="videoPortalExit(event,this.href,'healingVideo')" aria-label="Hayvn Healing"></a>
+      <a class="portal-link studio" href="studio.html?skipIntro=1" onclick="videoPortalExit(event,this.href,'studioVideo')" aria-label="Hayvn Studio"></a>
       <a class="portal-link boudoir" href="https://hayvnboudoir.com" onclick="portalExit(event,this.href)" aria-label="Hayvn Boudoir"></a>
     </div>
   </main>
 
-  <div class="healing-transition" id="healingTransition">
+  <div class="transition-layer" id="videoTransition">
     <video id="healingVideo" src="videos/healing-transition.mp4" playsinline preload="auto"></video>
+    <video id="studioVideo" src="videos/studio-transition.mp4" playsinline preload="auto"></video>
   </div>
 
   <audio id="portalMusic" src="audio/intro-reveal.mp3" preload="auto" loop></audio>
@@ -198,57 +208,39 @@
   <script>
     const portalMusic = document.getElementById("portalMusic");
     const audioToggle = document.getElementById("audioToggle");
-    const healingTransition = document.getElementById("healingTransition");
+    const videoTransition = document.getElementById("videoTransition");
     const healingVideo = document.getElementById("healingVideo");
+    const studioVideo = document.getElementById("studioVideo");
 
     let muted = false;
     let navigating = false;
-    let healingTimeout = null;
-    let healingRedirectTimeout = null;
+    let fallbackTimeout = null;
+    let redirectTimeout = null;
 
     function resetPortalState(){
       navigating = false;
-
       document.body.style.opacity = "1";
       document.body.style.filter = "none";
 
-      if(healingTimeout){
-        clearTimeout(healingTimeout);
-        healingTimeout = null;
-      }
+      if(fallbackTimeout){ clearTimeout(fallbackTimeout); fallbackTimeout = null; }
+      if(redirectTimeout){ clearTimeout(redirectTimeout); redirectTimeout = null; }
 
-      if(healingRedirectTimeout){
-        clearTimeout(healingRedirectTimeout);
-        healingRedirectTimeout = null;
-      }
+      videoTransition.classList.remove("active","fade-black");
 
-      if(healingTransition){
-        healingTransition.classList.remove("active", "fade-black");
-      }
+      [healingVideo, studioVideo].forEach(video => {
+        video.pause();
+        video.currentTime = 0;
+        video.onended = null;
+        video.classList.remove("active-video");
+      });
 
-      if(healingVideo){
-        healingVideo.pause();
-        healingVideo.currentTime = 0;
-        healingVideo.onended = null;
-      }
-
-      if(portalMusic){
-        portalMusic.volume = 0.38;
-      }
+      if(portalMusic) portalMusic.volume = 0.38;
     }
 
-    window.addEventListener("pageshow", () => {
-      setTimeout(resetPortalState, 80);
-    });
-
+    window.addEventListener("pageshow", () => setTimeout(resetPortalState, 80));
+    window.addEventListener("focus", () => setTimeout(resetPortalState, 80));
     document.addEventListener("visibilitychange", () => {
-      if(!document.hidden){
-        setTimeout(resetPortalState, 80);
-      }
-    });
-
-    window.addEventListener("focus", () => {
-      setTimeout(resetPortalState, 80);
+      if(!document.hidden) setTimeout(resetPortalState, 80);
     });
 
     function updateAudioButton(){
@@ -284,55 +276,59 @@
       navigating = true;
 
       document.body.animate(
-        [
-          { opacity:1, filter:"blur(0px)" },
-          { opacity:0, filter:"blur(12px)" }
-        ],
+        [{ opacity:1, filter:"blur(0px)" },{ opacity:0, filter:"blur(12px)" }],
         { duration:900, easing:"ease", fill:"forwards" }
       );
 
-      setTimeout(() => {
-        window.location.assign(url);
-      }, 720);
+      setTimeout(() => { window.location.assign(url); }, 720);
     }
 
-    function healingPortalExit(event,url){
+    function videoPortalExit(event,url,videoId){
       event.preventDefault();
       if(navigating) return;
       navigating = true;
 
-      healingTransition.classList.add("active");
-      healingTransition.classList.remove("fade-black");
+      const selectedVideo = document.getElementById(videoId);
+      const otherVideo = videoId === "healingVideo" ? studioVideo : healingVideo;
+
+      otherVideo.pause();
+      otherVideo.currentTime = 0;
+      otherVideo.onended = null;
+      otherVideo.classList.remove("active-video");
+
+      selectedVideo.currentTime = 0;
+      selectedVideo.muted = muted;
+      selectedVideo.volume = muted ? 0 : 0.85;
+      selectedVideo.classList.add("active-video");
+
+      videoTransition.classList.remove("fade-black");
+      videoTransition.classList.add("active");
 
       fadePortalMusic(0.04, 1600);
 
-      healingVideo.currentTime = 0;
-      healingVideo.muted = muted;
-      healingVideo.volume = muted ? 0 : 0.85;
-
-      const playPromise = healingVideo.play();
+      const playPromise = selectedVideo.play();
 
       if(playPromise){
         playPromise.catch(() => {
-          healingRedirectTimeout = setTimeout(() => {
+          redirectTimeout = setTimeout(() => {
             window.location.assign(url);
           }, 2200);
         });
       }
 
-      healingVideo.onended = () => {
-        healingTransition.classList.add("fade-black");
+      selectedVideo.onended = () => {
+        videoTransition.classList.add("fade-black");
 
-        healingRedirectTimeout = setTimeout(() => {
+        redirectTimeout = setTimeout(() => {
           window.location.assign(url);
         }, 1600);
       };
 
-      healingTimeout = setTimeout(() => {
-        if(navigating && !healingTransition.classList.contains("fade-black")){
-          healingTransition.classList.add("fade-black");
+      fallbackTimeout = setTimeout(() => {
+        if(navigating && !videoTransition.classList.contains("fade-black")){
+          videoTransition.classList.add("fade-black");
 
-          healingRedirectTimeout = setTimeout(() => {
+          redirectTimeout = setTimeout(() => {
             window.location.assign(url);
           }, 1600);
         }
