@@ -14,9 +14,12 @@
       --gold-soft:#f1d48b;
     }
 
-    *{ box-sizing:border-box; }
+    *{
+      box-sizing:border-box;
+    }
 
-    html, body{
+    html,
+    body{
       margin:0;
       width:100%;
       height:100%;
@@ -56,16 +59,22 @@
       -webkit-user-drag:none;
     }
 
+    /* CLICK ZONES */
+
     .portal-link{
       position:absolute;
       z-index:5;
       display:block;
       cursor:pointer;
-      border-radius:50%;
+
+      width:16.9%;
       aspect-ratio:1 / 1;
-      width:18.2%;
+
+      border-radius:50%;
+
       background:transparent;
       border:1px solid transparent;
+
       transition:
         transform .28s ease,
         box-shadow .28s ease,
@@ -75,59 +84,99 @@
     .portal-link:hover,
     .portal-link:focus-visible{
       transform:scale(1.018);
-      border-color:rgba(241,212,139,.38);
+
+      border-color:rgba(241,212,139,.36);
+
       box-shadow:
-        0 0 8px rgba(241,212,139,.34),
-        0 0 16px rgba(215,173,95,.22),
-        inset 0 0 12px rgba(241,212,139,.04);
+        0 0 8px rgba(241,212,139,.32),
+        0 0 16px rgba(215,173,95,.20),
+        inset 0 0 10px rgba(241,212,139,.03);
     }
 
+    /* DESKTOP ALIGNMENT */
+
     .healing{
-      left:22.5%;
-      top:39.5%;
+      left:26.0%;
+      top:39.9%;
     }
 
     .studio{
-      left:40.9%;
-      top:39.5%;
+      left:41.6%;
+      top:39.9%;
     }
 
     .boudoir{
-      left:59.3%;
-      top:39.5%;
+      left:57.2%;
+      top:39.9%;
     }
+
+    /* AUDIO */
 
     .audio-toggle{
       position:fixed;
       right:18px;
       bottom:18px;
       z-index:20;
+
       width:46px;
       height:46px;
+
       border:none;
       border-radius:999px;
+
       background:rgba(0,0,0,.42);
       backdrop-filter:blur(12px);
+
       color:var(--gold-soft);
+
       cursor:pointer;
+
       font-size:18px;
       font-weight:900;
+
       display:flex;
       align-items:center;
       justify-content:center;
-      transition:transform .25s ease, opacity .25s ease;
+
+      transition:
+        transform .25s ease,
+        opacity .25s ease;
     }
 
-    .audio-toggle:hover{ transform:scale(1.08); }
-    .audio-toggle.muted{ opacity:.55; }
+    .audio-toggle:hover{
+      transform:scale(1.08);
+    }
+
+    .audio-toggle.muted{
+      opacity:.55;
+    }
+
+    /* INTRO */
 
     @keyframes portalReveal{
-      0%{ opacity:0; transform:scale(.96); filter:blur(10px); }
-      60%{ opacity:1; transform:scale(1.01); filter:blur(0); }
-      100%{ opacity:1; transform:scale(1); filter:blur(0); }
+      0%{
+        opacity:0;
+        transform:scale(.96);
+        filter:blur(10px);
+      }
+
+      60%{
+        opacity:1;
+        transform:scale(1.01);
+        filter:blur(0);
+      }
+
+      100%{
+        opacity:1;
+        transform:scale(1);
+        filter:blur(0);
+      }
     }
 
+    /* MOBILE */
+
     @media (max-width:760px){
+
       .portal-stage{
         width:100vw;
         height:100svh;
@@ -167,10 +216,17 @@
 </head>
 
 <body>
+
   <main class="portal">
+
     <div class="portal-stage">
+
       <picture>
-        <source media="(max-width:760px)" srcset="images/hayvn-portal-mobile.png">
+        <source
+          media="(max-width:760px)"
+          srcset="images/hayvn-portal-mobile.png"
+        >
+
         <img
           class="portal-image"
           src="images/hayvn-logo-gold.png"
@@ -180,18 +236,47 @@
         >
       </picture>
 
-      <a class="portal-link healing" href="https://hayvnhealing.com" aria-label="Hayvn Healing"></a>
-      <a class="portal-link studio" href="studio.html?skipIntro=1" aria-label="Hayvn Studio"></a>
-      <a class="portal-link boudoir" href="https://hayvnboudoir.com" aria-label="Hayvn Boudoir"></a>
+      <a
+        class="portal-link healing"
+        href="https://hayvnhealing.com"
+        aria-label="Hayvn Healing"
+      ></a>
+
+      <a
+        class="portal-link studio"
+        href="studio.html?skipIntro=1"
+        aria-label="Hayvn Studio"
+      ></a>
+
+      <a
+        class="portal-link boudoir"
+        href="https://hayvnboudoir.com"
+        aria-label="Hayvn Boudoir"
+      ></a>
+
     </div>
+
   </main>
 
-  <audio id="portalMusic" src="audio/intro-reveal.mp3" preload="auto" loop></audio>
-  <button class="audio-toggle" id="audioToggle" type="button" aria-label="Toggle music">♪</button>
+  <audio
+    id="portalMusic"
+    src="audio/intro-reveal.mp3"
+    preload="auto"
+    loop
+  ></audio>
+
+  <button
+    class="audio-toggle"
+    id="audioToggle"
+    type="button"
+    aria-label="Toggle music"
+  >♪</button>
 
   <script>
+
     const portalMusic = document.getElementById("portalMusic");
     const audioToggle = document.getElementById("audioToggle");
+
     let muted = false;
 
     function updateAudioButton(){
@@ -202,22 +287,43 @@
 
     function startMusic(){
       if(muted) return;
+
       portalMusic.volume = 0.38;
+
       portalMusic.play().catch(() => {});
     }
 
     updateAudioButton();
+
     startMusic();
 
-    window.addEventListener("pointerdown", startMusic, { once:true });
-    window.addEventListener("touchstart", startMusic, { once:true });
+    window.addEventListener(
+      "pointerdown",
+      startMusic,
+      { once:true }
+    );
+
+    window.addEventListener(
+      "touchstart",
+      startMusic,
+      { once:true }
+    );
 
     audioToggle.addEventListener("click", () => {
+
       muted = !muted;
+
       updateAudioButton();
-      if(!muted) startMusic();
-      else portalMusic.pause();
+
+      if(!muted){
+        startMusic();
+      }else{
+        portalMusic.pause();
+      }
+
     });
+
   </script>
+
 </body>
 </html>
