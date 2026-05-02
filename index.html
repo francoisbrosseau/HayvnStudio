@@ -37,13 +37,38 @@
       background:#030302;
       overflow:hidden;
     }
+.portal::before{
+  content:"";
+  position:absolute;
+  inset:-20%;
+  z-index:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at center,
+      rgba(215,173,95,.10),
+      rgba(215,173,95,.035) 28%,
+      transparent 58%);
+  animation: backgroundBreath 6s ease-in-out infinite;
+}
 
+@keyframes backgroundBreath{
+  0%,100%{
+    opacity:.45;
+    transform:scale(1);
+  }
+
+  50%{
+    opacity:.75;
+    transform:scale(1.05);
+  }
+}
     .portal-stage{
       position:relative;
       width:min(100vw, 177.78vh);
       height:min(100vh, 56.25vw);
       opacity:0;
       animation:portalReveal 2.2s ease forwards;
+      z-index:1;
     }
 
     picture,
@@ -80,16 +105,36 @@
     }
 
     .portal-link:hover,
-    .portal-link:focus-visible{
-      transform:scale(1.018);
+.portal-link:focus-visible{
+  transform:scale(1.025);
+  border-color:rgba(241,212,139,.48);
 
-      border-color:rgba(241,212,139,.36);
+  box-shadow:
+    0 0 10px rgba(241,212,139,.42),
+    0 0 24px rgba(215,173,95,.30),
+    0 0 48px rgba(215,173,95,.13),
+    inset 0 0 14px rgba(241,212,139,.06);
 
-      box-shadow:
-        0 0 8px rgba(241,212,139,.32),
-        0 0 16px rgba(215,173,95,.20),
-        inset 0 0 10px rgba(241,212,139,.03);
-    }
+  animation: portalPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes portalPulse{
+  0%,100%{
+    box-shadow:
+      0 0 10px rgba(241,212,139,.38),
+      0 0 22px rgba(215,173,95,.26),
+      0 0 42px rgba(215,173,95,.11),
+      inset 0 0 14px rgba(241,212,139,.05);
+  }
+
+  50%{
+    box-shadow:
+      0 0 14px rgba(241,212,139,.58),
+      0 0 32px rgba(215,173,95,.42),
+      0 0 62px rgba(215,173,95,.20),
+      inset 0 0 18px rgba(241,212,139,.08);
+  }
+}
 
     .healing{
       left:21%;
