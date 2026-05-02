@@ -42,11 +42,7 @@
       inset:-20%;
       z-index:0;
       pointer-events:none;
-      background:
-        radial-gradient(circle at center,
-          rgba(215,173,95,.10),
-          rgba(215,173,95,.035) 28%,
-          transparent 58%);
+      background:radial-gradient(circle at center, rgba(215,173,95,.10), rgba(215,173,95,.035) 28%, transparent 58%);
       animation:backgroundBreath 6s ease-in-out infinite;
     }
 
@@ -57,12 +53,7 @@
       z-index:0;
       pointer-events:none;
       opacity:0;
-      background:
-        radial-gradient(circle at 50% 22%,
-          rgba(241,212,139,.34),
-          rgba(215,173,95,.15) 16%,
-          rgba(215,173,95,.045) 34%,
-          transparent 58%);
+      background:radial-gradient(circle at 50% 22%, rgba(241,212,139,.34), rgba(215,173,95,.15) 16%, rgba(215,173,95,.045) 34%, transparent 58%);
       animation:logoImpact 4.5s ease forwards .8s;
     }
 
@@ -94,13 +85,7 @@
       inset:-10%;
       z-index:3;
       pointer-events:none;
-      background:
-        radial-gradient(circle at 50% 50%,
-          rgba(255,245,200,.26) 0%,
-          rgba(241,212,139,.18) 12%,
-          rgba(215,173,95,.12) 24%,
-          rgba(80,20,0,.22) 36%,
-          rgba(0,0,0,.94) 58%);
+      background:radial-gradient(circle at 50% 50%, rgba(255,245,200,.26) 0%, rgba(241,212,139,.18) 12%, rgba(215,173,95,.12) 24%, rgba(80,20,0,.22) 36%, rgba(0,0,0,.94) 58%);
       mix-blend-mode:screen;
       filter:blur(18px) contrast(130%) saturate(135%);
       transform:translateX(-135%) skewX(-8deg) scale(1.3);
@@ -113,11 +98,7 @@
       inset:-10%;
       z-index:2;
       pointer-events:none;
-      background:
-        radial-gradient(circle at 50% 50%,
-          rgba(255,240,180,.10) 0%,
-          rgba(241,212,139,.05) 14%,
-          transparent 36%);
+      background:radial-gradient(circle at 50% 50%, rgba(255,240,180,.10) 0%, rgba(241,212,139,.05) 14%, transparent 36%);
       opacity:0;
       filter:blur(24px) saturate(140%);
       transform:translateX(-135%) skewX(-8deg) scale(1.5);
@@ -133,16 +114,8 @@
       z-index:4;
       pointer-events:none;
       opacity:0;
-      background:
-        radial-gradient(ellipse at center,
-          rgba(255,246,205,.44) 0%,
-          rgba(241,212,139,.25) 24%,
-          rgba(215,173,95,.10) 46%,
-          transparent 72%);
-      filter:
-        blur(14px)
-        drop-shadow(0 0 28px rgba(241,212,139,.45))
-        drop-shadow(0 0 68px rgba(215,173,95,.25));
+      background:radial-gradient(ellipse at center, rgba(255,246,205,.44) 0%, rgba(241,212,139,.25) 24%, rgba(215,173,95,.10) 46%, transparent 72%);
+      filter:blur(14px) drop-shadow(0 0 28px rgba(241,212,139,.45)) drop-shadow(0 0 68px rgba(215,173,95,.25));
       animation:hayvnLogoSettle 4.4s ease forwards 1.25s;
     }
 
@@ -190,70 +163,37 @@
       border-radius:50%;
       background:transparent;
       border:1px solid transparent;
-      transition:
-        transform .28s ease,
-        box-shadow .28s ease,
-        border-color .28s ease;
+      transition:transform .28s ease, box-shadow .28s ease, border-color .28s ease;
       animation:circleAwaken 2.8s ease forwards 4.6s;
     }
 
     @keyframes circleAwaken{
-      0%{
-        border-color:transparent;
-        box-shadow:none;
-      }
-
+      0%{ border-color:transparent; box-shadow:none; }
       22%{
         border-color:rgba(241,212,139,.95);
-        box-shadow:
-          0 0 22px rgba(241,212,139,.85),
-          0 0 52px rgba(215,173,95,.58),
-          0 0 92px rgba(215,173,95,.30),
-          inset 0 0 26px rgba(241,212,139,.12);
+        box-shadow:0 0 22px rgba(241,212,139,.85), 0 0 52px rgba(215,173,95,.58), 0 0 92px rgba(215,173,95,.30), inset 0 0 26px rgba(241,212,139,.12);
       }
-
       52%{
         border-color:rgba(241,212,139,.68);
-        box-shadow:
-          0 0 16px rgba(241,212,139,.54),
-          0 0 38px rgba(215,173,95,.36),
-          0 0 68px rgba(215,173,95,.18),
-          inset 0 0 18px rgba(241,212,139,.08);
+        box-shadow:0 0 16px rgba(241,212,139,.54), 0 0 38px rgba(215,173,95,.36), 0 0 68px rgba(215,173,95,.18), inset 0 0 18px rgba(241,212,139,.08);
       }
-
-      100%{
-        border-color:transparent;
-        box-shadow:none;
-      }
+      100%{ border-color:transparent; box-shadow:none; }
     }
 
     .portal-link:hover,
     .portal-link:focus-visible{
       transform:scale(1.025);
       border-color:rgba(241,212,139,.48);
-      box-shadow:
-        0 0 10px rgba(241,212,139,.42),
-        0 0 24px rgba(215,173,95,.30),
-        0 0 48px rgba(215,173,95,.13),
-        inset 0 0 14px rgba(241,212,139,.06);
+      box-shadow:0 0 10px rgba(241,212,139,.42), 0 0 24px rgba(215,173,95,.30), 0 0 48px rgba(215,173,95,.13), inset 0 0 14px rgba(241,212,139,.06);
       animation:portalPulse 1.8s ease-in-out infinite;
     }
 
     @keyframes portalPulse{
       0%,100%{
-        box-shadow:
-          0 0 10px rgba(241,212,139,.38),
-          0 0 22px rgba(215,173,95,.26),
-          0 0 42px rgba(215,173,95,.11),
-          inset 0 0 14px rgba(241,212,139,.05);
+        box-shadow:0 0 10px rgba(241,212,139,.38), 0 0 22px rgba(215,173,95,.26), 0 0 42px rgba(215,173,95,.11), inset 0 0 14px rgba(241,212,139,.05);
       }
-
       50%{
-        box-shadow:
-          0 0 14px rgba(241,212,139,.58),
-          0 0 32px rgba(215,173,95,.42),
-          0 0 62px rgba(215,173,95,.20),
-          inset 0 0 18px rgba(241,212,139,.08);
+        box-shadow:0 0 14px rgba(241,212,139,.58), 0 0 32px rgba(215,173,95,.42), 0 0 62px rgba(215,173,95,.20), inset 0 0 18px rgba(241,212,139,.08);
       }
     }
 
@@ -291,18 +231,15 @@
         transform:scale(1.1) translateY(14px);
         filter:blur(30px) brightness(.45);
       }
-
       34%{
         opacity:.38;
         filter:blur(16px) brightness(.72);
       }
-
       68%{
         opacity:1;
         transform:scale(1.018) translateY(0);
         filter:blur(0) brightness(1.05);
       }
-
       100%{
         opacity:1;
         transform:scale(1);
@@ -317,7 +254,10 @@
       background:#030302;
       opacity:0;
       pointer-events:none;
-      transition:opacity 1200ms ease;
+      transition:opacity 1400ms ease;
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
 
     .healing-transition.active{
@@ -328,17 +268,26 @@
     .healing-transition video{
       width:100%;
       height:100%;
-      object-fit:cover;
+      object-fit:contain;
+      background:#030302;
       opacity:0;
-      transition:opacity 1400ms ease;
+      transform:scale(.985);
+      transition:opacity 1600ms ease, transform 2200ms ease;
     }
 
     .healing-transition.active video{
       opacity:1;
+      transform:scale(1);
+    }
+
+    .healing-transition.fade-black{
+      background:#000;
     }
 
     .healing-transition.fade-black video{
       opacity:0;
+      transform:scale(1.015);
+      transition:opacity 1300ms ease, transform 1300ms ease;
     }
 
     @media (max-width:760px){
@@ -372,6 +321,10 @@
         right:14px;
         bottom:14px;
       }
+
+      .healing-transition video{
+        object-fit:cover;
+      }
     }
   </style>
 </head>
@@ -382,14 +335,7 @@
     <div class="portal-stage">
       <picture>
         <source media="(max-width:760px)" srcset="images/hayvn-portal-mobile.png">
-
-        <img
-          class="portal-image"
-          src="images/hayvn-logo-gold.png"
-          alt="Hayvn Portal"
-          fetchpriority="high"
-          decoding="async"
-        >
+        <img class="portal-image" src="images/hayvn-logo-gold.png" alt="Hayvn Portal" fetchpriority="high" decoding="async">
       </picture>
 
       <div class="hayvn-flash"></div>
@@ -401,11 +347,10 @@
   </main>
 
   <div class="healing-transition" id="healingTransition">
-    <video id="healingVideo" src="videos/healing-transition.mp4" playsinline></video>
+    <video id="healingVideo" src="videos/healing-transition.mp4" playsinline preload="auto"></video>
   </div>
 
   <audio id="portalMusic" src="audio/intro-reveal.mp3" preload="auto" loop></audio>
-
   <button class="audio-toggle" id="audioToggle" type="button" aria-label="Toggle music">♪</button>
 
   <script>
@@ -426,6 +371,24 @@
       if(muted) return;
       portalMusic.volume = 0.38;
       portalMusic.play().catch(() => {});
+    }
+
+    function fadePortalMusic(targetVolume, duration){
+      if(!portalMusic) return;
+
+      const startVolume = portalMusic.volume;
+      const startTime = performance.now();
+
+      function step(now){
+        const progress = Math.min((now - startTime) / duration, 1);
+        portalMusic.volume = startVolume + (targetVolume - startVolume) * progress;
+
+        if(progress < 1){
+          requestAnimationFrame(step);
+        }
+      }
+
+      requestAnimationFrame(step);
     }
 
     function portalExit(event,url){
@@ -451,20 +414,7 @@
       event.preventDefault();
 
       healingTransition.classList.add("active");
-
-      if(portalMusic){
-        portalMusic.animate(
-          [
-            { volume: portalMusic.volume },
-            { volume: 0.04 }
-          ],
-          { duration: 900, easing: "ease" }
-        );
-
-        setTimeout(() => {
-          portalMusic.volume = 0.04;
-        }, 900);
-      }
+      fadePortalMusic(0.04, 1400);
 
       healingVideo.currentTime = 0;
       healingVideo.muted = muted;
@@ -476,7 +426,7 @@
         playPromise.catch(() => {
           setTimeout(() => {
             window.location.href = url;
-          }, 1800);
+          }, 2200);
         });
       }
 
@@ -485,7 +435,7 @@
 
         setTimeout(() => {
           window.location.href = url;
-        }, 900);
+        }, 1400);
       };
 
       setTimeout(() => {
@@ -494,9 +444,9 @@
 
           setTimeout(() => {
             window.location.href = url;
-          }, 900);
+          }, 1400);
         }
-      }, 9500);
+      }, 10000);
     }
 
     updateAudioButton();
