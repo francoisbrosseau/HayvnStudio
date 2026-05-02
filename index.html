@@ -58,30 +58,52 @@
       -webkit-user-drag:none;
     }
 
+    /* CLICKABLE LOGOS */
+
     .portal-link{
       position:absolute;
       z-index:5;
       display:block;
       cursor:pointer;
       border-radius:50%;
-      overflow:hidden;
-      transition:
-        transform .24s ease,
-        filter .24s ease;
+      background:transparent;
+      transition:transform .3s ease;
     }
 
-    /* subtle hover glow */
+    .portal-link::before{
+      content:"";
+      position:absolute;
+      inset:4%;
+      border-radius:50%;
+      opacity:0;
+      pointer-events:none;
+
+      transition:
+        opacity .35s ease,
+        transform .35s ease;
+
+      transform:scale(.96);
+
+      border:1px solid rgba(241,212,139,.55);
+
+      box-shadow:
+        0 0 10px rgba(241,212,139,.35),
+        0 0 22px rgba(215,173,95,.25),
+        inset 0 0 18px rgba(241,212,139,.06);
+    }
+
+    .portal-link:hover::before,
+    .portal-link:focus-visible::before{
+      opacity:1;
+      transform:scale(1);
+    }
 
     .portal-link:hover,
     .portal-link:focus-visible{
-      transform:scale(1.018);
-      filter:
-        brightness(1.18)
-        drop-shadow(0 0 6px rgba(241,212,139,.45))
-        drop-shadow(0 0 16px rgba(215,173,95,.28));
+      transform:scale(1.015);
     }
 
-    /* DESKTOP */
+    /* DESKTOP POSITIONS */
 
     .healing{
       left:14.2%;
@@ -103,6 +125,8 @@
       width:22.5%;
       height:39%;
     }
+
+    /* AUDIO BUTTON */
 
     .audio-toggle{
       position:fixed;
@@ -142,6 +166,8 @@
     .audio-toggle.muted{
       opacity:.55;
     }
+
+    /* INTRO */
 
     @keyframes portalReveal{
       0%{
