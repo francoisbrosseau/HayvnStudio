@@ -26,17 +26,19 @@
     }
 
     .portal{
-      position:relative;
       width:100vw;
       height:100vh;
-      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
       background:#030302;
+      overflow:hidden;
     }
 
     .portal-stage{
       position:relative;
-      width:100%;
-      height:100%;
+      width:min(100vw, 177.78vh);
+      height:min(100vh, 56.25vw);
       opacity:0;
       animation:portalReveal 2.2s ease forwards;
     }
@@ -60,40 +62,39 @@
       display:block;
       cursor:pointer;
       border-radius:50%;
+      aspect-ratio:1 / 1;
+      width:19.2%;
       background:transparent;
       border:1px solid transparent;
-      transition:transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+      transition:
+        transform .28s ease,
+        box-shadow .28s ease,
+        border-color .28s ease;
     }
 
     .portal-link:hover,
     .portal-link:focus-visible{
       transform:scale(1.018);
-      border-color:rgba(241,212,139,.34);
+      border-color:rgba(241,212,139,.38);
       box-shadow:
-        0 0 7px rgba(241,212,139,.32),
-        0 0 15px rgba(215,173,95,.18),
-        inset 0 0 10px rgba(241,212,139,.035);
+        0 0 8px rgba(241,212,139,.34),
+        0 0 16px rgba(215,173,95,.22),
+        inset 0 0 12px rgba(241,212,139,.04);
     }
 
     .healing{
-      left:16.5%;
-      top:41.5%;
-      width:19.8%;
-      height:34.5%;
+      left:15.7%;
+      top:39.2%;
     }
 
     .studio{
-      left:40.2%;
-      top:41.5%;
-      width:19.8%;
-      height:34.5%;
+      left:40.4%;
+      top:39.2%;
     }
 
     .boudoir{
-      left:63.9%;
-      top:41.5%;
-      width:19.8%;
-      height:34.5%;
+      left:65.1%;
+      top:39.2%;
     }
 
     .audio-toggle{
@@ -127,27 +128,32 @@
     }
 
     @media (max-width:760px){
-      .portal-image{ object-fit:cover; }
+      .portal-stage{
+        width:100vw;
+        height:100svh;
+      }
+
+      .portal-image{
+        object-fit:cover;
+      }
+
+      .portal-link{
+        width:48%;
+      }
 
       .healing{
-        left:27%;
-        top:35%;
-        width:46%;
-        height:14.5%;
+        left:26%;
+        top:34%;
       }
 
       .studio{
-        left:27%;
-        top:55.2%;
-        width:46%;
-        height:14.5%;
+        left:26%;
+        top:54%;
       }
 
       .boudoir{
-        left:27%;
-        top:75.3%;
-        width:46%;
-        height:14.5%;
+        left:26%;
+        top:74%;
       }
 
       .audio-toggle{
