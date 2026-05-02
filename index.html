@@ -149,30 +149,21 @@
     .transition-layer.active{opacity:1;pointer-events:auto}
 
     .transition-layer video{
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-      object-fit:contain;
-      background:#030302;
-      opacity:0;
-      transform:scale(.985);
+      position:absolute;inset:0;width:100%;height:100%;
+      object-fit:contain;background:#030302;
+      opacity:0;transform:scale(.985);
       transition:opacity 1800ms ease,transform 2400ms ease;
-      pointer-events:none;
-      display:none;
+      pointer-events:none;display:none;
     }
 
     .transition-layer video.active-video{
-      display:block;
-      opacity:1;
-      transform:scale(1);
+      display:block;opacity:1;transform:scale(1);
     }
 
     .transition-layer.fade-black{background:#000}
 
     .transition-layer.fade-black video.active-video{
-      opacity:0;
-      transform:scale(1.012);
+      opacity:0;transform:scale(1.012);
       transition:opacity 1600ms ease,transform 1600ms ease;
     }
 
@@ -207,8 +198,8 @@
   </main>
 
   <div class="transition-layer" id="videoTransition">
-    <video id="healingVideo" src="videos/healing-transition.mp4" playsinline preload="auto"></video>
-    <video id="studioVideo" src="videos/studio-transition.mp4" playsinline preload="auto"></video>
+    <video id="healingVideo" src="videos/healing-transition.mp4" playsinline preload="auto" loop></video>
+    <video id="studioVideo" src="videos/studio-transition.mp4" playsinline preload="auto" loop></video>
   </div>
 
   <audio id="portalMusic" src="audio/intro-reveal.mp3" preload="auto" loop></audio>
@@ -244,7 +235,11 @@
         video.style.display = "none";
       });
 
-      if(portalMusic) portalMusic.volume = 0.38;
+      if(portalMusic){
+        portalMusic.volume = 0.38;
+        portalMusic.currentTime = 0;
+        portalMusic.play().catch(() => {});
+      }
     }
 
     window.addEventListener("pageshow", () => setTimeout(resetPortalState, 80));
@@ -267,7 +262,6 @@
 
     function fadePortalMusic(targetVolume,duration){
       if(!portalMusic) return;
-
       const startVolume = portalMusic.volume;
       const startTime = performance.now();
 
@@ -300,11 +294,10 @@
 
       const selectedVideo = document.getElementById(videoId);
       const otherVideo = videoId === "healingVideo" ? studioVideo : healingVideo;
-      const maxDuration = videoId === "studioVideo" ? 16000 : 11000;
+      const maxDuration = videoId === "studioVideo" ? 15500 : 10000;
 
       otherVideo.pause();
       otherVideo.currentTime = 0;
-      otherVideo.onended = null;
       otherVideo.classList.remove("active-video");
       otherVideo.style.display = "none";
 
@@ -322,32 +315,18 @@
 
       fadePortalMusic(0.04, 1600);
 
-      const playPromise = selectedVideo.play();
+      selectedVideo.play().catch(() => {
+        redirectTimeout = setTimeout(() => {
+          window.location.assign(url);
+        }, 2200);
+      });
 
-      if(playPromise){
-        playPromise.catch(() => {
-          redirectTimeout = setTimeout(() => {
-            window.location.assign(url);
-          }, 2200);
-        });
-      }
-
-      selectedVideo.onended = () => {
+      fallbackTimeout = setTimeout(() => {
         videoTransition.classList.add("fade-black");
 
         redirectTimeout = setTimeout(() => {
           window.location.assign(url);
         }, 1600);
-      };
-
-      fallbackTimeout = setTimeout(() => {
-        if(navigating && !videoTransition.classList.contains("fade-black")){
-          videoTransition.classList.add("fade-black");
-
-          redirectTimeout = setTimeout(() => {
-            window.location.assign(url);
-          }, 1600);
-        }
       }, maxDuration);
     }
 
