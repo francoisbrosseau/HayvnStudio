@@ -203,17 +203,33 @@
 
     let muted = false;
     let navigating = false;
+    let healingTimeout = null;
+    let healingRedirectTimeout = null;
 
     function resetPortalState(){
       navigating = false;
+
       document.body.style.opacity = "1";
       document.body.style.filter = "none";
 
-      healingTransition.classList.remove("active", "fade-black");
+      if(healingTimeout){
+        clearTimeout(healingTimeout);
+        healingTimeout = null;
+      }
+
+      if(healingRedirectTimeout){
+        clearTimeout(healingRedirectTimeout);
+        healingRedirectTimeout = null;
+      }
+
+      if(healingTransition){
+        healingTransition.classList.remove("active", "fade-black");
+      }
 
       if(healingVideo){
         healingVideo.pause();
         healingVideo.currentTime = 0;
+        healingVideo.onended = null;
       }
 
       if(portalMusic){
@@ -221,7 +237,19 @@
       }
     }
 
-    window.addEventListener("pageshow", resetPortalState);
+    window.addEventListener("pageshow", () => {
+      setTimeout(resetPortalState, 80);
+    });
+
+    document.addEventListener("visibilitychange", () => {
+      if(!document.hidden){
+        setTimeout(resetPortalState, 80);
+      }
+    });
+
+    window.addEventListener("focus", () => {
+      setTimeout(resetPortalState, 80);
+    });
 
     function updateAudioButton(){
       audioToggle.textContent = muted ? "♪̸" : "♪";
@@ -274,6 +302,8 @@
       navigating = true;
 
       healingTransition.classList.add("active");
+      healingTransition.classList.remove("fade-black");
+
       fadePortalMusic(0.04, 1600);
 
       healingVideo.currentTime = 0;
@@ -284,23 +314,25 @@
 
       if(playPromise){
         playPromise.catch(() => {
-          setTimeout(() => window.location.assign(url), 2200);
+          healingRedirectTimeout = setTimeout(() => {
+            window.location.assign(url);
+          }, 2200);
         });
       }
 
       healingVideo.onended = () => {
         healingTransition.classList.add("fade-black");
 
-        setTimeout(() => {
+        healingRedirectTimeout = setTimeout(() => {
           window.location.assign(url);
         }, 1600);
       };
 
-      setTimeout(() => {
+      healingTimeout = setTimeout(() => {
         if(navigating && !healingTransition.classList.contains("fade-black")){
           healingTransition.classList.add("fade-black");
 
-          setTimeout(() => {
+          healingRedirectTimeout = setTimeout(() => {
             window.location.assign(url);
           }, 1600);
         }
