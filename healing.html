@@ -18,78 +18,99 @@
     }
 
     body{
-      min-height:240vh;
+      min-height:260vh;
       overflow-x:hidden;
       font-family:system-ui,sans-serif;
-      background:#030302;
+      background:#020202;
       color:white;
     }
 
-    .bg{
+    /* =========================
+       CINEMATIC BACKGROUND
+    ========================== */
+
+    .bg-wrap{
       position:fixed;
       inset:0;
-      z-index:-3;
+      z-index:-5;
+      overflow:hidden;
+    }
 
-      background:
-        radial-gradient(
-          circle at center,
-          rgba(215,173,95,.12) 0%,
-          rgba(0,0,0,0) 34%
-        ),
+    .bg{
+      position:absolute;
+      inset:-8%;
 
-        linear-gradient(
-          to bottom,
-          rgba(0,0,0,.18),
-          rgba(0,0,0,.58)
-        ),
-
-        url('images/healing-bg.webp');
-
-      background-size:
-        140% 140%,
-        cover,
-        auto 120%;
-
-      background-position:
-        center,
-        center,
-        center top;
-
+      background-image:url('images/healing-bg.webp');
+      background-size:cover;
+      background-position:center center;
       background-repeat:no-repeat;
 
-      animation:bgFloat 22s ease-in-out infinite alternate;
+      transform:scale(1.12);
 
-      transform:scale(1.02);
+      animation:bgDrift 28s ease-in-out infinite alternate;
 
-      opacity:.96;
+      filter:
+        brightness(.82)
+        contrast(1.05)
+        saturate(1.05);
     }
 
-    .overlay{
-      position:fixed;
+    /* DARK CINEMATIC EDGES */
+
+    .bg::after{
+      content:"";
+      position:absolute;
       inset:0;
-      z-index:-2;
 
       background:
         radial-gradient(
           circle at center,
-          rgba(255,220,140,.05),
-          transparent 52%
+          rgba(0,0,0,0) 28%,
+          rgba(0,0,0,.22) 58%,
+          rgba(0,0,0,.72) 100%
         );
     }
+
+    /* GOLD ATMOSPHERE */
+
+    .ambient{
+      position:absolute;
+      inset:0;
+
+      background:
+        radial-gradient(
+          circle at 50% 18%,
+          rgba(241,212,139,.18),
+          rgba(241,212,139,.06) 24%,
+          transparent 52%
+        );
+
+      mix-blend-mode:screen;
+
+      animation:ambientPulse 8s ease-in-out infinite;
+    }
+
+    /* SOFT GRAIN */
 
     .grain{
       position:fixed;
       inset:0;
       z-index:-1;
 
-      opacity:.06;
+      opacity:.04;
       pointer-events:none;
 
       background-image:
         url("https://grainy-gradients.vercel.app/noise.svg");
     }
 
+    /* =========================
+       HERO
+    ========================== */
+
     .hero{
+      position:relative;
+
       min-height:100vh;
 
       display:flex;
@@ -103,17 +124,18 @@
     }
 
     h1{
-      font-size:clamp(52px,8vw,140px);
+      font-size:clamp(54px,8vw,150px);
       font-weight:300;
       letter-spacing:.08em;
 
       color:#f1d48b;
 
       text-shadow:
-        0 0 12px rgba(241,212,139,.24),
-        0 0 44px rgba(215,173,95,.12);
+        0 0 14px rgba(241,212,139,.28),
+        0 0 48px rgba(215,173,95,.16),
+        0 0 90px rgba(215,173,95,.10);
 
-      animation:titleGlow 5s ease-in-out infinite alternate;
+      animation:titleGlow 6s ease-in-out infinite alternate;
     }
 
     p{
@@ -124,30 +146,47 @@
       font-size:clamp(18px,2vw,26px);
       line-height:1.8;
 
-      opacity:.82;
+      opacity:.84;
 
       text-shadow:
-        0 0 18px rgba(0,0,0,.45);
+        0 0 18px rgba(0,0,0,.55);
     }
+
+    /* SCROLL SPACE */
 
     .scroll-space{
-      height:140vh;
+      height:160vh;
     }
 
-    @keyframes bgFloat{
+    /* =========================
+       ANIMATIONS
+    ========================== */
+
+    @keyframes bgDrift{
 
       0%{
-        background-position:
-          center,
-          center,
-          center top;
+        transform:
+          scale(1.12)
+          translateY(0px);
       }
 
       100%{
-        background-position:
-          center,
-          center,
-          center 6%;
+        transform:
+          scale(1.18)
+          translateY(-40px);
+      }
+    }
+
+    @keyframes ambientPulse{
+
+      0%,100%{
+        opacity:.55;
+        transform:scale(1);
+      }
+
+      50%{
+        opacity:.9;
+        transform:scale(1.06);
       }
     }
 
@@ -155,28 +194,32 @@
 
       0%{
         text-shadow:
-          0 0 12px rgba(241,212,139,.24),
-          0 0 44px rgba(215,173,95,.12);
+          0 0 14px rgba(241,212,139,.24),
+          0 0 48px rgba(215,173,95,.14),
+          0 0 90px rgba(215,173,95,.08);
       }
 
       100%{
         text-shadow:
-          0 0 18px rgba(241,212,139,.38),
-          0 0 64px rgba(215,173,95,.20);
+          0 0 22px rgba(241,212,139,.40),
+          0 0 74px rgba(215,173,95,.22),
+          0 0 120px rgba(215,173,95,.14);
       }
     }
+
+    /* =========================
+       MOBILE
+    ========================== */
 
     @media (max-width:900px){
 
       .bg{
-        background-size:
-          180% 180%,
-          cover,
-          auto 110%;
+        background-position:center top;
+        transform:scale(1.18);
       }
 
       h1{
-        font-size:clamp(42px,12vw,82px);
+        font-size:clamp(42px,12vw,90px);
       }
 
       p{
@@ -189,8 +232,14 @@
 
 <body>
 
-  <div class="bg"></div>
-  <div class="overlay"></div>
+  <div class="bg-wrap">
+
+    <div class="bg"></div>
+
+    <div class="ambient"></div>
+
+  </div>
+
   <div class="grain"></div>
 
   <section class="hero">
