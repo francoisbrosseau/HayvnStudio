@@ -1,1 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hayvn Healing</title>
 
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      min-height:220vh;
+      overflow-x:hidden;
+      font-family:system-ui,sans-serif;
+      background:#050505;
+      color:white;
+    }
+
+    .bg{
+      position:fixed;
+      inset:0;
+      z-index:-2;
+
+      background-image:url('images/healing-bg.webp');
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+
+      transform:scale(1.02);
+    }
+
+    .overlay{
+      position:fixed;
+      inset:0;
+      z-index:-1;
+
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(0,0,0,.38),
+          rgba(0,0,0,.58)
+        );
+    }
+
+    .hero{
+      min-height:100vh;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+
+      text-align:center;
+      padding:40px;
+    }
+
+    h1{
+      font-size:clamp(48px,8vw,120px);
+      letter-spacing:.08em;
+      font-weight:300;
+
+      color:#f1d48b;
+
+      text-shadow:
+        0 0 12px rgba(241,212,139,.22),
+        0 0 42px rgba(215,173,95,.12);
+    }
+
+    p{
+      margin-top:18px;
+      max-width:720px;
+
+      font-size:clamp(18px,2vw,24px);
+      line-height:1.7;
+
+      opacity:.82;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="bg"></div>
+  <div class="overlay"></div>
+
+  <section class="hero">
+
+    <h1>HAYVN HEALING</h1>
+
+    <p>
+      A sanctuary of grounding, restoration,
+      ritual, and inner alignment.
+    </p>
+
+  </section>
+
+</body>
+</html>
