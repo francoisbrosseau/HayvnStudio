@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hayvn Healing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HAYVN Healing</title>
 
   <style>
 
@@ -18,16 +18,16 @@
     }
 
     body{
-      min-height:260vh;
-      overflow-x:hidden;
-      font-family:system-ui,sans-serif;
-      background:#020202;
+      background:#050505;
       color:white;
+      overflow-x:hidden;
+      font-family:Arial, sans-serif;
+      min-height:220vh;
     }
 
     /* =========================
-       CINEMATIC BACKGROUND
-    ========================== */
+       BACKGROUND
+    ========================= */
 
     .bg-wrap{
       position:fixed;
@@ -38,24 +38,22 @@
 
     .bg{
       position:absolute;
-      inset:-8%;
+      inset:0;
 
       background-image:url('images/healing-bg-v2.webp');
       background-size:cover;
       background-position:center center;
       background-repeat:no-repeat;
 
-      transform:scale(1.12);
+      transform:scale(1.05);
 
-      animation:bgDrift 28s ease-in-out infinite alternate;
+      animation:bgMove 18s ease-in-out infinite alternate;
 
       filter:
-        brightness(.82)
+        brightness(.75)
         contrast(1.05)
         saturate(1.05);
     }
-
-    /* DARK CINEMATIC EDGES */
 
     .bg::after{
       content:"";
@@ -65,13 +63,15 @@
       background:
         radial-gradient(
           circle at center,
-          rgba(0,0,0,0) 28%,
-          rgba(0,0,0,.22) 58%,
-          rgba(0,0,0,.72) 100%
+          rgba(0,0,0,.0) 20%,
+          rgba(0,0,0,.30) 58%,
+          rgba(0,0,0,.82) 100%
         );
     }
 
-    /* GOLD ATMOSPHERE */
+    /* =========================
+       GOLD ATMOSPHERE
+    ========================= */
 
     .ambient{
       position:absolute;
@@ -79,10 +79,9 @@
 
       background:
         radial-gradient(
-          circle at 50% 18%,
-          rgba(241,212,139,.18),
-          rgba(241,212,139,.06) 24%,
-          transparent 52%
+          circle at 50% 15%,
+          rgba(255,220,140,.20),
+          transparent 45%
         );
 
       mix-blend-mode:screen;
@@ -90,14 +89,16 @@
       animation:ambientPulse 8s ease-in-out infinite;
     }
 
-    /* SOFT GRAIN */
+    /* =========================
+       GRAIN
+    ========================= */
 
     .grain{
       position:fixed;
       inset:0;
       z-index:-1;
 
-      opacity:.04;
+      opacity:.05;
       pointer-events:none;
 
       background-image:
@@ -105,12 +106,10 @@
     }
 
     /* =========================
-       HERO
-    ========================== */
+       HERO SECTION
+    ========================= */
 
     .hero{
-      position:relative;
-
       min-height:100vh;
 
       display:flex;
@@ -123,106 +122,135 @@
       padding:40px;
     }
 
-    h1{
-      font-size:clamp(54px,8vw,150px);
-      font-weight:300;
-      letter-spacing:.08em;
+    .hero-logo{
+      width:min(620px,80vw);
 
-      color:#f1d48b;
+      opacity:0;
 
-      text-shadow:
-        0 0 14px rgba(241,212,139,.28),
-        0 0 48px rgba(215,173,95,.16),
-        0 0 90px rgba(215,173,95,.10);
+      animation:
+        logoReveal 2.2s ease forwards,
+        logoFloat 5s ease-in-out infinite alternate;
 
-      animation:titleGlow 6s ease-in-out infinite alternate;
+      filter:
+        drop-shadow(0 0 18px rgba(241,212,139,.22))
+        drop-shadow(0 0 42px rgba(215,173,95,.14));
     }
 
-    p{
-      margin-top:22px;
+    .hero-sub{
+      margin-top:26px;
 
-      max-width:820px;
+      max-width:780px;
 
-      font-size:clamp(18px,2vw,26px);
+      font-size:clamp(18px,2vw,25px);
       line-height:1.8;
 
-      opacity:.84;
+      opacity:0;
+
+      animation:
+        textReveal 2s ease forwards;
+
+      animation-delay:.7s;
+
+      color:rgba(255,255,255,.84);
 
       text-shadow:
-        0 0 18px rgba(0,0,0,.55);
+        0 0 20px rgba(0,0,0,.45);
     }
 
-    /* SCROLL SPACE */
+    /* =========================
+       PLACEHOLDER SECTION
+    ========================= */
 
-    .scroll-space{
-      height:160vh;
+    .placeholder{
+      height:120vh;
     }
 
     /* =========================
        ANIMATIONS
-    ========================== */
+    ========================= */
 
-    @keyframes bgDrift{
+    @keyframes logoReveal{
+
+      0%{
+        opacity:0;
+        transform:
+          scale(.92)
+          translateY(30px);
+      }
+
+      100%{
+        opacity:1;
+        transform:
+          scale(1)
+          translateY(0px);
+      }
+    }
+
+    @keyframes textReveal{
+
+      0%{
+        opacity:0;
+        transform:translateY(18px);
+      }
+
+      100%{
+        opacity:1;
+        transform:translateY(0px);
+      }
+    }
+
+    @keyframes logoFloat{
+
+      0%{
+        transform:translateY(0px);
+      }
+
+      100%{
+        transform:translateY(-10px);
+      }
+    }
+
+    @keyframes bgMove{
 
       0%{
         transform:
-          scale(1.12)
+          scale(1.05)
           translateY(0px);
       }
 
       100%{
         transform:
-          scale(1.18)
-          translateY(-40px);
+          scale(1.10)
+          translateY(-30px);
       }
     }
 
     @keyframes ambientPulse{
 
       0%,100%{
-        opacity:.55;
-        transform:scale(1);
+        opacity:.45;
       }
 
       50%{
-        opacity:.9;
-        transform:scale(1.06);
-      }
-    }
-
-    @keyframes titleGlow{
-
-      0%{
-        text-shadow:
-          0 0 14px rgba(241,212,139,.24),
-          0 0 48px rgba(215,173,95,.14),
-          0 0 90px rgba(215,173,95,.08);
-      }
-
-      100%{
-        text-shadow:
-          0 0 22px rgba(241,212,139,.40),
-          0 0 74px rgba(215,173,95,.22),
-          0 0 120px rgba(215,173,95,.14);
+        opacity:.95;
       }
     }
 
     /* =========================
        MOBILE
-    ========================== */
+    ========================= */
 
-    @media (max-width:900px){
+    @media(max-width:900px){
 
       .bg{
         background-position:center top;
-        transform:scale(1.18);
       }
 
-      h1{
-        font-size:clamp(42px,12vw,90px);
+      .hero-logo{
+        width:88vw;
       }
 
-      p{
+      .hero-sub{
         font-size:18px;
       }
     }
@@ -232,6 +260,8 @@
 
 <body>
 
+  <!-- BACKGROUND -->
+
   <div class="bg-wrap">
 
     <div class="bg"></div>
@@ -240,20 +270,30 @@
 
   </div>
 
+  <!-- GRAIN -->
+
   <div class="grain"></div>
+
+  <!-- HERO -->
 
   <section class="hero">
 
-    <h1>HAYVN HEALING</h1>
+    <img
+      src="images/healing-logo.png"
+      alt="HAYVN Healing"
+      class="hero-logo"
+    />
 
-    <p>
+    <p class="hero-sub">
       A sanctuary of grounding, restoration,
       ritual, and inner alignment.
     </p>
 
   </section>
 
-  <div class="scroll-space"></div>
+  <!-- PLACEHOLDER -->
+
+  <section class="placeholder"></section>
 
 </body>
 </html>
