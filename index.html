@@ -767,6 +767,10 @@
 
       fadePortalMusic(0.04,1600);
 
+      selectedVideo.onclick = () => {
+      window.location.assign(url);
+     };
+
       selectedVideo.play().catch(() => {
 
         redirectTimeout = setTimeout(() => {
