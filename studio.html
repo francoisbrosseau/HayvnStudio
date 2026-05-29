@@ -154,6 +154,17 @@
       font-size:clamp(42px,5vw,72px);
       font-weight:400;
       margin-bottom:20px;
+      text-shadow:0 0 14px rgba(233,211,154,.18);
+      transition:color 1.2s ease, text-shadow 1.2s ease, transform 1.2s ease;
+    }
+
+    .section-title.title-glow{
+    color:#fff4cc;
+    text-shadow:
+    0 0 8px rgba(255,255,255,.55),
+    0 0 22px rgba(233,211,154,.60),
+    0 0 46px rgba(233,211,154,.35);
+    transform:scale(1.025);
     }
 
     .section-intro{
@@ -249,7 +260,7 @@
 
     .photo-tile{
       min-height:220px;
-      border:1px solid rgba(233,211,154,.26);
+      border:1px solid rgba(233,211,154,.20);
       background:rgba(5,5,5,.34);
       backdrop-filter:blur(10px);
       display:flex;
@@ -273,11 +284,13 @@
     .photo-tile.wide{grid-column:span 2;}
 
     .photo-tile:hover{
-      transform:translateY(-4px);
-      border-color:rgba(233,211,154,.52);
-      box-shadow:0 0 22px rgba(233,211,154,.10);
-    }
+  transform:translateY(-6px);
+  border-color:rgba(233,211,154,.46);
 
+  box-shadow:
+    0 0 28px rgba(233,211,154,.12),
+    0 0 60px rgba(233,211,154,.06);
+}
     .photo-tile::after{
       content:"";
       position:absolute;
@@ -310,7 +323,7 @@
     }
 
     .category-card{
-      border:1px solid rgba(233,211,154,.28);
+      border:1px solid rgba(233,211,154,.22);
       background:rgba(5,5,5,.36);
       backdrop-filter:blur(10px);
       padding:26px 18px;
@@ -323,10 +336,13 @@
     }
 
     .category-card:hover{
-      transform:translateY(-4px);
-      border-color:rgba(233,211,154,.55);
-      box-shadow:0 0 22px rgba(233,211,154,.10);
-    }
+  transform:translateY(-6px);
+  border-color:rgba(233,211,154,.48);
+
+  box-shadow:
+    0 0 28px rgba(233,211,154,.12),
+    0 0 60px rgba(233,211,154,.06);
+}
 
     .booking-section{
       padding:150px 40px;
@@ -344,11 +360,20 @@
     }
 
     .booking-card h2{
+      .booking-card h2.title-glow{
+  color:#fff4cc;
+  text-shadow:
+    0 0 8px rgba(255,255,255,.55),
+    0 0 22px rgba(233,211,154,.60),
+    0 0 46px rgba(233,211,154,.35);
+  transform:scale(1.025);
+}
       color:#e9d39a;
       font-family:"Cinzel",serif;
       font-size:clamp(42px,5vw,72px);
       font-weight:400;
       margin-bottom:24px;
+      transition:color 1.2s ease, text-shadow 1.2s ease, transform 1.2s ease;
     }
 
     .booking-card p{
@@ -742,6 +767,32 @@
     updateAudioButton();
     startAmbient();
   </script>
+  <script>
+  const sectionTitles = document.querySelectorAll('.section-title, .booking-card h2');
+
+  const titleObserver = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('title-glow');
+
+          setTimeout(() => {
+            entry.target.classList.remove('title-glow');
+          }, 1800);
+
+          titleObserver.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold:.55
+    }
+  );
+
+  sectionTitles.forEach(title => {
+    titleObserver.observe(title);
+  });
+</script>
 
 </body>
 </html>
