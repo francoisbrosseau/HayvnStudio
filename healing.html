@@ -49,10 +49,7 @@
 
       background-image:url('images/healing-bg-v2.webp');
       background-size:cover;
-
-      /* MOVED LEFT CORRECTLY */
-      background-position:51.25% center;
-
+      background-position:50.25% center;
       background-repeat:no-repeat;
 
       transform:scale(1.05);
@@ -116,6 +113,53 @@
     }
 
     /* =========================
+       AUDIO BUTTON
+    ========================= */
+
+    .audio-toggle{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:50;
+
+      width:46px;
+      height:46px;
+
+      border:none;
+      border-radius:999px;
+
+      background:rgba(0,0,0,.38);
+      backdrop-filter:blur(12px);
+
+      color:#f1d48b;
+      cursor:pointer;
+
+      font-size:18px;
+      font-weight:900;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      transition:
+        transform .25s ease,
+        opacity .25s ease,
+        box-shadow .25s ease;
+    }
+
+    .audio-toggle:hover{
+      transform:scale(1.08);
+
+      box-shadow:
+        0 0 10px rgba(241,212,139,.32),
+        0 0 24px rgba(215,173,95,.18);
+    }
+
+    .audio-toggle.muted{
+      opacity:.52;
+    }
+
+    /* =========================
        HERO SECTION
     ========================= */
 
@@ -132,29 +176,13 @@
       padding:40px;
     }
 
-    .hero-logo{
-      width:min(1150px,96vw);
-
-      opacity:0;
-
-      animation:
-        logoReveal 2.2s ease forwards,
-        logoFloat 5s ease-in-out infinite alternate;
-
-      filter:
-        brightness(1.18)
-        drop-shadow(0 0 28px rgba(241,212,139,.40))
-        drop-shadow(0 0 80px rgba(215,173,95,.28))
-        drop-shadow(0 0 140px rgba(215,173,95,.16));
-    }
-
-    /* INITIAL LOGO GLOW FLASH */
-
     .hero-logo-wrap{
       position:relative;
       display:flex;
       align-items:center;
       justify-content:center;
+
+      animation:logoAwaken 4.2s ease forwards;
     }
 
     .hero-logo-wrap::before{
@@ -162,26 +190,43 @@
 
       position:absolute;
 
-      width:120%;
-      height:120%;
+      width:132%;
+      height:132%;
 
       border-radius:50%;
 
       background:
         radial-gradient(
           circle,
-          rgba(255,235,180,.48) 0%,
-          rgba(241,212,139,.18) 30%,
-          transparent 68%
+          rgba(255,238,184,.78) 0%,
+          rgba(241,212,139,.34) 24%,
+          rgba(215,173,95,.14) 46%,
+          transparent 72%
         );
 
-      filter:blur(34px);
+      filter:blur(42px);
 
       opacity:0;
 
-      animation:logoFlash 3.5s ease forwards;
+      animation:logoFlash 4.2s ease forwards;
 
       pointer-events:none;
+    }
+
+    .hero-logo{
+      width:min(1150px,96vw);
+
+      opacity:0;
+
+      animation:
+        logoReveal 2.2s ease forwards,
+        logoFloat 5s ease-in-out infinite alternate 2.3s;
+
+      filter:
+        brightness(1.22)
+        drop-shadow(0 0 32px rgba(241,212,139,.46))
+        drop-shadow(0 0 92px rgba(215,173,95,.30))
+        drop-shadow(0 0 150px rgba(215,173,95,.17));
     }
 
     .hero-sub{
@@ -199,7 +244,7 @@
       animation:
         textReveal 2s ease forwards;
 
-      animation-delay:.7s;
+      animation-delay:.9s;
 
       color:rgba(246,228,185,.92);
 
@@ -229,8 +274,38 @@
         opacity:0;
 
         transform:
-          scale(.88)
-          translateY(40px);
+          scale(.84)
+          translateY(42px);
+
+        filter:
+          brightness(.72)
+          drop-shadow(0 0 0 rgba(241,212,139,0));
+      }
+
+      34%{
+        opacity:1;
+
+        transform:
+          scale(1.05)
+          translateY(0px);
+
+        filter:
+          brightness(1.62)
+          drop-shadow(0 0 46px rgba(241,212,139,.70))
+          drop-shadow(0 0 120px rgba(215,173,95,.40));
+      }
+
+      62%{
+        opacity:1;
+
+        transform:
+          scale(1.015)
+          translateY(0px);
+
+        filter:
+          brightness(1.35)
+          drop-shadow(0 0 34px rgba(241,212,139,.52))
+          drop-shadow(0 0 96px rgba(215,173,95,.28));
       }
 
       100%{
@@ -239,6 +314,12 @@
         transform:
           scale(1)
           translateY(0px);
+
+        filter:
+          brightness(1.22)
+          drop-shadow(0 0 32px rgba(241,212,139,.46))
+          drop-shadow(0 0 92px rgba(215,173,95,.30))
+          drop-shadow(0 0 150px rgba(215,173,95,.17));
       }
     }
 
@@ -251,17 +332,37 @@
 
       18%{
         opacity:1;
-        transform:scale(1.04);
+        transform:scale(1.02);
       }
 
-      55%{
-        opacity:.35;
-        transform:scale(1.20);
+      45%{
+        opacity:.72;
+        transform:scale(1.18);
+      }
+
+      76%{
+        opacity:.22;
+        transform:scale(1.38);
       }
 
       100%{
         opacity:0;
-        transform:scale(1.38);
+        transform:scale(1.52);
+      }
+    }
+
+    @keyframes logoAwaken{
+
+      0%{
+        filter:brightness(.84);
+      }
+
+      38%{
+        filter:brightness(1.25);
+      }
+
+      100%{
+        filter:brightness(1);
       }
     }
 
@@ -333,51 +434,25 @@
         font-size:22px;
         line-height:1.7;
       }
+
+      .audio-toggle{
+        width:42px;
+        height:42px;
+        right:14px;
+        bottom:14px;
+      }
     }
-    /* =========================
-   AUDIO BUTTON
-========================= */
-
-#audioToggle{
-  position:fixed;
-  top:20px;
-  right:20px;
-
-  width:52px;
-  height:52px;
-
-  border:none;
-  border-radius:50%;
-
-  background:rgba(0,0,0,.55);
-
-  color:#f1d48b;
-
-  font-size:20px;
-  cursor:pointer;
-
-  z-index:9999;
-
-  backdrop-filter:blur(10px);
-
-  transition:.3s;
-}
-
-#audioToggle:hover{
-  transform:scale(1.08);
-}
 
   </style>
 </head>
 
 <body>
-  <!-- AMBIENT AUDIO -->
 
-<audio id="ambientAudio" autoplay loop>
-  <source src="audio/healing-ambient.mp3" type="audio/mpeg">
-</audio>
+  <!-- AUDIO -->
 
-<button id="audioToggle">🔊</button>
+  <audio id="healingAmbient" src="audio/healing-ambient.mp3" preload="auto" loop></audio>
+
+  <button class="audio-toggle" id="audioToggle" type="button" aria-label="Toggle ambient sound">♪</button>
 
   <!-- BACKGROUND -->
 
@@ -417,6 +492,84 @@
   <!-- PLACEHOLDER -->
 
   <section class="placeholder"></section>
+
+  <script>
+
+    const healingAmbient = document.getElementById("healingAmbient");
+    const audioToggle = document.getElementById("audioToggle");
+
+    let muted = false;
+    let targetVolume = 0.20;
+    let fadeInterval = null;
+
+    function updateAudioButton(){
+      audioToggle.textContent = muted ? "♪̸" : "♪";
+      audioToggle.classList.toggle("muted", muted);
+    }
+
+    function fadeAudioIn(){
+      clearInterval(fadeInterval);
+
+      healingAmbient.volume = 0;
+
+      fadeInterval = setInterval(() => {
+
+        if(muted){
+          clearInterval(fadeInterval);
+          return;
+        }
+
+        if(healingAmbient.volume < targetVolume){
+          healingAmbient.volume = Math.min(
+            healingAmbient.volume + 0.01,
+            targetVolume
+          );
+        }else{
+          clearInterval(fadeInterval);
+        }
+
+      }, 140);
+    }
+
+    function startAmbient(){
+      if(muted) return;
+
+      healingAmbient.play()
+        .then(() => {
+          fadeAudioIn();
+        })
+        .catch(() => {});
+    }
+
+    function stopAmbient(){
+      clearInterval(fadeInterval);
+      healingAmbient.pause();
+    }
+
+    audioToggle.addEventListener("click", () => {
+      muted = !muted;
+
+      updateAudioButton();
+
+      if(muted){
+        stopAmbient();
+      }else{
+        startAmbient();
+      }
+    });
+
+    window.addEventListener("pageshow", () => {
+      updateAudioButton();
+      startAmbient();
+    });
+
+    window.addEventListener("pointerdown", startAmbient, { once:true });
+    window.addEventListener("touchstart", startAmbient, { once:true });
+
+    updateAudioButton();
+    startAmbient();
+
+  </script>
 
 </body>
 </html>
