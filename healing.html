@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>HAYVN Healing</title>
 
+  <!-- HEALING FONT -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+
   <style>
 
     *{
@@ -21,7 +28,7 @@
       background:#050505;
       color:white;
       overflow-x:hidden;
-      font-family:Arial, sans-serif;
+      font-family:"Cormorant Garamond", serif;
       min-height:220vh;
     }
 
@@ -50,9 +57,9 @@
       animation:bgMove 18s ease-in-out infinite alternate;
 
       filter:
-        brightness(.75)
+        brightness(.78)
         contrast(1.05)
-        saturate(1.05);
+        saturate(1.08);
     }
 
     .bg::after{
@@ -64,7 +71,7 @@
         radial-gradient(
           circle at center,
           rgba(0,0,0,.0) 20%,
-          rgba(0,0,0,.30) 58%,
+          rgba(0,0,0,.28) 58%,
           rgba(0,0,0,.82) 100%
         );
     }
@@ -80,7 +87,7 @@
       background:
         radial-gradient(
           circle at 50% 15%,
-          rgba(255,220,140,.20),
+          rgba(255,220,140,.22),
           transparent 45%
         );
 
@@ -123,7 +130,7 @@
     }
 
     .hero-logo{
-      width:min(620px,80vw);
+      width:min(920px,92vw);
 
       opacity:0;
 
@@ -132,17 +139,20 @@
         logoFloat 5s ease-in-out infinite alternate;
 
       filter:
-        drop-shadow(0 0 18px rgba(241,212,139,.22))
-        drop-shadow(0 0 42px rgba(215,173,95,.14));
+        brightness(1.12)
+        drop-shadow(0 0 22px rgba(241,212,139,.34))
+        drop-shadow(0 0 62px rgba(215,173,95,.22))
+        drop-shadow(0 0 120px rgba(215,173,95,.12));
     }
 
     .hero-sub{
-      margin-top:26px;
+      margin-top:34px;
 
-      max-width:780px;
+      max-width:900px;
 
-      font-size:clamp(18px,2vw,25px);
+      font-size:clamp(22px,2vw,34px);
       line-height:1.8;
+      letter-spacing:.04em;
 
       opacity:0;
 
@@ -151,14 +161,16 @@
 
       animation-delay:.7s;
 
-      color:rgba(255,255,255,.84);
+      color:rgba(241,226,190,.88);
 
       text-shadow:
-        0 0 20px rgba(0,0,0,.45);
+        0 0 20px rgba(0,0,0,.55);
+
+      font-weight:300;
     }
 
     /* =========================
-       PLACEHOLDER SECTION
+       PLACEHOLDER
     ========================= */
 
     .placeholder{
@@ -173,6 +185,7 @@
 
       0%{
         opacity:0;
+
         transform:
           scale(.92)
           translateY(30px);
@@ -180,6 +193,7 @@
 
       100%{
         opacity:1;
+
         transform:
           scale(1)
           translateY(0px);
@@ -247,11 +261,12 @@
       }
 
       .hero-logo{
-        width:88vw;
+        width:96vw;
       }
 
       .hero-sub{
-        font-size:18px;
+        font-size:20px;
+        line-height:1.7;
       }
     }
 
