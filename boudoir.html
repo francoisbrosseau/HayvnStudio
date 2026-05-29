@@ -271,16 +271,21 @@
 .package-copy h3{
   transition:
     color 1.2s ease,
-    text-shadow 1.2s ease;
+    text-shadow 1.2s ease,
+    transform 1.2s ease;
 }
 
 .package-copy h3.glow-title{
-  color:#fff2c9;
+
+  color:#fffef2;
 
   text-shadow:
-    0 0 12px rgba(233,211,154,.55),
-    0 0 24px rgba(233,211,154,.35),
-    0 0 40px rgba(233,211,154,.20);
+    0 0 8px rgba(255,255,255,.95),
+    0 0 18px rgba(255,240,190,.95),
+    0 0 36px rgba(233,211,154,.90),
+    0 0 70px rgba(233,211,154,.75);
+
+  transform:scale(1.04);
 }
 
     .package-row.reverse .package-image{ order:2; }
@@ -886,7 +891,7 @@ setTimeout(() => {
     'glow-title'
   );
 
-},2500);
+},1800);
 
           observer.unobserve(
             entry.target
