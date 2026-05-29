@@ -375,6 +375,116 @@
       0%,100%{ opacity:.45; }
       50%{ opacity:.95; }
     }
+    /* =========================
+COACHING
+========================= */
+
+.coaching-section{
+padding:160px 40px;
+max-width:1400px;
+margin:0 auto;
+}
+
+.coaching-header{
+text-align:center;
+margin-bottom:90px;
+}
+
+.coaching-title{
+color:#e9d39a;
+font-family:"Cinzel", serif;
+font-size:clamp(42px,5vw,72px);
+font-weight:400;
+margin-bottom:18px;
+}
+
+.coaching-subtitle{
+max-width:850px;
+margin:0 auto;
+
+font-size:clamp(22px,1.8vw,30px);
+line-height:1.8;
+
+color:rgba(255,255,255,.88);
+}
+
+.coaching-layout{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:60px;
+align-items:center;
+}
+
+.coaching-image{
+min-height:650px;
+
+border:1px solid rgba(233,211,154,.45);
+
+background:rgba(10,10,10,.28);
+
+backdrop-filter:blur(10px);
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+color:#e9d39a;
+
+font-family:"Cinzel", serif;
+letter-spacing:.14em;
+
+box-shadow:
+0 0 30px rgba(233,211,154,.08);
+}
+
+.coaching-content h3{
+color:#e9d39a;
+font-family:"Cinzel", serif;
+font-size:clamp(30px,3vw,46px);
+font-weight:400;
+margin-bottom:18px;
+}
+
+.coaching-content p{
+font-size:clamp(22px,1.6vw,28px);
+line-height:1.9;
+color:rgba(255,255,255,.88);
+margin-bottom:40px;
+}
+
+.coaching-divider{
+width:120px;
+height:1px;
+background:rgba(233,211,154,.55);
+margin:50px 0;
+}
+
+.coaching-quote{
+font-family:"Cinzel", serif;
+font-size:clamp(24px,2vw,34px);
+color:#e9d39a;
+line-height:1.7;
+margin-bottom:50px;
+}
+
+.coaching-btn{
+display:inline-flex;
+padding:16px 34px;
+border:1px solid rgba(233,211,154,.55);
+color:#e9d39a;
+text-decoration:none;
+font-family:"Cinzel", serif;
+letter-spacing:.08em;
+transition:.3s ease;
+}
+
+.coaching-btn:hover{
+background:rgba(233,211,154,.08);
+box-shadow:
+0 0 20px rgba(233,211,154,.18);
+}
+
+    
 
     @media(max-width:900px){
       .bg{
@@ -444,6 +554,19 @@
 
       .moon-copy{
         padding:0;
+        .coaching-section{
+padding:90px 22px;
+}
+
+.coaching-layout{
+grid-template-columns:1fr;
+gap:35px;
+}
+
+.coaching-image{
+min-height:340px;
+}
+
       }
     }
   </style>
@@ -587,7 +710,74 @@
     </div>
   </section>
 
-  <section class="placeholder"></section>
+<!-- COACHING -->
+
+<section class="coaching-section">
+
+  <div class="coaching-header">
+
+```
+<h2 class="coaching-title">Coaching</h2>
+
+<p class="coaching-subtitle">
+  Guidance, accountability, and support for meaningful change.
+</p>
+```
+
+  </div>
+
+  <div class="coaching-layout">
+
+```
+<div class="coaching-image">
+  Coaching Image
+</div>
+
+<div class="coaching-content">
+
+  <h3>Gain Clarity</h3>
+
+  <p>
+    When life feels uncertain, coaching creates space to explore
+    your goals, values, and next steps with greater confidence,
+    direction, and self-awareness.
+  </p>
+
+  <h3>Build Momentum</h3>
+
+  <p>
+    Together we identify obstacles, create practical strategies,
+    and develop sustainable habits that support lasting growth
+    and meaningful transformation.
+  </p>
+
+  <h3>Stay Aligned</h3>
+
+  <p>
+    Coaching helps transform insight into action while providing
+    accountability, encouragement, and support throughout the
+    journey.
+  </p>
+
+  <div class="coaching-divider"></div>
+
+  <div class="coaching-quote">
+    “Transformation begins when intention meets action.”
+  </div>
+
+  <a href="#" class="coaching-btn">
+    Schedule a Discovery Call
+  </a>
+
+</div>
+```
+
+  </div>
+
+</section>
+
+<section class="placeholder"></section>
+
 
   <script>
     const healingAmbient = document.getElementById("healingAmbient");
