@@ -5,15 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>HAYVN Healing</title>
 
-  <!-- FONTS -->
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
-
     *{
       margin:0;
       padding:0;
@@ -29,12 +26,8 @@
       color:white;
       overflow-x:hidden;
       font-family:"Cormorant Garamond", serif;
-      min-height:220vh;
+      min-height:100vh;
     }
-
-    /* =========================
-       BACKGROUND
-    ========================= */
 
     .bg-wrap{
       position:fixed;
@@ -46,133 +39,76 @@
     .bg{
       position:absolute;
       inset:0;
-
       background-image:url('images/healing-bg-v2.webp');
       background-size:cover;
       background-position:51.25% center;
       background-repeat:no-repeat;
-
       transform:scale(1.05);
-
       animation:bgMove 18s ease-in-out infinite alternate;
-
-      filter:
-        brightness(.82)
-        contrast(1.05)
-        saturate(1.08);
+      filter:brightness(.82) contrast(1.05) saturate(1.08);
     }
 
     .bg::after{
       content:"";
       position:absolute;
       inset:0;
-
-      background:
-        radial-gradient(
-          circle at center,
-          rgba(0,0,0,.0) 20%,
-          rgba(0,0,0,.28) 58%,
-          rgba(0,0,0,.82) 100%
-        );
+      background:radial-gradient(circle at center, rgba(0,0,0,0) 20%, rgba(0,0,0,.28) 58%, rgba(0,0,0,.82) 100%);
     }
-
-    /* =========================
-       GOLD ATMOSPHERE
-    ========================= */
 
     .ambient{
       position:absolute;
       inset:0;
-
-      background:
-        radial-gradient(
-          circle at 50% 15%,
-          rgba(255,220,140,.24),
-          transparent 45%
-        );
-
+      background:radial-gradient(circle at 50% 15%, rgba(255,220,140,.24), transparent 45%);
       mix-blend-mode:screen;
-
       animation:ambientPulse 8s ease-in-out infinite;
     }
-
-    /* =========================
-       GRAIN
-    ========================= */
 
     .grain{
       position:fixed;
       inset:0;
       z-index:-1;
-
       opacity:.05;
       pointer-events:none;
-
-      background-image:
-        url("https://grainy-gradients.vercel.app/noise.svg");
+      background-image:url("https://grainy-gradients.vercel.app/noise.svg");
     }
-
-    /* =========================
-       AUDIO BUTTON
-    ========================= */
 
     .audio-toggle{
       position:fixed;
       right:18px;
       bottom:18px;
       z-index:50;
-
       width:46px;
       height:46px;
-
       border:none;
       border-radius:999px;
-
       background:rgba(0,0,0,.38);
       backdrop-filter:blur(12px);
-
       color:#f1d48b;
       cursor:pointer;
-
       font-size:18px;
       font-weight:900;
-
       display:flex;
       align-items:center;
       justify-content:center;
-
-      transition:
-        transform .25s ease,
-        opacity .25s ease,
-        box-shadow .25s ease;
+      transition:transform .25s ease, opacity .25s ease, box-shadow .25s ease;
     }
 
     .audio-toggle:hover{
       transform:scale(1.08);
-
-      box-shadow:
-        0 0 10px rgba(241,212,139,.32),
-        0 0 24px rgba(215,173,95,.18);
+      box-shadow:0 0 10px rgba(241,212,139,.32), 0 0 24px rgba(215,173,95,.18);
     }
 
     .audio-toggle.muted{
       opacity:.52;
     }
 
-    /* =========================
-       HERO SECTION
-    ========================= */
-
     .hero{
       min-height:100vh;
-
       display:flex;
       align-items:center;
       justify-content:center;
       flex-direction:column;
-
       text-align:center;
-
       padding:40px;
     }
 
@@ -181,617 +117,479 @@
       display:flex;
       align-items:center;
       justify-content:center;
-
       animation:logoAwaken 4.2s ease forwards;
     }
 
     .hero-logo-wrap::before{
       content:"";
-
       position:absolute;
-
       width:132%;
       height:132%;
-
       border-radius:50%;
-
-      background:
-        radial-gradient(
-          circle,
-          rgba(255,238,184,.78) 0%,
-          rgba(241,212,139,.34) 24%,
-          rgba(215,173,95,.14) 46%,
-          transparent 72%
-        );
-
+      background:radial-gradient(circle, rgba(255,238,184,.78) 0%, rgba(241,212,139,.34) 24%, rgba(215,173,95,.14) 46%, transparent 72%);
       filter:blur(42px);
-
       opacity:0;
-
       animation:logoFlash 4.2s ease forwards;
-
       pointer-events:none;
     }
 
     .hero-logo{
       width:min(1150px,96vw);
-
       opacity:0;
-
-      animation:
-        logoReveal 2.2s ease forwards,
-        logoFloat 5s ease-in-out infinite alternate 2.3s;
-
-      filter:
-        brightness(1.22)
-        drop-shadow(0 0 32px rgba(241,212,139,.46))
-        drop-shadow(0 0 92px rgba(215,173,95,.30))
-        drop-shadow(0 0 150px rgba(215,173,95,.17));
+      animation:logoReveal 2.2s ease forwards, logoFloat 5s ease-in-out infinite alternate 2.3s;
+      filter:brightness(1.22) drop-shadow(0 0 32px rgba(241,212,139,.46)) drop-shadow(0 0 92px rgba(215,173,95,.30)) drop-shadow(0 0 150px rgba(215,173,95,.17));
     }
 
     .hero-sub{
       margin-top:40px;
-
       max-width:980px;
-
       font-size:clamp(26px,2.4vw,42px);
-
       line-height:1.7;
       letter-spacing:.06em;
-
       opacity:0;
-
-      animation:
-        textReveal 2s ease forwards;
-
+      animation:textReveal 2s ease forwards;
       animation-delay:.9s;
-
       color:rgba(246,228,185,.92);
-
-      text-shadow:
-        0 0 24px rgba(0,0,0,.60);
-
+      text-shadow:0 0 24px rgba(0,0,0,.60);
       font-family:"Cinzel", serif;
-
       font-weight:400;
     }
-   
-    /* =========================
-       PLACEHOLDER
-    ========================= */
 
-    .placeholder{
-      height:120vh;
+    .bio-section{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:120px 40px;
     }
 
-    /* =========================
-       ANIMATIONS
-    ========================= */
+    .bio-card{
+      width:min(1200px,100%);
+      display:grid;
+      grid-template-columns:320px 1fr;
+      gap:50px;
+      padding:40px;
+      border:1px solid rgba(233,211,154,.35);
+      background:rgba(5,5,5,.38);
+      backdrop-filter:blur(10px);
+      box-shadow:0 0 30px rgba(233,211,154,.08);
+    }
+
+    .bio-photo{
+      aspect-ratio:1/1;
+      border:1px solid rgba(233,211,154,.45);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#e9d39a;
+      font-family:"Cinzel", serif;
+      letter-spacing:.12em;
+      text-align:center;
+      background:linear-gradient(135deg, rgba(233,211,154,.04), rgba(255,255,255,.01));
+    }
+
+    .bio-content h2{
+      color:#e9d39a;
+      font-family:"Cinzel", serif;
+      font-size:clamp(34px,4vw,54px);
+      margin-bottom:25px;
+      font-weight:400;
+    }
+
+    .bio-content p{
+      font-size:clamp(22px,1.6vw,28px);
+      line-height:1.9;
+      color:rgba(255,255,255,.88);
+      margin-bottom:20px;
+    }
+
+    .service-section{
+      padding:140px 40px;
+      max-width:1400px;
+      margin:0 auto;
+    }
+
+    .service-title,
+    .moon-title{
+      text-align:center;
+      color:#e9d39a;
+      font-family:"Cinzel", serif;
+      font-size:clamp(42px,5vw,72px);
+      font-weight:400;
+      margin-bottom:20px;
+    }
+
+    .service-intro,
+    .moon-intro{
+      max-width:900px;
+      margin:0 auto 80px;
+      text-align:center;
+      font-size:clamp(22px,1.8vw,30px);
+      line-height:1.9;
+      color:rgba(255,255,255,.88);
+    }
+
+    .service-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:30px;
+    }
+
+    .service-card{
+      border:1px solid rgba(233,211,154,.35);
+      background:rgba(5,5,5,.35);
+      backdrop-filter:blur(10px);
+      padding:24px;
+      min-height:420px;
+    }
+
+    .service-image{
+      aspect-ratio:1/1;
+      border:1px solid rgba(233,211,154,.30);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#e9d39a;
+      margin-bottom:20px;
+      background:rgba(255,255,255,.025);
+    }
+
+    .service-card h3{
+      color:#e9d39a;
+      font-family:"Cinzel", serif;
+      font-size:30px;
+      font-weight:400;
+      margin-bottom:14px;
+    }
+
+    .service-card p{
+      font-size:22px;
+      line-height:1.8;
+      color:rgba(255,255,255,.86);
+    }
+
+    .moon-section{
+      padding:150px 40px;
+      max-width:1400px;
+      margin:0 auto;
+    }
+
+    .moon-row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:50px;
+      align-items:center;
+      margin-bottom:70px;
+    }
+
+    .moon-row.reverse .moon-image{
+      order:2;
+    }
+
+    .moon-image{
+      min-height:420px;
+      border:1px solid rgba(233,211,154,.35);
+      background:rgba(5,5,5,.35);
+      backdrop-filter:blur(10px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#e9d39a;
+      font-family:"Cinzel", serif;
+      letter-spacing:.12em;
+      text-align:center;
+    }
+
+    .moon-copy{
+      padding:20px;
+    }
+
+    .moon-copy h3{
+      color:#e9d39a;
+      font-family:"Cinzel", serif;
+      font-size:clamp(32px,3vw,48px);
+      font-weight:400;
+      margin-bottom:20px;
+    }
+
+    .moon-copy p{
+      font-size:clamp(22px,1.6vw,28px);
+      line-height:1.85;
+      color:rgba(255,255,255,.88);
+    }
+
+    .placeholder{
+      height:40vh;
+    }
 
     @keyframes logoReveal{
-
       0%{
         opacity:0;
-
-        transform:
-          scale(.84)
-          translateY(42px);
-
-        filter:
-          brightness(.72)
-          drop-shadow(0 0 0 rgba(241,212,139,0));
+        transform:scale(.84) translateY(42px);
+        filter:brightness(.72) drop-shadow(0 0 0 rgba(241,212,139,0));
       }
 
       34%{
         opacity:1;
-
-        transform:
-          scale(1.05)
-          translateY(0px);
-
-        filter:
-          brightness(1.62)
-          drop-shadow(0 0 46px rgba(241,212,139,.70))
-          drop-shadow(0 0 120px rgba(215,173,95,.40));
-      }
-
-      62%{
-        opacity:1;
-
-        transform:
-          scale(1.015)
-          translateY(0px);
-
-        filter:
-          brightness(1.35)
-          drop-shadow(0 0 34px rgba(241,212,139,.52))
-          drop-shadow(0 0 96px rgba(215,173,95,.28));
+        transform:scale(1.05) translateY(0);
+        filter:brightness(1.62) drop-shadow(0 0 46px rgba(241,212,139,.70)) drop-shadow(0 0 120px rgba(215,173,95,.40));
       }
 
       100%{
         opacity:1;
-
-        transform:
-          scale(1)
-          translateY(0px);
-
-        filter:
-          brightness(1.22)
-          drop-shadow(0 0 32px rgba(241,212,139,.46))
-          drop-shadow(0 0 92px rgba(215,173,95,.30))
-          drop-shadow(0 0 150px rgba(215,173,95,.17));
+        transform:scale(1) translateY(0);
+        filter:brightness(1.22) drop-shadow(0 0 32px rgba(241,212,139,.46)) drop-shadow(0 0 92px rgba(215,173,95,.30)) drop-shadow(0 0 150px rgba(215,173,95,.17));
       }
     }
 
     @keyframes logoFlash{
-
-      0%{
-        opacity:0;
-        transform:scale(.55);
-      }
-
-      18%{
-        opacity:1;
-        transform:scale(1.02);
-      }
-
-      45%{
-        opacity:.72;
-        transform:scale(1.18);
-      }
-
-      76%{
-        opacity:.22;
-        transform:scale(1.38);
-      }
-
-      100%{
-        opacity:0;
-        transform:scale(1.52);
-      }
+      0%{ opacity:0; transform:scale(.55); }
+      18%{ opacity:1; transform:scale(1.02); }
+      45%{ opacity:.72; transform:scale(1.18); }
+      76%{ opacity:.22; transform:scale(1.38); }
+      100%{ opacity:0; transform:scale(1.52); }
     }
 
     @keyframes logoAwaken{
-
-      0%{
-        filter:brightness(.84);
-      }
-
-      38%{
-        filter:brightness(1.25);
-      }
-
-      100%{
-        filter:brightness(1);
-      }
+      0%{ filter:brightness(.84); }
+      38%{ filter:brightness(1.25); }
+      100%{ filter:brightness(1); }
     }
 
     @keyframes textReveal{
-
-      0%{
-        opacity:0;
-        transform:translateY(18px);
-      }
-
-      100%{
-        opacity:1;
-        transform:translateY(0px);
-      }
+      0%{ opacity:0; transform:translateY(18px); }
+      100%{ opacity:1; transform:translateY(0); }
     }
 
     @keyframes logoFloat{
-
-      0%{
-        transform:translateY(0px);
-      }
-
-      100%{
-        transform:translateY(-10px);
-      }
+      0%{ transform:translateY(0); }
+      100%{ transform:translateY(-10px); }
     }
 
     @keyframes bgMove{
-
-      0%{
-        transform:
-          scale(1.05)
-          translateY(0px);
-      }
-
-      100%{
-        transform:
-          scale(1.10)
-          translateY(-30px);
-      }
+      0%{ transform:scale(1.05) translateY(0); }
+      100%{ transform:scale(1.10) translateY(-30px); }
     }
 
     @keyframes ambientPulse{
+      0%,100%{ opacity:.45; }
+      50%{ opacity:.95; }
+    }
 
-      0%,100%{
-        opacity:.45;
+    @media(max-width:900px){
+      .bg{
+        background-position:56% top;
       }
 
-      50%{
-        opacity:.95;
+      .hero{
+        padding:28px;
+      }
+
+      .hero-logo{
+        width:100vw;
+      }
+
+      .hero-sub{
+        font-size:22px;
+        line-height:1.7;
+      }
+
+      .audio-toggle{
+        width:42px;
+        height:42px;
+        right:14px;
+        bottom:14px;
+      }
+
+      .bio-section,
+      .service-section,
+      .moon-section{
+        padding:90px 22px;
+      }
+
+      .bio-card{
+        grid-template-columns:1fr;
+        padding:26px;
+        gap:30px;
+      }
+
+      .bio-photo{
+        max-width:320px;
+        width:100%;
+        margin:0 auto;
+      }
+
+      .service-grid{
+        grid-template-columns:1fr;
+      }
+
+      .service-card{
+        min-height:auto;
+      }
+
+      .moon-row,
+      .moon-row.reverse{
+        grid-template-columns:1fr;
+        gap:26px;
+        margin-bottom:60px;
+      }
+
+      .moon-row.reverse .moon-image{
+        order:0;
+      }
+
+      .moon-image{
+        min-height:300px;
+      }
+
+      .moon-copy{
+        padding:0;
       }
     }
-    /* =========================
-   BIO SECTION
-========================= */
-
-.bio-section{
-  min-height:100vh;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  padding:120px 40px;
-}
-
-.bio-card{
-  width:min(1200px,100%);
-
-  display:grid;
-  grid-template-columns:320px 1fr;
-  gap:50px;
-
-  padding:40px;
-
-  border:1px solid rgba(233,211,154,.35);
-
-  background:rgba(5,5,5,.38);
-
-  backdrop-filter:blur(10px);
-
-  box-shadow:
-    0 0 30px rgba(233,211,154,.08);
-}
-
-.bio-photo{
-  aspect-ratio:1/1;
-
-  border:1px solid rgba(233,211,154,.45);
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  color:#e9d39a;
-
-  font-family:"Cinzel", serif;
-  letter-spacing:.12em;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(233,211,154,.04),
-      rgba(255,255,255,.01)
-    );
-}
-
-.bio-content h2{
-  color:#e9d39a;
-
-  font-family:"Cinzel", serif;
-
-  font-size:clamp(34px,4vw,54px);
-
-  margin-bottom:25px;
-
-  font-weight:400;
-}
-
-.bio-content p{
-  font-size:clamp(22px,1.6vw,28px);
-
-  line-height:1.9;
-
-  color:rgba(255,255,255,.88);
-
-  margin-bottom:20px;
-}
-    <section class="service-section">
-
-  <h2 class="service-title">Distance Healing</h2>
-
-  <p class="service-intro">
-    Distance healing offers a supportive space for restoration,
-    reflection, and energetic balance. Sessions are designed to
-    help create clarity, reconnect with intention, and encourage
-    alignment wherever you may be.
-  </p>
-
-  <div class="service-grid">
-
-    <div class="service-card">
-      <div class="service-image">Image Placeholder</div>
-      <h3>Session Overview</h3>
-      <p>Introduction to the healing process and intention setting.</p>
-    </div>
-
-    <div class="service-card">
-      <div class="service-image">Image Placeholder</div>
-      <h3>Energy Alignment</h3>
-      <p>Focused support designed to encourage balance and flow.</p>
-    </div>
-
-    <div class="service-card">
-      <div class="service-image">Image Placeholder</div>
-      <h3>Emotional Support</h3>
-      <p>Creating space for release, reflection, and grounding.</p>
-    </div>
-
-    <div class="service-card">
-      <div class="service-image">Image Placeholder</div>
-      <h3>Spiritual Guidance</h3>
-      <p>Exploring intuition, insight, and personal connection.</p>
-    </div>
-
-    <div class="service-card">
-      <div class="service-image">Image Placeholder</div>
-      <h3>Integration</h3>
-      <p>Practical reflection and continued alignment after sessions.</p>
-    </div>
-
-  </div>
-
-</section>
-    .service-section{
-  padding:140px 40px;
-  max-width:1400px;
-  margin:0 auto;
-}
-
-.service-title{
-  text-align:center;
-  color:#e9d39a;
-  font-family:"Cinzel", serif;
-  font-size:clamp(42px,5vw,72px);
-  font-weight:400;
-  margin-bottom:20px;
-}
-
-.service-intro{
-  max-width:900px;
-  margin:0 auto 80px;
-  text-align:center;
-
-  font-size:clamp(22px,1.8vw,30px);
-  line-height:1.9;
-
-  color:rgba(255,255,255,.88);
-}
-
-.service-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:30px;
-}
-
-.service-card{
-  border:1px solid rgba(233,211,154,.35);
-
-  background:rgba(5,5,5,.35);
-
-  backdrop-filter:blur(10px);
-
-  padding:24px;
-
-  min-height:420px;
-}
-
-.service-image{
-  aspect-ratio:1/1;
-
-  border:1px solid rgba(233,211,154,.30);
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  color:#e9d39a;
-
-  margin-bottom:20px;
-}
-
-.service-card h3{
-  color:#e9d39a;
-  font-family:"Cinzel", serif;
-  font-size:30px;
-  font-weight:400;
-  margin-bottom:14px;
-}
-
-.service-card p{
-  font-size:22px;
-  line-height:1.8;
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:900px){
-
-    /* =========================
-       MOBILE
-    ========================= */
-
-   @media(max-width:900px){
-
-  .bg{
-    background-position:56% top;
-  }
-
-  .hero-logo{
-    width:100vw;
-  }
-
-  .hero-sub{
-    font-size:22px;
-    line-height:1.7;
-  }
-
-  .audio-toggle{
-    width:42px;
-    height:42px;
-    right:14px;
-    bottom:14px;
-  }
-
-  .bio-card{
-    grid-template-columns:1fr;
-  }
-
-  .bio-photo{
-    max-width:320px;
-    width:100%;
-    margin:0 auto;
-  }
-
-}
-
   </style>
 </head>
 
 <body>
 
-  <!-- AUDIO -->
-
   <audio id="healingAmbient" src="audio/healing-ambient.mp3" preload="auto" loop></audio>
 
   <button class="audio-toggle" id="audioToggle" type="button" aria-label="Toggle ambient sound">♪</button>
 
-  <!-- BACKGROUND -->
-
   <div class="bg-wrap">
-
     <div class="bg"></div>
-
     <div class="ambient"></div>
-
   </div>
-
-  <!-- GRAIN -->
 
   <div class="grain"></div>
 
-  <!-- HERO -->
-
   <section class="hero">
-
     <div class="hero-logo-wrap">
-
-      <img
-        src="images/healing-logo.png"
-        alt="HAYVN Healing"
-        class="hero-logo"
-      />
-
+      <img src="images/healing-logo.png" alt="HAYVN Healing" class="hero-logo" />
     </div>
 
     <p class="hero-sub">
       A sanctuary of grounding, restoration,
       ritual, and inner alignment.
     </p>
-
   </section>
+
   <section class="bio-section">
+    <div class="bio-card">
+      <div class="bio-photo">
+        <span>Portrait Coming Soon</span>
+      </div>
 
-  <div class="bio-card">
+      <div class="bio-content">
+        <h2>A Path to Healing</h2>
 
-    <div class="bio-photo">
-      <span>Portrait Coming Soon</span>
+        <p>
+          HAYVN Healing is a sacred space for restoration, energetic support,
+          and inner alignment.
+        </p>
+
+        <p>
+          Through intuitive healing, ritual work, and grounded spiritual guidance,
+          each session is created to help you reconnect with clarity, calm, and
+          your own inner wisdom.
+        </p>
+      </div>
     </div>
-
-    <div class="bio-content">
-
-      <h2>A Path to Healing</h2>
-
-      ...
-
-    </div>
-
-  </div>
-
-</section>
   </section>
 
-<!-- DISTANCE HEALING -->
+  <section class="service-section">
+    <h2 class="service-title">Distance Healing</h2>
 
-<section class="service-section">
+    <p class="service-intro">
+      Distance healing offers a supportive space for restoration,
+      reflection, and energetic balance. Sessions are designed to
+      help create clarity, reconnect with intention, and encourage
+      alignment wherever you may be.
+    </p>
 
-  <h2 class="service-title">Distance Healing</h2>
+    <div class="service-grid">
+      <div class="service-card">
+        <div class="service-image">Image Placeholder</div>
+        <h3>Session Overview</h3>
+        <p>Introduction to the healing process and intention setting.</p>
+      </div>
 
-  <p class="service-intro">
-    Distance healing offers a supportive space for restoration,
-    reflection, and energetic balance. Sessions are designed to
-    help create clarity, reconnect with intention, and encourage
-    alignment wherever you may be.
-  </p>
+      <div class="service-card">
+        <div class="service-image">Image Placeholder</div>
+        <h3>Energy Alignment</h3>
+        <p>Focused support designed to encourage balance and flow.</p>
+      </div>
 
-  <div class="service-grid">
+      <div class="service-card">
+        <div class="service-image">Image Placeholder</div>
+        <h3>Emotional Support</h3>
+        <p>Creating space for release, reflection, and grounding.</p>
+      </div>
 
-    <div class="service-card">
-      <div class="service-image">Image Placeholder</div>
-      <h3>Session Overview</h3>
-      <p>Introduction to the healing process and intention setting.</p>
+      <div class="service-card">
+        <div class="service-image">Image Placeholder</div>
+        <h3>Spiritual Guidance</h3>
+        <p>Exploring intuition, insight, and personal connection.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-image">Image Placeholder</div>
+        <h3>Integration</h3>
+        <p>Practical reflection and continued alignment after sessions.</p>
+      </div>
     </div>
+  </section>
 
-    <div class="service-card">
-      <div class="service-image">Image Placeholder</div>
-      <h3>Energy Alignment</h3>
-      <p>Focused support designed to encourage balance and flow.</p>
-    </div>
-
-    <div class="service-card">
-      <div class="service-image">Image Placeholder</div>
-      <h3>Emotional Support</h3>
-      <p>Creating space for release, reflection, and grounding.</p>
-    </div>
-
-    <div class="service-card">
-      <div class="service-image">Image Placeholder</div>
-      <h3>Spiritual Guidance</h3>
-      <p>Exploring intuition, insight, and personal connection.</p>
-    </div>
-
-    <div class="service-card">
-      <div class="service-image">Image Placeholder</div>
-      <h3>Integration</h3>
-      <p>Practical reflection and continued alignment after sessions.</p>
-    </div>
-
-  </div>
-
-</section>
   <section class="moon-section">
+    <h2 class="moon-title">Moon Rituals</h2>
 
-  <h2 class="moon-title">Moon Rituals</h2>
+    <p class="moon-intro">
+      Moon rituals provide a sacred opportunity to align with natural cycles,
+      deepen self-awareness, and create space for intention, reflection,
+      release, and transformation.
+    </p>
 
-  <p class="moon-intro">
-    Moon rituals provide a sacred opportunity to align with
-    natural cycles, deepen self-awareness, and create space
-    for intention, reflection, and transformation.
-  </p>
+    <div class="moon-row">
+      <div class="moon-image">Moon Ritual Image</div>
 
-  <!-- IMAGE + Moon Rituals -->
+      <div class="moon-copy">
+        <h3>Moon Rituals</h3>
+        <p>
+          These rituals are designed to help you connect with lunar energy,
+          set meaningful intentions, and create a sacred pause for reflection,
+          clarity, and energetic renewal.
+        </p>
+      </div>
+    </div>
 
-  <!-- IMAGE + Healings -->
+    <div class="moon-row reverse">
+      <div class="moon-image">Healing Image</div>
 
-  <!-- IMAGE + Cord Cuttings -->
+      <div class="moon-copy">
+        <h3>Healings</h3>
+        <p>
+          Healing sessions offer a gentle space for grounding, emotional release,
+          energetic balance, and reconnection with your inner calm.
+        </p>
+      </div>
+    </div>
 
-</section>
+    <div class="moon-row">
+      <div class="moon-image">Cord Cutting Image</div>
 
-<!-- PLACEHOLDER -->
-
-  <!-- PLACEHOLDER -->
+      <div class="moon-copy">
+        <h3>Cord Cuttings</h3>
+        <p>
+          Cord cutting rituals support the release of old attachments,
+          energetic heaviness, and patterns that no longer feel aligned with
+          your path forward.
+        </p>
+      </div>
+    </div>
+  </section>
 
   <section class="placeholder"></section>
 
   <script>
-
     const healingAmbient = document.getElementById("healingAmbient");
     const audioToggle = document.getElementById("audioToggle");
 
@@ -806,25 +604,19 @@
 
     function fadeAudioIn(){
       clearInterval(fadeInterval);
-
       healingAmbient.volume = 0;
 
       fadeInterval = setInterval(() => {
-
         if(muted){
           clearInterval(fadeInterval);
           return;
         }
 
         if(healingAmbient.volume < targetVolume){
-          healingAmbient.volume = Math.min(
-            healingAmbient.volume + 0.01,
-            targetVolume
-          );
+          healingAmbient.volume = Math.min(healingAmbient.volume + 0.01, targetVolume);
         }else{
           clearInterval(fadeInterval);
         }
-
       }, 140);
     }
 
@@ -845,7 +637,6 @@
 
     audioToggle.addEventListener("click", () => {
       muted = !muted;
-
       updateAudioButton();
 
       if(muted){
@@ -865,7 +656,6 @@
 
     updateAudioButton();
     startAmbient();
-
   </script>
 
 </body>
