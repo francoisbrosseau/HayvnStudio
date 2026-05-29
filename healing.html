@@ -483,6 +483,82 @@ background:rgba(233,211,154,.08);
 box-shadow:
 0 0 20px rgba(233,211,154,.18);
 }
+    /* =========================
+COMMUNITY
+========================= */
+
+.community-section{
+padding:160px 40px;
+max-width:1200px;
+margin:0 auto;
+}
+
+.community-inner{
+text-align:center;
+}
+
+.community-title{
+color:#e9d39a;
+font-family:"Cinzel", serif;
+font-size:clamp(42px,5vw,72px);
+font-weight:400;
+margin-bottom:60px;
+}
+
+.community-image{
+min-height:420px;
+border:1px solid rgba(233,211,154,.35);
+background:rgba(5,5,5,.35);
+backdrop-filter:blur(10px);
+display:flex;
+align-items:center;
+justify-content:center;
+color:#e9d39a;
+font-family:"Cinzel", serif;
+letter-spacing:.12em;
+margin-bottom:50px;
+}
+
+.community-text{
+max-width:900px;
+margin:0 auto 60px;
+font-size:clamp(22px,1.6vw,28px);
+line-height:1.9;
+color:rgba(255,255,255,.88);
+}
+
+.community-benefits{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:20px;
+max-width:900px;
+margin:0 auto 60px;
+}
+
+.community-benefit{
+border:1px solid rgba(233,211,154,.25);
+padding:22px;
+background:rgba(255,255,255,.02);
+font-size:24px;
+}
+
+.community-btn{
+display:inline-flex;
+padding:18px 36px;
+border:1px solid rgba(233,211,154,.55);
+color:#e9d39a;
+text-decoration:none;
+font-family:"Cinzel", serif;
+letter-spacing:.08em;
+transition:.3s ease;
+}
+
+.community-btn:hover{
+background:rgba(233,211,154,.08);
+box-shadow:
+0 0 20px rgba(233,211,154,.18);
+}
+
 
     
 
@@ -568,6 +644,18 @@ box-shadow:
 .coaching-image{
   min-height:340px;
 }
+      .community-section{
+padding:90px 22px;
+}
+
+.community-benefits{
+grid-template-columns:1fr;
+}
+
+.community-image{
+min-height:280px;
+}
+
   </style>
 </head>
 
@@ -770,6 +858,61 @@ box-shadow:
   </div>
 
 </section>
+  <!-- COMMUNITY -->
+
+<section class="community-section">
+
+  <div class="community-inner">
+
+```
+<h2 class="community-title">
+  The HAYVN Circle
+</h2>
+
+<div class="community-image">
+  Community Image
+</div>
+
+<p class="community-text">
+  Continue your journey beyond individual sessions.
+  The HAYVN Circle is a welcoming community for those
+  seeking connection, inspiration, healing insights,
+  lunar wisdom, and meaningful support along their path.
+</p>
+
+<div class="community-benefits">
+
+  <div class="community-benefit">
+    🌙 Moon Ritual Updates
+  </div>
+
+  <div class="community-benefit">
+    ✨ Community Support
+  </div>
+
+  <div class="community-benefit">
+    🕊 Healing Insights
+  </div>
+
+  <div class="community-benefit">
+    🔮 Exclusive Live Events
+  </div>
+
+</div>
+
+<a
+  href="YOUR_FACEBOOK_LINK_HERE"
+  target="_blank"
+  class="community-btn"
+>
+  Join Our Facebook Community
+</a>
+```
+
+  </div>
+
+</section>
+
 
 <section class="placeholder"></section>
 
