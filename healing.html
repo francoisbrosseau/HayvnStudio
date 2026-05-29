@@ -255,6 +255,43 @@
 
       font-weight:400;
     }
+    <section class="bio-section">
+
+  <div class="bio-card">
+
+    <div class="bio-photo">
+      <span>Portrait Coming Soon</span>
+    </div>
+
+    <div class="bio-content">
+
+      <h2>A Path to Healing</h2>
+
+      <p>
+        Healing begins when we create space to listen inward. Through
+        intentional practice, ritual, reflection, and energetic awareness,
+        each session is designed to support balance, clarity, and
+        reconnection with self.
+      </p>
+
+      <p>
+        This space will soon contain the practitioner's personal story,
+        healing philosophy, training, and approach. For now, it serves as a
+        foundation for the journey that visitors will explore throughout the
+        site.
+      </p>
+
+      <p>
+        Every path is unique. The intention here is not to fix or force, but
+        to create a supportive environment where restoration, insight, and
+        alignment can naturally emerge.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
 
     /* =========================
        PLACEHOLDER
@@ -415,6 +452,82 @@
         opacity:.95;
       }
     }
+    /* =========================
+   BIO SECTION
+========================= */
+
+.bio-section{
+  min-height:100vh;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:120px 40px;
+}
+
+.bio-card{
+  width:min(1200px,100%);
+
+  display:grid;
+  grid-template-columns:320px 1fr;
+  gap:50px;
+
+  padding:40px;
+
+  border:1px solid rgba(233,211,154,.35);
+
+  background:rgba(5,5,5,.38);
+
+  backdrop-filter:blur(10px);
+
+  box-shadow:
+    0 0 30px rgba(233,211,154,.08);
+}
+
+.bio-photo{
+  aspect-ratio:1/1;
+
+  border:1px solid rgba(233,211,154,.45);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  color:#e9d39a;
+
+  font-family:"Cinzel", serif;
+  letter-spacing:.12em;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(233,211,154,.04),
+      rgba(255,255,255,.01)
+    );
+}
+
+.bio-content h2{
+  color:#e9d39a;
+
+  font-family:"Cinzel", serif;
+
+  font-size:clamp(34px,4vw,54px);
+
+  margin-bottom:25px;
+
+  font-weight:400;
+}
+
+.bio-content p{
+  font-size:clamp(22px,1.6vw,28px);
+
+  line-height:1.9;
+
+  color:rgba(255,255,255,.88);
+
+  margin-bottom:20px;
+}
 
     /* =========================
        MOBILE
@@ -442,6 +555,15 @@
         bottom:14px;
       }
     }
+    .bio-card{
+  grid-template-columns:1fr;
+}
+
+.bio-photo{
+  max-width:320px;
+  width:100%;
+  margin:0 auto;
+}
 
   </style>
 </head>
