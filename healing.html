@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>HAYVN Healing</title>
 
-  <!-- HEALING FONT -->
+  <!-- FONTS -->
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
 
@@ -57,7 +57,7 @@
       animation:bgMove 18s ease-in-out infinite alternate;
 
       filter:
-        brightness(.78)
+        brightness(.82)
         contrast(1.05)
         saturate(1.08);
     }
@@ -87,7 +87,7 @@
       background:
         radial-gradient(
           circle at 50% 15%,
-          rgba(255,220,140,.22),
+          rgba(255,220,140,.24),
           transparent 45%
         );
 
@@ -130,7 +130,7 @@
     }
 
     .hero-logo{
-      width:min(920px,92vw);
+      width:min(1150px,96vw);
 
       opacity:0;
 
@@ -139,20 +139,57 @@
         logoFloat 5s ease-in-out infinite alternate;
 
       filter:
-        brightness(1.12)
-        drop-shadow(0 0 22px rgba(241,212,139,.34))
-        drop-shadow(0 0 62px rgba(215,173,95,.22))
-        drop-shadow(0 0 120px rgba(215,173,95,.12));
+        brightness(1.18)
+        drop-shadow(0 0 28px rgba(241,212,139,.40))
+        drop-shadow(0 0 80px rgba(215,173,95,.28))
+        drop-shadow(0 0 140px rgba(215,173,95,.16));
+    }
+
+    /* INITIAL LOGO GLOW FLASH */
+
+    .hero-logo-wrap{
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .hero-logo-wrap::before{
+      content:"";
+
+      position:absolute;
+
+      width:120%;
+      height:120%;
+
+      border-radius:50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(255,235,180,.48) 0%,
+          rgba(241,212,139,.18) 30%,
+          transparent 68%
+        );
+
+      filter:blur(34px);
+
+      opacity:0;
+
+      animation:logoFlash 3.5s ease forwards;
+
+      pointer-events:none;
     }
 
     .hero-sub{
-      margin-top:34px;
+      margin-top:40px;
 
-      max-width:900px;
+      max-width:980px;
 
-      font-size:clamp(22px,2vw,34px);
-      line-height:1.8;
-      letter-spacing:.04em;
+      font-size:clamp(26px,2.4vw,42px);
+
+      line-height:1.7;
+      letter-spacing:.06em;
 
       opacity:0;
 
@@ -161,12 +198,14 @@
 
       animation-delay:.7s;
 
-      color:rgba(241,226,190,.88);
+      color:rgba(246,228,185,.92);
 
       text-shadow:
-        0 0 20px rgba(0,0,0,.55);
+        0 0 24px rgba(0,0,0,.60);
 
-      font-weight:300;
+      font-family:"Cinzel", serif;
+
+      font-weight:400;
     }
 
     /* =========================
@@ -187,8 +226,8 @@
         opacity:0;
 
         transform:
-          scale(.92)
-          translateY(30px);
+          scale(.88)
+          translateY(40px);
       }
 
       100%{
@@ -197,6 +236,29 @@
         transform:
           scale(1)
           translateY(0px);
+      }
+    }
+
+    @keyframes logoFlash{
+
+      0%{
+        opacity:0;
+        transform:scale(.55);
+      }
+
+      18%{
+        opacity:1;
+        transform:scale(1.04);
+      }
+
+      55%{
+        opacity:.35;
+        transform:scale(1.20);
+      }
+
+      100%{
+        opacity:0;
+        transform:scale(1.38);
       }
     }
 
@@ -261,11 +323,11 @@
       }
 
       .hero-logo{
-        width:96vw;
+        width:100vw;
       }
 
       .hero-sub{
-        font-size:20px;
+        font-size:22px;
         line-height:1.7;
       }
     }
@@ -293,11 +355,15 @@
 
   <section class="hero">
 
-    <img
-      src="images/healing-logo.png"
-      alt="HAYVN Healing"
-      class="hero-logo"
-    />
+    <div class="hero-logo-wrap">
+
+      <img
+        src="images/healing-logo.png"
+        alt="HAYVN Healing"
+        class="hero-logo"
+      />
+
+    </div>
 
     <p class="hero-sub">
       A sanctuary of grounding, restoration,
