@@ -334,11 +334,50 @@
         line-height:1.7;
       }
     }
+    /* =========================
+   AUDIO BUTTON
+========================= */
+
+#audioToggle{
+  position:fixed;
+  top:20px;
+  right:20px;
+
+  width:52px;
+  height:52px;
+
+  border:none;
+  border-radius:50%;
+
+  background:rgba(0,0,0,.55);
+
+  color:#f1d48b;
+
+  font-size:20px;
+  cursor:pointer;
+
+  z-index:9999;
+
+  backdrop-filter:blur(10px);
+
+  transition:.3s;
+}
+
+#audioToggle:hover{
+  transform:scale(1.08);
+}
 
   </style>
 </head>
 
 <body>
+  <!-- AMBIENT AUDIO -->
+
+<audio id="ambientAudio" autoplay loop>
+  <source src="audio/healing-ambient.mp3" type="audio/mpeg">
+</audio>
+
+<button id="audioToggle">🔊</button>
 
   <!-- BACKGROUND -->
 
