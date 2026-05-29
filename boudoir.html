@@ -255,6 +255,25 @@
       gap:56px;
       align-items:center;
       margin-bottom:90px;
+      opacity:0;
+transform:translateY(40px);
+transition:
+  opacity 1s ease,
+  transform 1s ease;
+      .package-row.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.package-row.glow{
+
+  box-shadow:
+    0 0 40px rgba(233,211,154,.15),
+    0 0 80px rgba(233,211,154,.08);
+
+  transition:
+    box-shadow 2.5s ease;
+}
     }
 
     .package-row.reverse .package-image{ order:2; }
@@ -827,6 +846,55 @@ window.addEventListener(
 
 updateAudioButton();
 startAmbient();
+
+</script>
+  <script>
+
+const packageRows =
+  document.querySelectorAll('.package-row');
+
+const observer =
+  new IntersectionObserver(
+
+    entries => {
+
+      entries.forEach(entry => {
+
+        if(entry.isIntersecting){
+
+          entry.target.classList.add(
+            'visible'
+          );
+
+          entry.target.classList.add(
+            'glow'
+          );
+
+          setTimeout(() => {
+
+            entry.target.classList.remove(
+              'glow'
+            );
+
+          },2500);
+
+          observer.unobserve(
+            entry.target
+          );
+        }
+
+      });
+
+    },
+
+    {
+      threshold:.25
+    }
+  );
+
+packageRows.forEach(row => {
+  observer.observe(row);
+});
 
 </script>
 </body>
