@@ -22,6 +22,48 @@
       font-family:"Cormorant Garamond", serif;
       min-height:100vh;
     }
+    .audio-toggle{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  z-index:50;
+
+  width:46px;
+  height:46px;
+
+  border:none;
+  border-radius:999px;
+
+  background:rgba(0,0,0,.38);
+  backdrop-filter:blur(12px);
+
+  color:#f1d48b;
+  cursor:pointer;
+
+  font-size:18px;
+  font-weight:900;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  transition:
+    transform .25s ease,
+    opacity .25s ease,
+    box-shadow .25s ease;
+}
+
+.audio-toggle:hover{
+  transform:scale(1.08);
+
+  box-shadow:
+    0 0 10px rgba(241,212,139,.32),
+    0 0 24px rgba(215,173,95,.18);
+}
+
+.audio-toggle.muted{
+  opacity:.52;
+}
 
     .bg-wrap{
       position:fixed;
@@ -474,6 +516,20 @@
 </head>
 
 <body>
+  <audio
+  id="boudoirAmbient"
+  src="audio/boudoir-ambient.mp3"
+  preload="auto"
+  loop>
+</audio>
+
+<button
+  class="audio-toggle"
+  id="audioToggle"
+  type="button"
+  aria-label="Toggle ambient sound">
+  ♪
+</button>
 
   <div class="bg-wrap">
     <div class="bg"></div>
@@ -660,6 +716,118 @@
   <footer class="footer">
     <span>HAYVN Boudoir</span> · Confidence · Beauty · Intimacy · Art
   </footer>
+<script>
 
+const boudoirAmbient =
+  document.getElementById("boudoirAmbient");
+
+const audioToggle =
+  document.getElementById("audioToggle");
+
+let muted = false;
+let targetVolume = 0.18;
+let fadeInterval = null;
+
+function updateAudioButton(){
+  audioToggle.textContent =
+    muted ? "♪̸" : "♪";
+
+  audioToggle.classList.toggle(
+    "muted",
+    muted
+  );
+}
+
+function fadeAudioIn(){
+
+  clearInterval(fadeInterval);
+
+  boudoirAmbient.volume = 0;
+
+  fadeInterval = setInterval(() => {
+
+    if(muted){
+      clearInterval(fadeInterval);
+      return;
+    }
+
+    if(
+      boudoirAmbient.volume <
+      targetVolume
+    ){
+
+      boudoirAmbient.volume =
+        Math.min(
+          boudoirAmbient.volume + 0.01,
+          targetVolume
+        );
+
+    }else{
+      clearInterval(fadeInterval);
+    }
+
+  },140);
+}
+
+function startAmbient(){
+
+  if(muted) return;
+
+  boudoirAmbient.play()
+    .then(() => {
+      fadeAudioIn();
+    })
+    .catch(() => {});
+}
+
+function stopAmbient(){
+
+  clearInterval(fadeInterval);
+
+  boudoirAmbient.pause();
+}
+
+audioToggle.addEventListener(
+  "click",
+  () => {
+
+    muted = !muted;
+
+    updateAudioButton();
+
+    if(muted){
+      stopAmbient();
+    }else{
+      startAmbient();
+    }
+  }
+);
+
+window.addEventListener(
+  "pageshow",
+  () => {
+
+    updateAudioButton();
+
+    startAmbient();
+  }
+);
+
+window.addEventListener(
+  "pointerdown",
+  startAmbient,
+  { once:true }
+);
+
+window.addEventListener(
+  "touchstart",
+  startAmbient,
+  { once:true }
+);
+
+updateAudioButton();
+startAmbient();
+
+</script>
 </body>
 </html>
