@@ -11,9 +11,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
-    *{ margin:0; padding:0; box-sizing:border-box; }
 
-    html{ scroll-behavior:smooth; }
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
 
     body{
       background:#050505;
@@ -23,84 +30,96 @@
       min-height:100vh;
     }
 
+    /* =========================================================
+       RETURN BUTTON
+    ========================================================= */
+
     .portal-return{
-  position:fixed;
-  top:18px;
-  left:18px;
-  z-index:50;
+      position:fixed;
+      top:18px;
+      left:18px;
+      z-index:50;
 
-  padding:12px 18px;
+      padding:12px 18px;
 
-  border:1px solid rgba(233,211,154,.35);
+      border:1px solid rgba(233,211,154,.35);
 
-  background:rgba(0,0,0,.30);
-  backdrop-filter:blur(10px);
+      background:rgba(0,0,0,.30);
+      backdrop-filter:blur(10px);
 
-  color:#e9d39a;
-  text-decoration:none;
+      color:#e9d39a;
+      text-decoration:none;
 
-  font-family:"Cinzel", serif;
-  font-size:14px;
-  letter-spacing:.08em;
+      font-family:"Cinzel", serif;
+      font-size:14px;
+      letter-spacing:.08em;
 
-  transition:
-    transform .25s ease,
-    box-shadow .25s ease,
-    border-color .25s ease;
-}
+      transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease;
+    }
 
-.portal-return:hover{
-  transform:translateY(-2px);
+    .portal-return:hover{
+      transform:translateY(-2px);
 
-  border-color:rgba(233,211,154,.65);
+      border-color:rgba(233,211,154,.65);
 
-  box-shadow:
-    0 0 10px rgba(233,211,154,.20),
-    0 0 24px rgba(233,211,154,.08);
-}
-    
+      box-shadow:
+        0 0 10px rgba(233,211,154,.20),
+        0 0 24px rgba(233,211,154,.08);
+    }
+
+    /* =========================================================
+       AUDIO
+    ========================================================= */
+
     .audio-toggle{
-  position:fixed;
-  right:18px;
-  bottom:18px;
-  z-index:50;
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:50;
 
-  width:46px;
-  height:46px;
+      width:46px;
+      height:46px;
 
-  border:none;
-  border-radius:999px;
+      border:none;
+      border-radius:999px;
 
-  background:rgba(0,0,0,.38);
-  backdrop-filter:blur(12px);
+      background:rgba(0,0,0,.38);
+      backdrop-filter:blur(12px);
 
-  color:#f1d48b;
-  cursor:pointer;
+      color:#f1d48b;
+      cursor:pointer;
 
-  font-size:18px;
-  font-weight:900;
+      font-size:18px;
+      font-weight:900;
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
+      display:flex;
+      align-items:center;
+      justify-content:center;
 
-  transition:
-    transform .25s ease,
-    opacity .25s ease,
-    box-shadow .25s ease;
-}
+      transition:
+        transform .25s ease,
+        opacity .25s ease,
+        box-shadow .25s ease;
+    }
 
-.audio-toggle:hover{
-  transform:scale(1.08);
+    .audio-toggle:hover{
+      transform:scale(1.08);
 
-  box-shadow:
-    0 0 10px rgba(241,212,139,.32),
-    0 0 24px rgba(215,173,95,.18);
-}
+      box-shadow:
+        0 0 10px rgba(241,212,139,.32),
+        0 0 24px rgba(215,173,95,.18);
+    }
 
-.audio-toggle.muted{
-  opacity:.52;
-}
+    .audio-toggle.muted{
+      opacity:.52;
+    }
+
+    /* =========================================================
+       BACKGROUND
+    ========================================================= */
 
     .bg-wrap{
       position:fixed;
@@ -113,29 +132,54 @@
     .bg{
       position:absolute;
       inset:0;
+
       background-image:url('images/boudoir-bg-v2.webp');
       background-size:cover;
       background-position:center top;
       background-repeat:no-repeat;
+
       transform:scale(1.05);
+
       animation:bgMove 20s ease-in-out infinite alternate;
-      filter:brightness(.74) contrast(1.08) saturate(1.05);
+
+      filter:
+        brightness(.74)
+        contrast(1.08)
+        saturate(1.05);
     }
 
     .bg::after{
       content:"";
       position:absolute;
       inset:0;
-      background:radial-gradient(circle at center, rgba(0,0,0,.03) 18%, rgba(0,0,0,.36) 58%, rgba(0,0,0,.86) 100%);
+
+      background:
+        radial-gradient(
+          circle at center,
+          rgba(0,0,0,.03) 18%,
+          rgba(0,0,0,.36) 58%,
+          rgba(0,0,0,.86) 100%
+        );
     }
 
     .ambient{
       position:absolute;
       inset:0;
+
       background:
-        radial-gradient(circle at 50% 18%, rgba(255,220,170,.20), transparent 42%),
-        radial-gradient(circle at 82% 70%, rgba(180,92,92,.12), transparent 42%);
+        radial-gradient(
+          circle at 50% 18%,
+          rgba(255,220,170,.20),
+          transparent 42%
+        ),
+        radial-gradient(
+          circle at 82% 70%,
+          rgba(180,92,92,.12),
+          transparent 42%
+        );
+
       mix-blend-mode:screen;
+
       animation:ambientPulse 9s ease-in-out infinite;
     }
 
@@ -143,416 +187,981 @@
       position:fixed;
       inset:0;
       z-index:-1;
+
       opacity:.05;
+
       pointer-events:none;
-      background-image:url("https://grainy-gradients.vercel.app/noise.svg");
+
+      background-image:
+        url("https://grainy-gradients.vercel.app/noise.svg");
     }
+
+    /* =========================================================
+       HERO
+    ========================================================= */
 
     .hero{
       min-height:100vh;
+
       display:flex;
       align-items:center;
       justify-content:center;
       flex-direction:column;
+
       text-align:center;
+
       padding:40px;
     }
 
     .hero-logo-wrap{
       position:relative;
+
       display:flex;
       align-items:center;
       justify-content:center;
+
       animation:logoAwaken 4.2s ease forwards;
     }
 
     .hero-logo-wrap::before{
       content:"";
+
       position:absolute;
+
       width:130%;
       height:130%;
+
       border-radius:50%;
-      background:radial-gradient(circle, rgba(255,231,185,.70) 0%, rgba(241,212,139,.30) 24%, rgba(215,173,95,.12) 46%, transparent 72%);
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(255,231,185,.70) 0%,
+          rgba(241,212,139,.30) 24%,
+          rgba(215,173,95,.12) 46%,
+          transparent 72%
+        );
+
       filter:blur(44px);
+
       opacity:0;
+
       animation:logoFlash 4.2s ease forwards;
+
       pointer-events:none;
     }
 
     .hero-logo{
       width:min(900px,94vw);
+
       opacity:0;
-      animation:logoReveal 2.2s ease forwards, logoFloat 5.5s ease-in-out infinite alternate 2.3s;
-      filter:brightness(1.18) drop-shadow(0 0 28px rgba(241,212,139,.42)) drop-shadow(0 0 86px rgba(215,173,95,.26)) drop-shadow(0 0 130px rgba(180,92,92,.12));
+
+      animation:
+        logoReveal 2.2s ease forwards,
+        logoFloat 5.5s ease-in-out infinite alternate 2.3s;
+
+      filter:
+        brightness(1.18)
+        drop-shadow(0 0 28px rgba(241,212,139,.42))
+        drop-shadow(0 0 86px rgba(215,173,95,.26))
+        drop-shadow(0 0 130px rgba(180,92,92,.12));
     }
 
     .hero-sub{
       margin-top:38px;
+
       max-width:900px;
+
       font-size:clamp(24px,2.2vw,38px);
       line-height:1.7;
       letter-spacing:.06em;
+
       opacity:0;
+
       animation:textReveal 2s ease forwards;
       animation-delay:.9s;
+
       color:rgba(246,228,185,.92);
-      text-shadow:0 0 24px rgba(0,0,0,.62);
+
+      text-shadow:
+        0 0 24px rgba(0,0,0,.62);
+
       font-family:"Cinzel", serif;
       font-weight:400;
     }
 
+    /* =========================================================
+       GENERAL TITLES
+    ========================================================= */
+
     .section-title{
       text-align:center;
+
       color:#e9d39a;
+
       font-family:"Cinzel", serif;
+
       font-size:clamp(42px,5vw,72px);
+
       font-weight:400;
+
       margin-bottom:20px;
+
+      text-shadow:
+        0 0 14px rgba(233,211,154,.18);
     }
 
     .section-intro{
       max-width:900px;
+
       margin:0 auto 80px;
+
       text-align:center;
+
       font-size:clamp(22px,1.8vw,30px);
+
       line-height:1.9;
+
       color:rgba(255,255,255,.88);
     }
 
+    /* =========================================================
+       BIO
+    ========================================================= */
+
     .bio-section{
       min-height:100vh;
+
       display:flex;
       align-items:center;
       justify-content:center;
+
       padding:120px 40px;
     }
 
     .bio-card{
       width:min(1200px,100%);
+
       display:grid;
+
       grid-template-columns:360px 1fr;
+
       gap:54px;
+
       padding:42px;
+
       border:1px solid rgba(233,211,154,.35);
+
       background:rgba(5,5,5,.38);
+
       backdrop-filter:blur(10px);
-      box-shadow:0 0 30px rgba(233,211,154,.08);
+
+      box-shadow:
+        0 0 30px rgba(233,211,154,.08);
     }
 
     .bio-photo{
       aspect-ratio:3/4;
+
       border:1px solid rgba(233,211,154,.45);
+
+      overflow:hidden;
+
+      position:relative;
+
+      background:#080808;
+
+      box-shadow:
+        0 0 28px rgba(233,211,154,.07);
+    }
+
+    .bio-photo img{
+      width:100%;
+      height:100%;
+
+      display:block;
+
+      object-fit:cover;
+      object-position:center center;
+
+      filter:
+        brightness(.96)
+        contrast(1.03)
+        saturate(.96);
+
+      transition:
+        transform 1.2s cubic-bezier(.2,.7,.2,1),
+        filter .8s ease;
+    }
+
+    .bio-photo:hover img{
+      transform:scale(1.035);
+
+      filter:
+        brightness(1.02)
+        contrast(1.02)
+        saturate(1.02);
+    }
+
+    .bio-content{
       display:flex;
-      align-items:center;
+      flex-direction:column;
       justify-content:center;
-      color:#e9d39a;
-      font-family:"Cinzel", serif;
-      letter-spacing:.12em;
-      text-align:center;
-      background:linear-gradient(135deg, rgba(233,211,154,.04), rgba(255,255,255,.01));
     }
 
     .bio-content h2{
       color:#e9d39a;
+
       font-family:"Cinzel", serif;
+
       font-size:clamp(34px,4vw,54px);
+
       margin-bottom:25px;
+
       font-weight:400;
     }
 
     .bio-content p{
       font-size:clamp(22px,1.6vw,28px);
+
       line-height:1.9;
+
       color:rgba(255,255,255,.88);
+
       margin-bottom:20px;
     }
 
+    /* =========================================================
+       EXPERIENCE
+    ========================================================= */
+
     .experience-section{
       padding:140px 40px 70px;
+
       max-width:1200px;
+
       margin:0 auto;
     }
 
     .experience-line{
       width:160px;
       height:1px;
+
       margin:0 auto 38px;
+
       background:rgba(233,211,154,.52);
+
+      box-shadow:
+        0 0 14px rgba(233,211,154,.15);
     }
+
+    /* =========================================================
+       PACKAGES
+    ========================================================= */
 
     .packages-section{
       padding:60px 40px 140px;
+
       max-width:1400px;
+
       margin:0 auto;
     }
 
     .package-row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:56px;
-  align-items:center;
-  margin-bottom:90px;
+      display:grid;
 
-  opacity:0;
-  transform:translateY(40px);
+      grid-template-columns:1fr 1fr;
 
-  transition:
-    opacity 1s ease,
-    transform 1s ease;
-}
+      gap:56px;
 
-.package-row.visible{
-  opacity:1;
-  transform:translateY(0);
-}
-.package-copy h3{
-  transition:
-    color 1.2s ease,
-    text-shadow 1.2s ease,
-    transform 1.2s ease;
-}
-
-.package-copy h3.glow-title{
-
-  color:#fffef2;
-
-  text-shadow:
-    0 0 8px rgba(255,255,255,.95),
-    0 0 18px rgba(255,240,190,.95),
-    0 0 36px rgba(233,211,154,.90),
-    0 0 70px rgba(233,211,154,.75);
-
-  transform:scale(1.04);
-}
-
-    .package-row.reverse .package-image{ order:2; }
-
-    .package-image{
-      min-height:520px;
-      border:1px solid rgba(233,211,154,.36);
-      background:rgba(5,5,5,.36);
-      backdrop-filter:blur(10px);
-      display:flex;
       align-items:center;
-      justify-content:center;
-      color:#e9d39a;
-      font-family:"Cinzel", serif;
-      letter-spacing:.12em;
-      text-align:center;
-      box-shadow:0 0 28px rgba(233,211,154,.07);
+
+      margin-bottom:110px;
+
+      opacity:0;
+
+      transform:translateY(40px);
+
+      transition:
+        opacity 1s ease,
+        transform 1s ease;
     }
 
-    .package-copy{ padding:20px; }
+    .package-row.visible{
+      opacity:1;
+
+      transform:translateY(0);
+    }
+
+    .package-row.reverse .package-image{
+      order:2;
+    }
+
+    .package-image{
+      height:600px;
+
+      border:1px solid rgba(233,211,154,.36);
+
+      background:#080808;
+
+      overflow:hidden;
+
+      position:relative;
+
+      box-shadow:
+        0 18px 50px rgba(0,0,0,.28),
+        0 0 28px rgba(233,211,154,.07);
+    }
+
+    .package-image img{
+      width:100%;
+      height:100%;
+
+      display:block;
+
+      object-fit:cover;
+
+      transition:
+        transform 1.2s cubic-bezier(.2,.7,.2,1),
+        filter .8s ease;
+
+      filter:
+        brightness(.94)
+        contrast(1.04)
+        saturate(.96);
+    }
+
+    .package-image::after{
+      content:"";
+
+      position:absolute;
+
+      inset:0;
+
+      pointer-events:none;
+
+      background:
+        linear-gradient(
+          to top,
+          rgba(0,0,0,.16),
+          transparent 45%
+        );
+
+      opacity:.65;
+
+      transition:opacity .6s ease;
+    }
+
+    .package-image:hover img{
+      transform:scale(1.04);
+
+      filter:
+        brightness(1.02)
+        contrast(1.02)
+        saturate(1.02);
+    }
+
+    .package-image:hover::after{
+      opacity:.30;
+    }
+
+    .package-copy{
+      padding:20px;
+    }
 
     .package-kicker{
       color:rgba(233,211,154,.72);
+
       font-family:"Cinzel", serif;
+
       font-size:15px;
+
       letter-spacing:.20em;
+
       text-transform:uppercase;
+
       margin-bottom:16px;
     }
 
     .package-copy h3{
       color:#e9d39a;
+
       font-family:"Cinzel", serif;
+
       font-size:clamp(34px,4vw,58px);
+
       font-weight:400;
+
       margin-bottom:22px;
+
+      transition:
+        color 1.2s ease,
+        text-shadow 1.2s ease,
+        transform 1.2s ease;
+    }
+
+    .package-copy h3.glow-title{
+      color:#fffef2;
+
+      text-shadow:
+        0 0 8px rgba(255,255,255,.95),
+        0 0 18px rgba(255,240,190,.95),
+        0 0 36px rgba(233,211,154,.90),
+        0 0 70px rgba(233,211,154,.75);
+
+      transform:scale(1.04);
     }
 
     .package-copy p{
       font-size:clamp(22px,1.6vw,28px);
+
       line-height:1.85;
+
       color:rgba(255,255,255,.88);
+
       margin-bottom:26px;
     }
 
     .package-list{
       list-style:none;
+
       margin:32px 0 34px;
     }
 
     .package-list li{
       font-size:22px;
+
       line-height:1.8;
+
       color:rgba(255,255,255,.82);
-      border-top:1px solid rgba(233,211,154,.16);
+
+      border-top:
+        1px solid rgba(233,211,154,.16);
+
       padding:12px 0;
     }
 
-    .package-list li:last-child{ border-bottom:1px solid rgba(233,211,154,.16); }
+    .package-list li:last-child{
+      border-bottom:
+        1px solid rgba(233,211,154,.16);
+    }
 
     .package-btn,
     .booking-btn{
       display:inline-flex;
+
       padding:16px 34px;
-      border:1px solid rgba(233,211,154,.55);
+
+      border:
+        1px solid rgba(233,211,154,.55);
+
       color:#e9d39a;
+
       text-decoration:none;
+
       font-family:"Cinzel", serif;
+
       letter-spacing:.08em;
-      transition:.3s ease;
+
+      transition:
+        transform .3s ease,
+        background .3s ease,
+        box-shadow .3s ease,
+        border-color .3s ease;
     }
 
     .package-btn:hover,
     .booking-btn:hover{
-      background:rgba(233,211,154,.08);
-      box-shadow:0 0 20px rgba(233,211,154,.18);
+      transform:translateY(-3px);
+
+      background:
+        rgba(233,211,154,.08);
+
+      border-color:
+        rgba(233,211,154,.82);
+
+      box-shadow:
+        0 0 20px rgba(233,211,154,.18);
     }
+
+    /* =========================================================
+       PORTFOLIO
+    ========================================================= */
+
+    .portfolio-section{
+      padding:120px 40px 150px;
+
+      max-width:1500px;
+
+      margin:0 auto;
+    }
+
+    .portfolio-line{
+      width:160px;
+      height:1px;
+
+      margin:0 auto 38px;
+
+      background:
+        rgba(233,211,154,.52);
+
+      box-shadow:
+        0 0 14px rgba(233,211,154,.15);
+    }
+
+    .boudoir-gallery{
+      display:grid;
+
+      grid-template-columns:
+        repeat(12,1fr);
+
+      grid-auto-flow:dense;
+
+      gap:18px;
+    }
+
+    .boudoir-photo{
+      position:relative;
+
+      overflow:hidden;
+
+      grid-column:span 4;
+
+      height:500px;
+
+      border:
+        1px solid rgba(233,211,154,.24);
+
+      background:#080808;
+
+      box-shadow:
+        0 16px 42px rgba(0,0,0,.26);
+
+      transition:
+        transform .45s ease,
+        border-color .45s ease,
+        box-shadow .45s ease;
+    }
+
+    .boudoir-photo img{
+      width:100%;
+      height:100%;
+
+      display:block;
+
+      object-fit:cover;
+
+      filter:
+        brightness(.94)
+        contrast(1.03)
+        saturate(.96);
+
+      transition:
+        transform 1s cubic-bezier(.2,.7,.2,1),
+        filter .7s ease;
+    }
+
+    .boudoir-photo::after{
+      content:"";
+
+      position:absolute;
+
+      inset:0;
+
+      pointer-events:none;
+
+      background:
+        linear-gradient(
+          to top,
+          rgba(0,0,0,.20),
+          transparent 45%
+        );
+
+      opacity:.55;
+
+      transition:opacity .5s ease;
+    }
+
+    .boudoir-photo:hover{
+      transform:translateY(-6px);
+
+      border-color:
+        rgba(233,211,154,.55);
+
+      box-shadow:
+        0 22px 50px rgba(0,0,0,.34),
+        0 0 28px rgba(233,211,154,.10);
+    }
+
+    .boudoir-photo:hover img{
+      transform:scale(1.045);
+
+      filter:
+        brightness(1.02)
+        contrast(1.02)
+        saturate(1.02);
+    }
+
+    .boudoir-photo:hover::after{
+      opacity:.24;
+    }
+
+    .boudoir-photo.wide{
+      grid-column:span 8;
+    }
+
+    .boudoir-photo.feature{
+      grid-column:span 8;
+
+      height:620px;
+    }
+
+    .boudoir-photo.side{
+      grid-column:span 4;
+
+      height:620px;
+    }
+
+    .boudoir-photo.tall{
+      grid-column:span 4;
+
+      height:650px;
+    }
+
+    .boudoir-photo.large{
+      grid-column:span 8;
+
+      height:650px;
+    }
+
+    /* =========================================================
+       FAQ
+    ========================================================= */
 
     .faq-section{
       padding:140px 40px;
+
       max-width:1100px;
+
       margin:0 auto;
     }
 
     .faq-list{
       display:grid;
+
       gap:20px;
     }
 
     .faq-item{
-      border:1px solid rgba(233,211,154,.26);
-      background:rgba(5,5,5,.34);
-      backdrop-filter:blur(10px);
+      border:
+        1px solid rgba(233,211,154,.26);
+
+      background:
+        rgba(5,5,5,.34);
+
+      backdrop-filter:
+        blur(10px);
+
       padding:30px;
     }
 
     .faq-item h3{
       color:#e9d39a;
+
       font-family:"Cinzel", serif;
-      font-size:clamp(24px,2vw,34px);
+
+      font-size:
+        clamp(24px,2vw,34px);
+
       font-weight:400;
+
       margin-bottom:14px;
     }
 
     .faq-item p{
-      font-size:clamp(21px,1.5vw,26px);
+      font-size:
+        clamp(21px,1.5vw,26px);
+
       line-height:1.8;
-      color:rgba(255,255,255,.86);
+
+      color:
+        rgba(255,255,255,.86);
     }
+
+    /* =========================================================
+       BOOKING
+    ========================================================= */
 
     .booking-section{
       padding:150px 40px;
+
       max-width:1200px;
+
       margin:0 auto;
+
       text-align:center;
     }
 
     .booking-card{
-      border:1px solid rgba(233,211,154,.38);
-      background:rgba(5,5,5,.38);
-      backdrop-filter:blur(10px);
+      border:
+        1px solid rgba(233,211,154,.38);
+
+      background:
+        rgba(5,5,5,.38);
+
+      backdrop-filter:
+        blur(10px);
+
       padding:70px 40px;
-      box-shadow:0 0 34px rgba(233,211,154,.08);
+
+      box-shadow:
+        0 0 34px rgba(233,211,154,.08);
     }
 
     .booking-card h2{
       color:#e9d39a;
+
       font-family:"Cinzel", serif;
-      font-size:clamp(42px,5vw,72px);
+
+      font-size:
+        clamp(42px,5vw,72px);
+
       font-weight:400;
+
       margin-bottom:24px;
     }
 
     .booking-card p{
       max-width:850px;
+
       margin:0 auto 46px;
-      font-size:clamp(22px,1.7vw,30px);
+
+      font-size:
+        clamp(22px,1.7vw,30px);
+
       line-height:1.9;
-      color:rgba(255,255,255,.88);
+
+      color:
+        rgba(255,255,255,.88);
     }
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
 
     .footer{
       padding:60px 30px 80px;
+
       text-align:center;
-      color:rgba(255,255,255,.55);
+
+      color:
+        rgba(255,255,255,.55);
+
       font-size:18px;
+
       letter-spacing:.06em;
     }
 
     .footer span{
       color:#e9d39a;
+
       font-family:"Cinzel", serif;
     }
 
+    /* =========================================================
+       ANIMATIONS
+    ========================================================= */
+
     @keyframes logoReveal{
+
       0%{
         opacity:0;
-        transform:scale(.84) translateY(42px);
-        filter:brightness(.72) drop-shadow(0 0 0 rgba(241,212,139,0));
+
+        transform:
+          scale(.84)
+          translateY(42px);
+
+        filter:
+          brightness(.72)
+          drop-shadow(
+            0 0 0
+            rgba(241,212,139,0)
+          );
       }
 
       34%{
         opacity:1;
-        transform:scale(1.05) translateY(0px);
-        filter:brightness(1.55) drop-shadow(0 0 44px rgba(241,212,139,.62)) drop-shadow(0 0 110px rgba(215,173,95,.32));
+
+        transform:
+          scale(1.05)
+          translateY(0);
+
+        filter:
+          brightness(1.55)
+          drop-shadow(
+            0 0 44px
+            rgba(241,212,139,.62)
+          )
+          drop-shadow(
+            0 0 110px
+            rgba(215,173,95,.32)
+          );
       }
 
       100%{
         opacity:1;
-        transform:scale(1) translateY(0px);
-        filter:brightness(1.18) drop-shadow(0 0 28px rgba(241,212,139,.42)) drop-shadow(0 0 86px rgba(215,173,95,.26)) drop-shadow(0 0 130px rgba(180,92,92,.12));
+
+        transform:
+          scale(1)
+          translateY(0);
+
+        filter:
+          brightness(1.18)
+          drop-shadow(
+            0 0 28px
+            rgba(241,212,139,.42)
+          )
+          drop-shadow(
+            0 0 86px
+            rgba(215,173,95,.26)
+          )
+          drop-shadow(
+            0 0 130px
+            rgba(180,92,92,.12)
+          );
       }
     }
 
     @keyframes logoFlash{
-      0%{ opacity:0; transform:scale(.55); }
-      18%{ opacity:1; transform:scale(1.02); }
-      45%{ opacity:.68; transform:scale(1.18); }
-      76%{ opacity:.20; transform:scale(1.38); }
-      100%{ opacity:0; transform:scale(1.52); }
+
+      0%{
+        opacity:0;
+        transform:scale(.55);
+      }
+
+      18%{
+        opacity:1;
+        transform:scale(1.02);
+      }
+
+      45%{
+        opacity:.68;
+        transform:scale(1.18);
+      }
+
+      76%{
+        opacity:.20;
+        transform:scale(1.38);
+      }
+
+      100%{
+        opacity:0;
+        transform:scale(1.52);
+      }
     }
 
     @keyframes logoAwaken{
-      0%{ filter:brightness(.84); }
-      38%{ filter:brightness(1.22); }
-      100%{ filter:brightness(1); }
+
+      0%{
+        filter:brightness(.84);
+      }
+
+      38%{
+        filter:brightness(1.22);
+      }
+
+      100%{
+        filter:brightness(1);
+      }
     }
 
     @keyframes textReveal{
-      0%{ opacity:0; transform:translateY(18px); }
-      100%{ opacity:1; transform:translateY(0px); }
+
+      0%{
+        opacity:0;
+        transform:translateY(18px);
+      }
+
+      100%{
+        opacity:1;
+        transform:translateY(0);
+      }
     }
 
     @keyframes logoFloat{
-      0%{ transform:translateY(0px); }
-      100%{ transform:translateY(-10px); }
+
+      0%{
+        transform:translateY(0);
+      }
+
+      100%{
+        transform:translateY(-10px);
+      }
     }
 
     @keyframes bgMove{
-      0%{ transform:scale(1.05) translateY(0px); }
-      100%{ transform:scale(1.10) translateY(-30px); }
+
+      0%{
+        transform:
+          scale(1.05)
+          translateY(0);
+      }
+
+      100%{
+        transform:
+          scale(1.10)
+          translateY(-30px);
+      }
     }
 
     @keyframes ambientPulse{
-      0%,100%{ opacity:.45; }
-      50%{ opacity:.90; }
+
+      0%,100%{
+        opacity:.45;
+      }
+
+      50%{
+        opacity:.90;
+      }
     }
+
+    /* =========================================================
+       MOBILE
+    ========================================================= */
 
     @media(max-width:900px){
 
       .portal-return{
-       top:14px;
-       left:14px;
-       padding:10px 14px;
-       font-size:12px;
-       }
-      .bg{ background-position:center top; }
+        top:14px;
+        left:14px;
 
-      .hero{ padding:28px; }
+        padding:10px 14px;
 
-      .hero-logo{ width:100vw; }
+        font-size:12px;
+      }
+
+      .bg{
+        background-position:center top;
+      }
+
+      .hero{
+        padding:28px;
+      }
+
+      .hero-logo{
+        width:100vw;
+      }
 
       .hero-sub{
         font-size:21px;
+
         line-height:1.7;
       }
 
       .bio-section,
       .experience-section,
       .packages-section,
+      .portfolio-section,
       .faq-section,
       .booking-section{
         padding:90px 22px;
@@ -560,55 +1169,110 @@
 
       .bio-card{
         grid-template-columns:1fr;
+
         padding:26px;
+
         gap:30px;
       }
 
       .bio-photo{
         max-width:340px;
+
         width:100%;
+
         margin:0 auto;
       }
 
       .package-row,
       .package-row.reverse{
         grid-template-columns:1fr;
+
         gap:28px;
-        margin-bottom:70px;
+
+        margin-bottom:80px;
       }
 
-      .package-row.reverse .package-image{ order:0; }
+      .package-row.reverse .package-image{
+        order:0;
+      }
 
-      .package-image{ min-height:330px; }
+      .package-image{
+        height:auto;
 
-      .package-copy{ padding:0; }
+        aspect-ratio:4/5;
+      }
 
-      .package-list li{ font-size:20px; }
+      .package-copy{
+        padding:0;
+      }
 
-      .booking-card{ padding:46px 24px; }
+      .package-list li{
+        font-size:20px;
+      }
+
+      .boudoir-gallery{
+        grid-template-columns:1fr;
+
+        gap:16px;
+      }
+
+      .boudoir-photo,
+      .boudoir-photo.wide,
+      .boudoir-photo.feature,
+      .boudoir-photo.side,
+      .boudoir-photo.tall,
+      .boudoir-photo.large{
+        grid-column:1;
+
+        height:auto;
+
+        aspect-ratio:4/5;
+      }
+
+      .booking-card{
+        padding:46px 24px;
+      }
+
+      .audio-toggle{
+        width:42px;
+        height:42px;
+
+        right:14px;
+        bottom:14px;
+      }
     }
+
   </style>
 </head>
 
 <body>
-  <a href="index.html" class="portal-return">
-  ← Return to HAYVN
-</a>
-  
-  <audio
-  id="boudoirAmbient"
-  src="audio/boudoir-ambient.mp3"
-  preload="auto"
-  loop>
-</audio>
 
-<button
-  class="audio-toggle"
-  id="audioToggle"
-  type="button"
-  aria-label="Toggle ambient sound">
-  ♪
-</button>
+  <!-- RETURN TO HAYVN -->
+
+  <a href="index.html" class="portal-return">
+    ← Return to HAYVN
+  </a>
+
+
+  <!-- AUDIO -->
+
+  <audio
+    id="boudoirAmbient"
+    src="audio/boudoir-ambient.mp3"
+    preload="auto"
+    loop>
+  </audio>
+
+  <button
+    class="audio-toggle"
+    id="audioToggle"
+    type="button"
+    aria-label="Toggle ambient sound">
+    ♪
+  </button>
+
+
+  <!-- BACKGROUND -->
 
   <div class="bg-wrap">
     <div class="bg"></div>
@@ -617,25 +1281,53 @@
 
   <div class="grain"></div>
 
+
+  <!-- =======================================================
+       HERO
+  ======================================================== -->
+
   <section class="hero">
+
     <div class="hero-logo-wrap">
-      <img src="images/boudoir-logo.png" alt="HAYVN Boudoir" class="hero-logo" />
+
+      <img
+        src="images/boudoir-logo.png"
+        alt="HAYVN Boudoir"
+        class="hero-logo"
+      />
+
     </div>
 
     <p class="hero-sub">
       Elegant editorial intimacy,
       confidence, beauty, and cinematic storytelling.
     </p>
+
   </section>
 
+
+  <!-- =======================================================
+       INTRO
+  ======================================================== -->
+
   <section class="bio-section">
+
     <div class="bio-card">
+
       <div class="bio-photo">
-        <span>Portrait Coming Soon</span>
+
+        <img
+          src="images/boudoir/IMG_4783.jpg"
+          alt="HAYVN Boudoir photography"
+        >
+
       </div>
 
       <div class="bio-content">
-        <h2>Beauty, Confidence, and Art</h2>
+
+        <h2>
+          Beauty, Confidence, and Art
+        </h2>
 
         <p>
           HAYVN Boudoir is an intimate photography experience designed
@@ -646,141 +1338,436 @@
           Every session is guided with care, direction, and intention so you can
           feel comfortable, elegant, and fully seen in front of the camera.
         </p>
+
       </div>
+
     </div>
+
   </section>
 
+
+  <!-- =======================================================
+       EXPERIENCE
+  ======================================================== -->
+
   <section class="experience-section">
+
     <div class="experience-line"></div>
 
-    <h2 class="section-title">The Experience</h2>
+    <h2 class="section-title">
+      The Experience
+    </h2>
 
     <p class="section-intro">
       Each boudoir session is crafted like an editorial story:
       thoughtful styling, gentle posing direction, cinematic lighting,
       and a private atmosphere where confidence can unfold naturally.
     </p>
+
   </section>
 
+
+  <!-- =======================================================
+       PACKAGES
+  ======================================================== -->
+
   <section class="packages-section">
+
+
+    <!-- MUSE -->
+
     <div class="package-row">
-      <div class="package-image">Package Image</div>
+
+      <div class="package-image">
+
+        <img
+          src="images/boudoir/IMG_5184(1).jpg"
+          alt="The Muse boudoir experience"
+          loading="lazy"
+        >
+
+      </div>
 
       <div class="package-copy">
-        <div class="package-kicker">Introductory Session</div>
+
+        <div class="package-kicker">
+          Introductory Session
+        </div>
+
         <h3>The Muse</h3>
+
         <p>
           A graceful entry into the boudoir experience, created for those
           who want something intimate, elegant, and beautifully simple.
         </p>
+
         <ul class="package-list">
           <li>Guided posing and direction</li>
           <li>Short editorial-style session</li>
           <li>Private image reveal</li>
         </ul>
-        <a href="#" class="package-btn">Inquire About This Package</a>
+
+        <a href="#" class="package-btn">
+          Inquire About This Package
+        </a>
+
       </div>
+
     </div>
 
+
+    <!-- BLOOM -->
+
     <div class="package-row reverse">
-      <div class="package-image">Package Image</div>
+
+      <div class="package-image">
+
+        <img
+          src="images/boudoir/IMG_6896.jpg"
+          alt="The Bloom boudoir experience"
+          loading="lazy"
+        >
+
+      </div>
 
       <div class="package-copy">
-        <div class="package-kicker">Most Loved</div>
+
+        <div class="package-kicker">
+          Most Loved
+        </div>
+
         <h3>The Bloom</h3>
+
         <p>
           A fuller session designed to help you relax, open up, and create
           a collection of images that feel confident, feminine, and timeless.
         </p>
+
         <ul class="package-list">
           <li>Expanded session time</li>
           <li>Multiple looks or styling changes</li>
           <li>Private image reveal</li>
         </ul>
-        <a href="#" class="package-btn">Inquire About This Package</a>
+
+        <a href="#" class="package-btn">
+          Inquire About This Package
+        </a>
+
       </div>
+
     </div>
 
+
+    <!-- GODDESS -->
+
     <div class="package-row">
-      <div class="package-image">Package Image</div>
+
+      <div class="package-image">
+
+        <img
+          src="images/boudoir/Screenshot_20260910-210653~2.jpg"
+          alt="The Goddess boudoir experience"
+          loading="lazy"
+        >
+
+      </div>
 
       <div class="package-copy">
-        <div class="package-kicker">Luxury Portrait Experience</div>
+
+        <div class="package-kicker">
+          Luxury Portrait Experience
+        </div>
+
         <h3>The Goddess</h3>
+
         <p>
           A premium boudoir experience created for deeper storytelling,
           elevated styling, and a more expansive gallery of powerful,
           intimate images.
         </p>
+
         <ul class="package-list">
           <li>Luxury guided session</li>
           <li>Multiple setups and styling moments</li>
           <li>Expanded final image selection</li>
         </ul>
-        <a href="#" class="package-btn">Inquire About This Package</a>
+
+        <a href="#" class="package-btn">
+          Inquire About This Package
+        </a>
+
       </div>
+
     </div>
 
+
+    <!-- SIGNATURE -->
+
     <div class="package-row reverse">
-      <div class="package-image">Package Image</div>
+
+      <div class="package-image">
+
+        <img
+          src="images/boudoir/Screenshot_20260910-210723~2.jpg"
+          alt="The Signature boudoir experience"
+          loading="lazy"
+        >
+
+      </div>
 
       <div class="package-copy">
-        <div class="package-kicker">Full Signature Experience</div>
+
+        <div class="package-kicker">
+          Full Signature Experience
+        </div>
+
         <h3>The Signature</h3>
+
         <p>
           The complete HAYVN Boudoir experience, designed as a full
           cinematic portrait story with elevated preparation, styling,
           direction, and final presentation.
         </p>
+
         <ul class="package-list">
           <li>Complete luxury session experience</li>
           <li>Full creative direction and preparation</li>
           <li>Signature image collection and reveal</li>
         </ul>
-        <a href="#" class="package-btn">Inquire About This Package</a>
+
+        <a href="#" class="package-btn">
+          Inquire About This Package
+        </a>
+
       </div>
+
     </div>
+
   </section>
 
+
+  <!-- =======================================================
+       PORTFOLIO
+  ======================================================== -->
+
+  <section class="portfolio-section">
+
+    <div class="portfolio-line"></div>
+
+    <h2 class="section-title">
+      The Art of Boudoir
+    </h2>
+
+    <p class="section-intro">
+      Intimate portraiture shaped through light, expression, movement,
+      softness, and confidence — each image created as a personal
+      piece of visual storytelling.
+    </p>
+
+
+    <div class="boudoir-gallery">
+
+
+      <div class="boudoir-photo feature">
+
+        <img
+          src="images/boudoir/Screenshot_20260910-210714.png"
+          alt="HAYVN Boudoir editorial portrait"
+          loading="lazy"
+        >
+
+      </div>
+
+
+      <div class="boudoir-photo side">
+
+        <img
+          src="images/boudoir/Screenshot_20260910-210728.png"
+          alt="HAYVN Boudoir portrait"
+          loading="lazy"
+        >
+
+      </div>
+
+
+      <div class="boudoir-photo tall">
+
+        <img
+          src="images/boudoir/Screenshot_20260910-210738.png"
+          alt="HAYVN Boudoir portrait"
+          loading="lazy"
+        >
+
+      </div>
+
+
+      <div class="boudoir-photo large">
+
+        <img
+          src="images/boudoir/Screenshot_20260910-210746.png"
+          alt="HAYVN Boudoir editorial photography"
+          loading="lazy"
+        >
+
+      </div>
+
+
+      <div class="boudoir-photo wide">
+
+        <img
+          src="images/boudoir/Screenshot_20260910-210801.png"
+          alt="HAYVN Boudoir photography"
+          loading="lazy"
+        >
+
+      </div>
+
+
+      <div class="boudoir-photo">
+
+        <img
+          src="images/boudoir/Screenshot_20260910-210805.png"
+          alt="HAYVN Boudoir portrait photography"
+          loading="lazy"
+        >
+
+      </div>
+
+
+      <div class="boudoir-photo">
+
+        <img
+          src="images/boudoir/IMG_4783.jpg"
+          alt="HAYVN Boudoir photography"
+          loading="lazy"
+        >
+
+      </div>
+
+
+      <div class="boudoir-photo">
+
+        <img
+          src="images/boudoir/IMG_5184(1).jpg"
+          alt="HAYVN Boudoir portrait photography"
+          loading="lazy"
+        >
+
+      </div>
+
+
+      <div class="boudoir-photo">
+
+        <img
+          src="images/boudoir/IMG_6896.jpg"
+          alt="HAYVN Boudoir portrait photography"
+          loading="lazy"
+        >
+
+      </div>
+
+
+      <div class="boudoir-photo wide">
+
+        <img
+          src="images/boudoir/Screenshot_20260910-210653~2.jpg"
+          alt="HAYVN Boudoir editorial photography"
+          loading="lazy"
+        >
+
+      </div>
+
+
+      <div class="boudoir-photo wide">
+
+        <img
+          src="images/boudoir/Screenshot_20260910-210723~2.jpg"
+          alt="HAYVN Boudoir photography"
+          loading="lazy"
+        >
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       FAQ
+  ======================================================== -->
+
   <section class="faq-section">
-    <h2 class="section-title">Questions</h2>
+
+    <h2 class="section-title">
+      Questions
+    </h2>
 
     <p class="section-intro">
       A few gentle answers before stepping into the experience.
     </p>
 
     <div class="faq-list">
+
       <div class="faq-item">
-        <h3>Do I need experience in front of the camera?</h3>
+
+        <h3>
+          Do I need experience in front of the camera?
+        </h3>
+
         <p>
           Not at all. You will be guided throughout the session with posing,
           expression, movement, and small adjustments so you never have to
           wonder what to do.
         </p>
+
       </div>
 
+
       <div class="faq-item">
-        <h3>What should I wear?</h3>
+
+        <h3>
+          What should I wear?
+        </h3>
+
         <p>
           Bring pieces that make you feel beautiful, confident, soft, powerful,
           or sensual. Lingerie is welcome, but bodysuits, robes, dresses,
           oversized shirts, and personal pieces can be just as beautiful.
         </p>
+
       </div>
 
+
       <div class="faq-item">
-        <h3>Will my photos be private?</h3>
+
+        <h3>
+          Will my photos be private?
+        </h3>
+
         <p>
           Your privacy matters. Images are never shared publicly without your
           permission and clear approval.
         </p>
+
       </div>
+
     </div>
+
   </section>
 
+
+  <!-- =======================================================
+       BOOKING
+  ======================================================== -->
+
   <section class="booking-section">
+
     <div class="booking-card">
-      <h2>Book Your Session</h2>
+
+      <h2>
+        Book Your Session
+      </h2>
 
       <p>
         Whether this is a gift, a celebration, a personal milestone,
@@ -788,177 +1775,253 @@
         with a simple conversation.
       </p>
 
-      <a href="#" class="booking-btn">Start Your Boudoir Inquiry</a>
+      <a href="#" class="booking-btn">
+        Start Your Boudoir Inquiry
+      </a>
+
     </div>
+
   </section>
 
+
+  <!-- =======================================================
+       FOOTER
+  ======================================================== -->
+
   <footer class="footer">
-    <span>HAYVN Boudoir</span> · Confidence · Beauty · Intimacy · Art
+
+    <span>HAYVN Boudoir</span>
+    · Confidence
+    · Beauty
+    · Intimacy
+    · Art
+
   </footer>
-<script>
 
-const boudoirAmbient =
-  document.getElementById("boudoirAmbient");
 
-const audioToggle =
-  document.getElementById("audioToggle");
+  <!-- =======================================================
+       AUDIO SCRIPT
+  ======================================================== -->
 
-let muted = false;
-let targetVolume = 0.18;
-let fadeInterval = null;
+  <script>
 
-function updateAudioButton(){
-  audioToggle.textContent =
-    muted ? "♪̸" : "♪";
+    const boudoirAmbient =
+      document.getElementById("boudoirAmbient");
 
-  audioToggle.classList.toggle(
-    "muted",
-    muted
-  );
-}
+    const audioToggle =
+      document.getElementById("audioToggle");
 
-function fadeAudioIn(){
+    let muted = false;
 
-  clearInterval(fadeInterval);
+    let targetVolume = 0.18;
 
-  boudoirAmbient.volume = 0;
+    let fadeInterval = null;
 
-  fadeInterval = setInterval(() => {
 
-    if(muted){
-      clearInterval(fadeInterval);
-      return;
+    function updateAudioButton(){
+
+      audioToggle.textContent =
+        muted ? "♪̸" : "♪";
+
+      audioToggle.classList.toggle(
+        "muted",
+        muted
+      );
+
     }
 
-    if(
-      boudoirAmbient.volume <
-      targetVolume
-    ){
 
-      boudoirAmbient.volume =
-        Math.min(
-          boudoirAmbient.volume + 0.01,
+    function fadeAudioIn(){
+
+      clearInterval(fadeInterval);
+
+      boudoirAmbient.volume = 0;
+
+      fadeInterval = setInterval(() => {
+
+        if(muted){
+
+          clearInterval(fadeInterval);
+
+          return;
+
+        }
+
+        if(
+          boudoirAmbient.volume <
           targetVolume
-        );
+        ){
 
-    }else{
+          boudoirAmbient.volume =
+            Math.min(
+              boudoirAmbient.volume + 0.01,
+              targetVolume
+            );
+
+        }else{
+
+          clearInterval(fadeInterval);
+
+        }
+
+      },140);
+
+    }
+
+
+    function startAmbient(){
+
+      if(muted) return;
+
+      boudoirAmbient
+        .play()
+        .then(() => {
+
+          fadeAudioIn();
+
+        })
+        .catch(() => {});
+
+    }
+
+
+    function stopAmbient(){
+
       clearInterval(fadeInterval);
+
+      boudoirAmbient.pause();
+
     }
 
-  },140);
-}
 
-function startAmbient(){
+    audioToggle.addEventListener(
+      "click",
+      () => {
 
-  if(muted) return;
+        muted = !muted;
 
-  boudoirAmbient.play()
-    .then(() => {
-      fadeAudioIn();
-    })
-    .catch(() => {});
-}
+        updateAudioButton();
 
-function stopAmbient(){
+        if(muted){
 
-  clearInterval(fadeInterval);
+          stopAmbient();
 
-  boudoirAmbient.pause();
-}
+        }else{
 
-audioToggle.addEventListener(
-  "click",
-  () => {
+          startAmbient();
 
-    muted = !muted;
+        }
 
-    updateAudioButton();
+      }
+    );
 
-    if(muted){
-      stopAmbient();
-    }else{
-      startAmbient();
-    }
-  }
-);
 
-window.addEventListener(
-  "pageshow",
-  () => {
+    window.addEventListener(
+      "pageshow",
+      () => {
+
+        updateAudioButton();
+
+        startAmbient();
+
+      }
+    );
+
+
+    window.addEventListener(
+      "pointerdown",
+      startAmbient,
+      { once:true }
+    );
+
+
+    window.addEventListener(
+      "touchstart",
+      startAmbient,
+      { once:true }
+    );
+
 
     updateAudioButton();
 
     startAmbient();
-  }
-);
 
-window.addEventListener(
-  "pointerdown",
-  startAmbient,
-  { once:true }
-);
+  </script>
 
-window.addEventListener(
-  "touchstart",
-  startAmbient,
-  { once:true }
-);
 
-updateAudioButton();
-startAmbient();
+  <!-- =======================================================
+       PACKAGE ANIMATION SCRIPT
+  ======================================================== -->
 
-</script>
   <script>
 
-const packageRows =
-  document.querySelectorAll('.package-row');
+    const packageRows =
+      document.querySelectorAll(
+        '.package-row'
+      );
 
-const observer =
-  new IntersectionObserver(
 
-    entries => {
+    const observer =
+      new IntersectionObserver(
 
-      entries.forEach(entry => {
+        entries => {
 
-        if(entry.isIntersecting){
+          entries.forEach(entry => {
 
-          entry.target.classList.add(
-            'visible'
-          );
+            if(entry.isIntersecting){
 
-          const title =
-  entry.target.querySelector('h3');
+              entry.target
+                .classList
+                .add('visible');
 
-title.classList.add(
-  'glow-title'
-);
 
-setTimeout(() => {
+              const title =
+                entry.target
+                  .querySelector('h3');
 
-  title.classList.remove(
-    'glow-title'
-  );
 
-},1800);
+              if(title){
 
-          observer.unobserve(
-            entry.target
-          );
+                title.classList.add(
+                  'glow-title'
+                );
+
+
+                setTimeout(() => {
+
+                  title.classList.remove(
+                    'glow-title'
+                  );
+
+                },1800);
+
+              }
+
+
+              observer.unobserve(
+                entry.target
+              );
+
+            }
+
+          });
+
+        },
+
+        {
+          threshold:.25
         }
 
-      });
+      );
 
-    },
 
-    {
-      threshold:.25
-    }
-  );
+    packageRows.forEach(row => {
 
-packageRows.forEach(row => {
-  observer.observe(row);
-});
+      observer.observe(row);
 
-</script>
+    });
+
+  </script>
+
 </body>
 </html>
