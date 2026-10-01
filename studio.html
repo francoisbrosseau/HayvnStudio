@@ -10,8 +10,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
-    *{margin:0;padding:0;box-sizing:border-box;}
-    html{scroll-behavior:smooth;}
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
     body{
       background:#050505;
       color:white;
@@ -19,6 +27,10 @@
       font-family:"Cormorant Garamond",serif;
       min-height:100vh;
     }
+
+    /* =========================================================
+       BACKGROUND
+    ========================================================= */
 
     .bg-wrap{
       position:fixed;
@@ -44,7 +56,13 @@
       content:"";
       position:absolute;
       inset:0;
-      background:radial-gradient(circle at center,rgba(0,0,0,.02) 18%,rgba(0,0,0,.38) 58%,rgba(0,0,0,.88) 100%);
+      background:
+        radial-gradient(
+          circle at center,
+          rgba(0,0,0,.02) 18%,
+          rgba(0,0,0,.38) 58%,
+          rgba(0,0,0,.88) 100%
+        );
     }
 
     .ambient{
@@ -65,468 +83,932 @@
       pointer-events:none;
       background-image:url("https://grainy-gradients.vercel.app/noise.svg");
     }
+
+    /* =========================================================
+       RETURN BUTTON
+    ========================================================= */
+
     .portal-return{
-  position:fixed;
-  top:18px;
-  left:18px;
-  z-index:50;
+      position:fixed;
+      top:18px;
+      left:18px;
+      z-index:50;
 
-  padding:12px 18px;
+      padding:12px 18px;
 
-  border:1px solid rgba(233,211,154,.35);
+      border:1px solid rgba(233,211,154,.35);
 
-  background:rgba(0,0,0,.30);
-  backdrop-filter:blur(10px);
+      background:rgba(0,0,0,.30);
+      backdrop-filter:blur(10px);
 
-  color:#e9d39a;
-  text-decoration:none;
+      color:#e9d39a;
+      text-decoration:none;
 
-  font-family:"Cinzel", serif;
-  font-size:14px;
-  letter-spacing:.08em;
+      font-family:"Cinzel",serif;
+      font-size:14px;
+      letter-spacing:.08em;
 
-  transition:
-    transform .25s ease,
-    box-shadow .25s ease,
-    border-color .25s ease;
-}
+      transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease;
+    }
 
-.portal-return:hover{
-  transform:translateY(-2px);
+    .portal-return:hover{
+      transform:translateY(-2px);
+      border-color:rgba(233,211,154,.65);
 
-  border-color:rgba(233,211,154,.65);
+      box-shadow:
+        0 0 10px rgba(233,211,154,.20),
+        0 0 24px rgba(233,211,154,.08);
+    }
 
-  box-shadow:
-    0 0 10px rgba(233,211,154,.20),
-    0 0 24px rgba(233,211,154,.08);
-}
+    /* =========================================================
+       AUDIO
+    ========================================================= */
 
     .audio-toggle{
       position:fixed;
       right:18px;
       bottom:18px;
       z-index:50;
+
       width:46px;
       height:46px;
+
       border:none;
       border-radius:999px;
+
       background:rgba(0,0,0,.38);
       backdrop-filter:blur(12px);
+
       color:#f1d48b;
+
       cursor:pointer;
+
       font-size:18px;
       font-weight:900;
+
       display:flex;
       align-items:center;
       justify-content:center;
-      transition:transform .25s ease,opacity .25s ease,box-shadow .25s ease;
+
+      transition:
+        transform .25s ease,
+        opacity .25s ease,
+        box-shadow .25s ease;
     }
 
     .audio-toggle:hover{
       transform:scale(1.08);
-      box-shadow:0 0 10px rgba(241,212,139,.32),0 0 24px rgba(215,173,95,.18);
+
+      box-shadow:
+        0 0 10px rgba(241,212,139,.32),
+        0 0 24px rgba(215,173,95,.18);
     }
 
-    .audio-toggle.muted{opacity:.52;}
+    .audio-toggle.muted{
+      opacity:.52;
+    }
+
+    /* =========================================================
+       HERO
+    ========================================================= */
 
     .hero{
       min-height:100vh;
+
       display:flex;
       align-items:center;
       justify-content:center;
       flex-direction:column;
+
       text-align:center;
+
       padding:40px;
     }
 
     .hero-logo-wrap{
       position:relative;
+
       display:flex;
       align-items:center;
       justify-content:center;
+
       animation:logoAwaken 4.2s ease forwards;
     }
 
     .hero-logo-wrap::before{
       content:"";
+
       position:absolute;
+
       width:130%;
       height:130%;
+
       border-radius:50%;
-      background:radial-gradient(circle,rgba(255,231,185,.72) 0%,rgba(241,212,139,.30) 24%,rgba(215,173,95,.12) 46%,transparent 72%);
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(255,231,185,.72) 0%,
+          rgba(241,212,139,.30) 24%,
+          rgba(215,173,95,.12) 46%,
+          transparent 72%
+        );
+
       filter:blur(44px);
+
       opacity:0;
+
       animation:logoFlash 4.2s ease forwards;
+
       pointer-events:none;
     }
 
     .hero-logo{
       width:min(900px,94vw);
+
       opacity:0;
-      animation:logoReveal 2.2s ease forwards,logoFloat 5.5s ease-in-out infinite alternate 2.3s;
-      filter:brightness(1.18) drop-shadow(0 0 28px rgba(241,212,139,.42)) drop-shadow(0 0 86px rgba(215,173,95,.26)) drop-shadow(0 0 130px rgba(120,150,180,.12));
+
+      animation:
+        logoReveal 2.2s ease forwards,
+        logoFloat 5.5s ease-in-out infinite alternate 2.3s;
+
+      filter:
+        brightness(1.18)
+        drop-shadow(0 0 28px rgba(241,212,139,.42))
+        drop-shadow(0 0 86px rgba(215,173,95,.26))
+        drop-shadow(0 0 130px rgba(120,150,180,.12));
     }
 
     .hero-sub{
       margin-top:38px;
+
       max-width:940px;
+
       font-size:clamp(24px,2.2vw,38px);
       line-height:1.7;
       letter-spacing:.06em;
+
       opacity:0;
+
       animation:textReveal 2s ease forwards;
       animation-delay:.9s;
+
       color:rgba(246,228,185,.92);
+
       text-shadow:0 0 24px rgba(0,0,0,.62);
+
       font-family:"Cinzel",serif;
       font-weight:400;
     }
+
+    /* =========================================================
+       GENERAL TITLES
+    ========================================================= */
 
     .section-title{
       text-align:center;
+
       color:#e9d39a;
+
       font-family:"Cinzel",serif;
+
       font-size:clamp(42px,5vw,72px);
+
       font-weight:400;
+
       margin-bottom:20px;
+
       text-shadow:0 0 14px rgba(233,211,154,.18);
-      transition:color 1.2s ease, text-shadow 1.2s ease, transform 1.2s ease;
+
+      transition:
+        color 1.2s ease,
+        text-shadow 1.2s ease,
+        transform 1.2s ease;
     }
 
-    .section-title.title-glow{
-    color:#fff4cc;
-    text-shadow:
-    0 0 8px rgba(255,255,255,.55),
-    0 0 22px rgba(233,211,154,.60),
-    0 0 46px rgba(233,211,154,.35);
-    transform:scale(1.025);
+    .section-title.title-glow,
+    .booking-card h2.title-glow{
+      color:#fff4cc;
+
+      text-shadow:
+        0 0 8px rgba(255,255,255,.55),
+        0 0 22px rgba(233,211,154,.60),
+        0 0 46px rgba(233,211,154,.35);
+
+      transform:scale(1.025);
     }
 
     .section-intro{
       max-width:980px;
-      margin:0 auto 80px;
+
+      margin:0 auto 70px;
+
       text-align:center;
+
       font-size:clamp(22px,1.8vw,30px);
+
       line-height:1.9;
+
       color:rgba(255,255,255,.88);
     }
 
     .gold-line{
       width:160px;
       height:1px;
+
       margin:0 auto 38px;
+
       background:rgba(233,211,154,.52);
+
+      box-shadow:0 0 14px rgba(233,211,154,.18);
     }
+
+    /* =========================================================
+       BIO
+    ========================================================= */
 
     .bio-section{
       min-height:100vh;
+
       display:flex;
       align-items:center;
       justify-content:center;
+
       padding:120px 40px;
     }
 
     .bio-card{
       width:min(1200px,100%);
+
       display:grid;
+
       grid-template-columns:360px 1fr;
+
       gap:54px;
+
       padding:42px;
+
       border:1px solid rgba(233,211,154,.35);
+
       background:rgba(5,5,5,.38);
+
       backdrop-filter:blur(10px);
-      box-shadow:0 0 30px rgba(233,211,154,.08);
+
+      box-shadow:
+        0 0 30px rgba(233,211,154,.08),
+        inset 0 0 50px rgba(255,255,255,.012);
     }
 
     .bio-photo{
       aspect-ratio:3/4;
+
       border:1px solid rgba(233,211,154,.45);
+
       display:flex;
       align-items:center;
       justify-content:center;
+
       color:#e9d39a;
+
       font-family:"Cinzel",serif;
+
       letter-spacing:.12em;
+
       text-align:center;
-      background:linear-gradient(135deg,rgba(233,211,154,.04),rgba(255,255,255,.01));
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(233,211,154,.04),
+          rgba(255,255,255,.01)
+        );
+    }
+
+    .bio-content{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
     }
 
     .bio-content h2{
       color:#e9d39a;
+
       font-family:"Cinzel",serif;
+
       font-size:clamp(34px,4vw,54px);
+
       margin-bottom:25px;
+
       font-weight:400;
     }
 
     .bio-content p{
       font-size:clamp(22px,1.6vw,28px);
+
       line-height:1.9;
+
       color:rgba(255,255,255,.88);
+
       margin-bottom:20px;
     }
 
+    /* =========================================================
+       STUDIO SECTIONS
+    ========================================================= */
+
     .studio-section{
       padding:150px 40px;
-      max-width:1500px;
+
+      max-width:1540px;
+
       margin:0 auto;
     }
 
     .gallery-header{
       max-width:1120px;
+
       margin:0 auto 60px;
     }
 
     .gallery-kicker{
       text-align:center;
+
       color:rgba(233,211,154,.72);
+
       font-family:"Cinzel",serif;
+
       font-size:15px;
+
       letter-spacing:.22em;
+
       text-transform:uppercase;
+
       margin-bottom:18px;
     }
 
+    /* =========================================================
+       EDITORIAL PHOTO GRID
+    ========================================================= */
+
     .gallery-grid{
       display:grid;
-      grid-template-columns:repeat(5,1fr);
+
+      grid-template-columns:repeat(12,1fr);
+
+      grid-auto-flow:dense;
+
       gap:18px;
     }
 
     .photo-tile{
-      min-height:220px;
-      border:1px solid rgba(233,211,154,.20);
-      background:rgba(5,5,5,.34);
-      backdrop-filter:blur(10px);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:#e9d39a;
-      font-family:"Cinzel",serif;
-      font-size:14px;
-      letter-spacing:.10em;
-      text-align:center;
       position:relative;
+
       overflow:hidden;
-      transition:transform .35s ease,border-color .35s ease,box-shadow .35s ease;
+
+      grid-column:span 3;
+
+      height:340px;
+
+      border:1px solid rgba(233,211,154,.22);
+
+      background:#090909;
+
+      box-shadow:0 14px 40px rgba(0,0,0,.20);
+
+      transition:
+        transform .45s ease,
+        border-color .45s ease,
+        box-shadow .45s ease;
+    }
+
+    .photo-tile img{
+      width:100%;
+      height:100%;
+
+      display:block;
+
+      object-fit:cover;
+
+      transition:
+        transform 1s cubic-bezier(.2,.7,.2,1),
+        filter .7s ease;
+
+      filter:
+        brightness(.94)
+        contrast(1.03)
+        saturate(.96);
+    }
+
+    .photo-tile::after{
+      content:"";
+
+      position:absolute;
+
+      inset:0;
+
+      pointer-events:none;
+
+      background:
+        linear-gradient(
+          to top,
+          rgba(0,0,0,.18),
+          transparent 42%
+        );
+
+      opacity:.55;
+
+      transition:opacity .5s ease;
+    }
+
+    .photo-tile:hover{
+      transform:translateY(-6px);
+
+      border-color:rgba(233,211,154,.55);
+
+      box-shadow:
+        0 20px 45px rgba(0,0,0,.32),
+        0 0 28px rgba(233,211,154,.12),
+        0 0 60px rgba(233,211,154,.06);
+    }
+
+    .photo-tile:hover img{
+      transform:scale(1.045);
+
+      filter:
+        brightness(1.02)
+        contrast(1.02)
+        saturate(1.03);
+    }
+
+    .photo-tile:hover::after{
+      opacity:.25;
+    }
+
+    .photo-tile.wide{
+      grid-column:span 6;
+    }
+
+    .photo-tile.large{
+      grid-column:span 6;
+      height:540px;
     }
 
     .photo-tile.tall{
-      min-height:330px;
-      grid-row:span 2;
+      grid-column:span 3;
+      height:540px;
     }
 
-    .photo-tile.wide{grid-column:span 2;}
-
-    .photo-tile:hover{
-  transform:translateY(-6px);
-  border-color:rgba(233,211,154,.46);
-
-  box-shadow:
-    0 0 28px rgba(233,211,154,.12),
-    0 0 60px rgba(233,211,154,.06);
-}
-    .photo-tile::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:linear-gradient(135deg,rgba(233,211,154,.06),rgba(255,255,255,.01));
-      opacity:.7;
-      pointer-events:none;
+    .photo-tile.feature{
+      grid-column:span 8;
+      height:560px;
     }
 
-    .photo-tile span{
-      position:relative;
-      z-index:2;
-      padding:14px;
+    .photo-tile.side{
+      grid-column:span 4;
+      height:560px;
+    }
+
+    /* Portrait-heavy galleries */
+
+    .people-grid .photo-tile{
+      height:420px;
+    }
+
+    .people-grid .photo-tile.tall{
+      height:620px;
+    }
+
+    .people-grid .photo-tile.large{
+      height:620px;
+    }
+
+    .people-grid .photo-tile.feature,
+    .people-grid .photo-tile.side{
+      height:600px;
     }
 
     .service-note{
       max-width:900px;
-      margin:52px auto 0;
+
+      margin:58px auto 0;
+
       text-align:center;
+
       color:rgba(255,255,255,.82);
+
       font-size:clamp(21px,1.5vw,26px);
+
       line-height:1.8;
     }
 
-    .portrait-categories{
-      display:grid;
-      grid-template-columns:repeat(5,1fr);
-      gap:18px;
-      margin-bottom:38px;
+    /* =========================================================
+       SECTION DIVIDER
+    ========================================================= */
+
+    .section-divider{
+      width:min(760px,70vw);
+
+      height:1px;
+
+      margin:20px auto;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(233,211,154,.22),
+          rgba(233,211,154,.55),
+          rgba(233,211,154,.22),
+          transparent
+        );
     }
 
-    .category-card{
-      border:1px solid rgba(233,211,154,.22);
-      background:rgba(5,5,5,.36);
-      backdrop-filter:blur(10px);
-      padding:26px 18px;
-      text-align:center;
-      color:#e9d39a;
-      font-family:"Cinzel",serif;
-      font-size:clamp(18px,1.4vw,24px);
-      letter-spacing:.08em;
-      transition:transform .35s ease,border-color .35s ease,box-shadow .35s ease;
-    }
-
-    .category-card:hover{
-  transform:translateY(-6px);
-  border-color:rgba(233,211,154,.48);
-
-  box-shadow:
-    0 0 28px rgba(233,211,154,.12),
-    0 0 60px rgba(233,211,154,.06);
-}
+    /* =========================================================
+       BOOKING
+    ========================================================= */
 
     .booking-section{
       padding:150px 40px;
+
       max-width:1200px;
+
       margin:0 auto;
+
       text-align:center;
     }
 
     .booking-card{
       border:1px solid rgba(233,211,154,.38);
-      background:rgba(5,5,5,.38);
-      backdrop-filter:blur(10px);
+
+      background:rgba(5,5,5,.42);
+
+      backdrop-filter:blur(12px);
+
       padding:70px 40px;
-      box-shadow:0 0 34px rgba(233,211,154,.08);
+
+      box-shadow:
+        0 0 34px rgba(233,211,154,.08),
+        inset 0 0 60px rgba(255,255,255,.012);
     }
 
     .booking-card h2{
-      .booking-card h2.title-glow{
-  color:#fff4cc;
-  text-shadow:
-    0 0 8px rgba(255,255,255,.55),
-    0 0 22px rgba(233,211,154,.60),
-    0 0 46px rgba(233,211,154,.35);
-  transform:scale(1.025);
-}
       color:#e9d39a;
+
       font-family:"Cinzel",serif;
+
       font-size:clamp(42px,5vw,72px);
+
       font-weight:400;
+
       margin-bottom:24px;
-      transition:color 1.2s ease, text-shadow 1.2s ease, transform 1.2s ease;
+
+      transition:
+        color 1.2s ease,
+        text-shadow 1.2s ease,
+        transform 1.2s ease;
     }
 
     .booking-card p{
       max-width:850px;
+
       margin:0 auto 46px;
+
       font-size:clamp(22px,1.7vw,30px);
+
       line-height:1.9;
+
       color:rgba(255,255,255,.88);
     }
 
     .booking-btn{
       display:inline-flex;
+
       padding:18px 36px;
+
       border:1px solid rgba(233,211,154,.55);
+
       color:#e9d39a;
+
       text-decoration:none;
+
       font-family:"Cinzel",serif;
+
       letter-spacing:.08em;
-      transition:.3s ease;
+
+      transition:
+        background .3s ease,
+        box-shadow .3s ease,
+        transform .3s ease,
+        border-color .3s ease;
     }
 
     .booking-btn:hover{
+      transform:translateY(-3px);
+
       background:rgba(233,211,154,.08);
-      box-shadow:0 0 20px rgba(233,211,154,.18);
+
+      border-color:rgba(233,211,154,.85);
+
+      box-shadow:
+        0 0 20px rgba(233,211,154,.18),
+        0 8px 30px rgba(0,0,0,.25);
     }
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
 
     .footer{
       padding:60px 30px 80px;
+
       text-align:center;
+
       color:rgba(255,255,255,.55);
+
       font-size:18px;
+
       letter-spacing:.06em;
     }
 
     .footer span{
       color:#e9d39a;
+
       font-family:"Cinzel",serif;
     }
 
+    /* =========================================================
+       ANIMATIONS
+    ========================================================= */
+
     @keyframes logoReveal{
-      0%{opacity:0;transform:scale(.84) translateY(42px);filter:brightness(.72) drop-shadow(0 0 0 rgba(241,212,139,0));}
-      34%{opacity:1;transform:scale(1.05) translateY(0);filter:brightness(1.55) drop-shadow(0 0 44px rgba(241,212,139,.62)) drop-shadow(0 0 110px rgba(215,173,95,.32));}
-      100%{opacity:1;transform:scale(1) translateY(0);filter:brightness(1.18) drop-shadow(0 0 28px rgba(241,212,139,.42)) drop-shadow(0 0 86px rgba(215,173,95,.26)) drop-shadow(0 0 130px rgba(120,150,180,.12));}
+      0%{
+        opacity:0;
+        transform:scale(.84) translateY(42px);
+        filter:brightness(.72) drop-shadow(0 0 0 rgba(241,212,139,0));
+      }
+
+      34%{
+        opacity:1;
+        transform:scale(1.05) translateY(0);
+
+        filter:
+          brightness(1.55)
+          drop-shadow(0 0 44px rgba(241,212,139,.62))
+          drop-shadow(0 0 110px rgba(215,173,95,.32));
+      }
+
+      100%{
+        opacity:1;
+        transform:scale(1) translateY(0);
+
+        filter:
+          brightness(1.18)
+          drop-shadow(0 0 28px rgba(241,212,139,.42))
+          drop-shadow(0 0 86px rgba(215,173,95,.26))
+          drop-shadow(0 0 130px rgba(120,150,180,.12));
+      }
     }
 
     @keyframes logoFlash{
-      0%{opacity:0;transform:scale(.55);}
-      18%{opacity:1;transform:scale(1.02);}
-      45%{opacity:.68;transform:scale(1.18);}
-      76%{opacity:.20;transform:scale(1.38);}
-      100%{opacity:0;transform:scale(1.52);}
+      0%{
+        opacity:0;
+        transform:scale(.55);
+      }
+
+      18%{
+        opacity:1;
+        transform:scale(1.02);
+      }
+
+      45%{
+        opacity:.68;
+        transform:scale(1.18);
+      }
+
+      76%{
+        opacity:.20;
+        transform:scale(1.38);
+      }
+
+      100%{
+        opacity:0;
+        transform:scale(1.52);
+      }
     }
 
     @keyframes logoAwaken{
-      0%{filter:brightness(.84);}
-      38%{filter:brightness(1.22);}
-      100%{filter:brightness(1);}
+      0%{
+        filter:brightness(.84);
+      }
+
+      38%{
+        filter:brightness(1.22);
+      }
+
+      100%{
+        filter:brightness(1);
+      }
     }
 
     @keyframes textReveal{
-      0%{opacity:0;transform:translateY(18px);}
-      100%{opacity:1;transform:translateY(0);}
+      0%{
+        opacity:0;
+        transform:translateY(18px);
+      }
+
+      100%{
+        opacity:1;
+        transform:translateY(0);
+      }
     }
 
     @keyframes logoFloat{
-      0%{transform:translateY(0);}
-      100%{transform:translateY(-10px);}
+      0%{
+        transform:translateY(0);
+      }
+
+      100%{
+        transform:translateY(-10px);
+      }
     }
 
     @keyframes bgMove{
-      0%{transform:scale(1.05) translateY(0);}
-      100%{transform:scale(1.10) translateY(-30px);}
+      0%{
+        transform:scale(1.05) translateY(0);
+      }
+
+      100%{
+        transform:scale(1.10) translateY(-30px);
+      }
     }
 
     @keyframes ambientPulse{
-      0%,100%{opacity:.45;}
-      50%{opacity:.90;}
+      0%,100%{
+        opacity:.45;
+      }
+
+      50%{
+        opacity:.90;
+      }
     }
+
+    /* =========================================================
+       TABLET
+    ========================================================= */
 
     @media(max-width:1100px){
-      .gallery-grid{grid-template-columns:repeat(3,1fr);}
-      .portrait-categories{grid-template-columns:repeat(2,1fr);}
+
+      .photo-tile{
+        grid-column:span 4;
+      }
+
+      .photo-tile.wide,
+      .photo-tile.large{
+        grid-column:span 8;
+      }
+
+      .photo-tile.tall{
+        grid-column:span 4;
+      }
+
+      .photo-tile.feature{
+        grid-column:span 8;
+      }
+
+      .photo-tile.side{
+        grid-column:span 4;
+      }
     }
 
+    /* =========================================================
+       MOBILE
+    ========================================================= */
+
     @media(max-width:900px){
+
       .portal-return{
-       top:14px;
-       left:14px;
-       padding:10px 14px;
-      font-size:12px;
+        top:14px;
+        left:14px;
+
+        padding:10px 14px;
+
+        font-size:12px;
+      }
+
+      .bg{
+        background-position:center top;
+      }
+
+      .hero{
+        padding:28px;
+      }
+
+      .hero-logo{
+        width:100vw;
+      }
+
+      .hero-sub{
+        font-size:21px;
+        line-height:1.7;
+      }
+
+      .bio-section,
+      .studio-section,
+      .booking-section{
+        padding:90px 22px;
+      }
+
+      .bio-card{
+        grid-template-columns:1fr;
+
+        padding:26px;
+
+        gap:30px;
+      }
+
+      .bio-photo{
+        max-width:340px;
+
+        width:100%;
+
+        margin:0 auto;
+      }
+
+      .gallery-grid{
+        grid-template-columns:1fr;
+
+        gap:16px;
+      }
+
+      .photo-tile,
+      .photo-tile.wide,
+      .photo-tile.large,
+      .photo-tile.tall,
+      .photo-tile.feature,
+      .photo-tile.side,
+      .people-grid .photo-tile,
+      .people-grid .photo-tile.tall,
+      .people-grid .photo-tile.large,
+      .people-grid .photo-tile.feature,
+      .people-grid .photo-tile.side{
+        grid-column:1;
+
+        height:auto;
+
+        aspect-ratio:4/5;
+      }
+
+      .photo-tile.wide{
+        aspect-ratio:4/3;
+      }
+
+      .booking-card{
+        padding:46px 24px;
+      }
+
+      .audio-toggle{
+        width:42px;
+        height:42px;
+
+        right:14px;
+        bottom:14px;
+      }
+
+      .section-intro{
+        margin-bottom:50px;
+      }
     }
-      .bg{background-position:center top;}
-      .hero{padding:28px;}
-      .hero-logo{width:100vw;}
-      .hero-sub{font-size:21px;line-height:1.7;}
-      .bio-section,.studio-section,.booking-section{padding:90px 22px;}
-      .bio-card{grid-template-columns:1fr;padding:26px;gap:30px;}
-      .bio-photo{max-width:340px;width:100%;margin:0 auto;}
-      .gallery-grid{grid-template-columns:1fr;}
-      .photo-tile,.photo-tile.tall{min-height:280px;grid-row:auto;}
-      .photo-tile.wide{grid-column:auto;}
-      .portrait-categories{grid-template-columns:1fr;}
-      .booking-card{padding:46px 24px;}
-      .audio-toggle{width:42px;height:42px;right:14px;bottom:14px;}
-    }
+
   </style>
 </head>
 
 <body>
 
+  <!-- RETURN TO MAIN HAYVN PORTAL -->
   <a href="index.html" class="portal-return">
-  ← Return to HAYVN
-</a>
+    ← Return to HAYVN
+  </a>
 
-  <audio id="studioAmbient" src="audio/studio-ambient.mp3" preload="auto" loop></audio>
+  <!-- AMBIENT AUDIO -->
+  <audio
+    id="studioAmbient"
+    src="audio/studio-ambient.mp3"
+    preload="auto"
+    loop>
+  </audio>
 
-  <button class="audio-toggle" id="audioToggle" type="button" aria-label="Toggle ambient sound">♪</button>
+  <button
+    class="audio-toggle"
+    id="audioToggle"
+    type="button"
+    aria-label="Toggle ambient sound">
+    ♪
+  </button>
 
+  <!-- BACKGROUND -->
   <div class="bg-wrap">
     <div class="bg"></div>
     <div class="ambient"></div>
@@ -534,24 +1016,41 @@
 
   <div class="grain"></div>
 
+  <!-- =======================================================
+       HERO
+  ======================================================== -->
+
   <section class="hero">
+
     <div class="hero-logo-wrap">
-      <img src="images/hayvn-logo-studio.png" alt="HAYVN Studio" class="hero-logo" />
+      <img
+        src="images/hayvn-logo-studio.png"
+        alt="HAYVN Studio"
+        class="hero-logo"
+      />
     </div>
 
     <p class="hero-sub">
       Professional photography, cinematic storytelling,
       and visual work crafted with intention.
     </p>
+
   </section>
 
+  <!-- =======================================================
+       INTRO / BIO
+  ======================================================== -->
+
   <section class="bio-section">
+
     <div class="bio-card">
+
       <div class="bio-photo">
         <span>Studio Portrait Coming Soon</span>
       </div>
 
       <div class="bio-content">
+
         <h2>Photography with Purpose</h2>
 
         <p>
@@ -562,41 +1061,106 @@
 
         <p>
           From real estate and staged spaces to portraits, weddings,
-          flying dress sessions, products, food, and editorial-style stories,
+          flying dress sessions, engagements, and editorial-style stories,
           every session is approached with clarity, elegance, and attention
           to detail.
         </p>
+
       </div>
+
     </div>
+
   </section>
 
+  <!-- =======================================================
+       REAL ESTATE
+  ======================================================== -->
+
   <section class="studio-section" id="real-estate">
+
     <div class="gallery-header">
+
       <div class="gold-line"></div>
-      <div class="gallery-kicker">Architecture · Interiors · Home Staging</div>
+
+      <div class="gallery-kicker">
+        Architecture · Interiors · Home Staging
+      </div>
+
       <h2 class="section-title">Real Estate</h2>
+
       <p class="section-intro">
         Clean, professional real estate photography designed to highlight
         space, flow, atmosphere, and the emotional potential of a property.
       </p>
+
     </div>
 
     <div class="gallery-grid">
-      <div class="photo-tile tall"><span>Real Estate 01</span></div>
-      <div class="photo-tile"><span>Real Estate 02</span></div>
-      <div class="photo-tile"><span>Real Estate 03</span></div>
-      <div class="photo-tile wide"><span>Real Estate 04</span></div>
-      <div class="photo-tile"><span>Real Estate 05</span></div>
-      <div class="photo-tile"><span>Real Estate 06</span></div>
-      <div class="photo-tile"><span>Real Estate 07</span></div>
-      <div class="photo-tile tall"><span>Real Estate 08</span></div>
-      <div class="photo-tile"><span>Real Estate 09</span></div>
-      <div class="photo-tile wide"><span>Real Estate 10</span></div>
-      <div class="photo-tile"><span>Real Estate 11</span></div>
-      <div class="photo-tile"><span>Real Estate 12</span></div>
-      <div class="photo-tile"><span>Real Estate 13</span></div>
-      <div class="photo-tile"><span>Real Estate 14</span></div>
-      <div class="photo-tile"><span>Real Estate 15</span></div>
+
+      <div class="photo-tile feature">
+        <img src="images/realestate/IMG_0698.webp" alt="HAYVN Studio real estate photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile side">
+        <img src="images/realestate/IMG_8994.webp" alt="HAYVN Studio real estate photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile wide">
+        <img src="images/realestate/IMG_9145.webp" alt="HAYVN Studio interior photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile wide">
+        <img src="images/realestate/IMG_9149.webp" alt="HAYVN Studio interior photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile">
+        <img src="images/realestate/IMG_9152.webp" alt="HAYVN Studio property photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile">
+        <img src="images/realestate/IMG_9208.webp" alt="HAYVN Studio property photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile">
+        <img src="images/realestate/IMG_9223.webp" alt="HAYVN Studio property photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile">
+        <img src="images/realestate/IMG_9237.webp" alt="HAYVN Studio property photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile large">
+        <img src="images/realestate/IMG_9281.webp" alt="HAYVN Studio real estate photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile wide">
+        <img src="images/realestate/IMG_9289.webp" alt="HAYVN Studio real estate photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile">
+        <img src="images/realestate/IMG_9303.webp" alt="HAYVN Studio real estate photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile">
+        <img src="images/realestate/IMG_9304.webp" alt="HAYVN Studio real estate photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile wide">
+        <img src="images/realestate/IMG_9996.webp" alt="HAYVN Studio property photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile">
+        <img src="images/realestate/PXL_20260721_195243246~2.webp" alt="HAYVN Studio property photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile">
+        <img src="images/realestate/PXL_20260721_195409272~2.webp" alt="HAYVN Studio property photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile wide">
+        <img src="images/realestate/PXL_20260721_200823901~2.webp" alt="HAYVN Studio property photography" loading="lazy">
+      </div>
+
     </div>
 
     <p class="service-note">
@@ -604,240 +1168,577 @@
       and visual presentation for properties that need to feel polished,
       welcoming, and market-ready.
     </p>
+
   </section>
 
+  <div class="section-divider"></div>
+
+  <!-- =======================================================
+       FLYING DRESS
+  ======================================================== -->
+
   <section class="studio-section" id="flying-dress">
+
     <div class="gallery-header">
+
       <div class="gold-line"></div>
-      <div class="gallery-kicker">Movement · Wind · Editorial Drama</div>
+
+      <div class="gallery-kicker">
+        Movement · Wind · Editorial Drama
+      </div>
+
       <h2 class="section-title">Flying Dress</h2>
+
       <p class="section-intro">
         Cinematic sessions built around movement, fabric, landscape,
         and bold portrait energy for images that feel powerful,
         elegant, and unforgettable.
       </p>
+
     </div>
 
-    <div class="gallery-grid">
-      <div class="photo-tile wide"><span>Flying Dress 01</span></div>
-      <div class="photo-tile tall"><span>Flying Dress 02</span></div>
-      <div class="photo-tile"><span>Flying Dress 03</span></div>
-      <div class="photo-tile"><span>Flying Dress 04</span></div>
-      <div class="photo-tile"><span>Flying Dress 05</span></div>
-      <div class="photo-tile wide"><span>Flying Dress 06</span></div>
-      <div class="photo-tile"><span>Flying Dress 07</span></div>
-      <div class="photo-tile"><span>Flying Dress 08</span></div>
-      <div class="photo-tile tall"><span>Flying Dress 09</span></div>
-      <div class="photo-tile"><span>Flying Dress 10</span></div>
-      <div class="photo-tile"><span>Flying Dress 11</span></div>
-      <div class="photo-tile wide"><span>Flying Dress 12</span></div>
-      <div class="photo-tile"><span>Flying Dress 13</span></div>
-      <div class="photo-tile"><span>Flying Dress 14</span></div>
-      <div class="photo-tile"><span>Flying Dress 15</span></div>
+    <div class="gallery-grid people-grid">
+
+      <div class="photo-tile tall">
+        <img src="images/flyingdress/IMG_0646(3).webp" alt="HAYVN Studio flying dress photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile large">
+        <img src="images/flyingdress/IMG_0739.webp" alt="HAYVN Studio flying dress photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile tall">
+        <img src="images/flyingdress/IMG_8379(1).webp" alt="HAYVN Studio flying dress portrait" loading="lazy">
+      </div>
+
+      <div class="photo-tile feature">
+        <img src="images/flyingdress/IMG_8687 - Copy.webp" alt="HAYVN Studio flying dress portrait" loading="lazy">
+      </div>
+
+      <div class="photo-tile side">
+        <img src="images/flyingdress/IMG_8687.webp" alt="HAYVN Studio flying dress portrait" loading="lazy">
+      </div>
+
+      <div class="photo-tile large">
+        <img src="images/flyingdress/IMG_8748.webp" alt="HAYVN Studio flying dress photography" loading="lazy">
+      </div>
+
     </div>
 
     <p class="service-note">
       Created for clients who want a dramatic, expressive, and elevated
       portrait experience with a fashion-inspired edge.
     </p>
+
   </section>
 
+  <div class="section-divider"></div>
+
+  <!-- =======================================================
+       PORTRAITS
+  ======================================================== -->
+
   <section class="studio-section" id="portraits">
+
     <div class="gallery-header">
+
       <div class="gold-line"></div>
-      <div class="gallery-kicker">People · Brands · Stories · Details</div>
+
+      <div class="gallery-kicker">
+        People · Personality · Stories · Expression
+      </div>
+
       <h2 class="section-title">Portraits</h2>
+
       <p class="section-intro">
-        Portrait work for families, couples, engagements, products,
-        food, personal brands, and creative projects — all shaped with
-        care, direction, and a polished visual style.
+        Portrait photography shaped around personality, connection,
+        atmosphere, and authentic expression — from personal sessions
+        and families to creative and editorial imagery.
       </p>
+
     </div>
 
-    <div class="portrait-categories">
-      <div class="category-card">Family</div>
-      <div class="category-card">Engagement</div>
-      <div class="category-card">Product</div>
-      <div class="category-card">Food</div>
-      <div class="category-card">Branding</div>
-    </div>
+    <div class="gallery-grid people-grid">
 
-    <div class="gallery-grid">
-      <div class="photo-tile tall"><span>Portrait 01</span></div>
-      <div class="photo-tile"><span>Family 02</span></div>
-      <div class="photo-tile"><span>Engagement 03</span></div>
-      <div class="photo-tile wide"><span>Product 04</span></div>
-      <div class="photo-tile"><span>Food 05</span></div>
-      <div class="photo-tile"><span>Portrait 06</span></div>
-      <div class="photo-tile"><span>Family 07</span></div>
-      <div class="photo-tile tall"><span>Branding 08</span></div>
-      <div class="photo-tile"><span>Engagement 09</span></div>
-      <div class="photo-tile wide"><span>Product 10</span></div>
-      <div class="photo-tile"><span>Food 11</span></div>
-      <div class="photo-tile"><span>Portrait 12</span></div>
-      <div class="photo-tile"><span>Family 13</span></div>
-      <div class="photo-tile"><span>Engagement 14</span></div>
-      <div class="photo-tile wide"><span>Product 15</span></div>
-      <div class="photo-tile"><span>Food 16</span></div>
-      <div class="photo-tile"><span>Portrait 17</span></div>
-      <div class="photo-tile tall"><span>Branding 18</span></div>
-      <div class="photo-tile"><span>Portrait 19</span></div>
-      <div class="photo-tile"><span>Portrait 20</span></div>
+      <div class="photo-tile tall">
+        <img src="images/portraits/IMG_0033(3).webp" alt="HAYVN Studio portrait photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile large">
+        <img src="images/portraits/IMG_0054.webp" alt="HAYVN Studio portrait photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile tall">
+        <img src="images/portraits/IMG_0348.webp" alt="HAYVN Studio portrait photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile">
+        <img src="images/portraits/IMG_0569.webp" alt="HAYVN Studio portrait photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile">
+        <img src="images/portraits/IMG_0644.webp" alt="HAYVN Studio portrait photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile wide">
+        <img src="images/portraits/IMG_1988.webp" alt="HAYVN Studio portrait photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile feature">
+        <img src="images/portraits/IMG_2068.webp" alt="HAYVN Studio portrait photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile side">
+        <img src="images/portraits/IMG_2141.webp" alt="HAYVN Studio portrait photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile tall">
+        <img src="images/portraits/IMG_2779.webp" alt="HAYVN Studio portrait photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile large">
+        <img src="images/portraits/IMG_3658.webp" alt="HAYVN Studio portrait photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile tall">
+        <img src="images/portraits/IMG_4233.webp" alt="HAYVN Studio portrait photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile">
+        <img src="images/portraits/IMG_4410.webp" alt="HAYVN Studio portrait photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile wide">
+        <img src="images/portraits/IMG_4591.webp" alt="HAYVN Studio portrait photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile">
+        <img src="images/portraits/IMG_4642.webp" alt="HAYVN Studio portrait photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile tall">
+        <img src="images/portraits/IMG_6154.webp" alt="HAYVN Studio portrait photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile large">
+        <img src="images/portraits/IMG_6479.webp" alt="HAYVN Studio portrait photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile">
+        <img src="images/portraits/IMG_6504.webp" alt="HAYVN Studio portrait photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile tall">
+        <img src="images/portraits/IMG_6642.webp" alt="HAYVN Studio portrait photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile">
+        <img src="images/portraits/IMG_6879.webp" alt="HAYVN Studio portrait photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile wide">
+        <img src="images/portraits/IMG_6962.webp" alt="HAYVN Studio portrait photography" loading="lazy">
+      </div>
+
     </div>
 
     <p class="service-note">
-      A flexible section for personal sessions, family stories,
-      engagement imagery, product presentation, food photography,
-      branding visuals, and creative portraits.
+      Personal portraits, family stories, creative sessions, branding,
+      lifestyle imagery, and expressive photography built around the
+      person in front of the lens.
     </p>
+
   </section>
 
-  <section class="studio-section" id="weddings">
+  <div class="section-divider"></div>
+
+  <!-- =======================================================
+       ENGAGEMENT
+  ======================================================== -->
+
+  <section class="studio-section" id="engagement">
+
     <div class="gallery-header">
+
       <div class="gold-line"></div>
-      <div class="gallery-kicker">Ceremony · Emotion · Details</div>
+
+      <div class="gallery-kicker">
+        Connection · Celebration · Story
+      </div>
+
+      <h2 class="section-title">Engagement</h2>
+
+      <p class="section-intro">
+        Relaxed, romantic engagement photography designed around
+        connection, personality, and the small moments that make
+        every couple's story their own.
+      </p>
+
+    </div>
+
+    <div class="gallery-grid people-grid">
+
+      <div class="photo-tile feature">
+        <img src="images/engagement/IMG_7583.jpg" alt="HAYVN Studio engagement photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile side">
+        <img src="images/engagement/IMG_7627.jpg" alt="HAYVN Studio engagement photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile tall">
+        <img src="images/engagement/IMG_7642.jpg" alt="HAYVN Studio engagement photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile large">
+        <img src="images/engagement/IMG_7804.jpg" alt="HAYVN Studio engagement photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile tall">
+        <img src="images/engagement/IMG_8037.jpg" alt="HAYVN Studio engagement photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile wide">
+        <img src="images/engagement/IMG_8048.jpg" alt="HAYVN Studio engagement photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile wide">
+        <img src="images/engagement/IMG_8529.jpg" alt="HAYVN Studio engagement photography" loading="lazy">
+      </div>
+
+    </div>
+
+    <p class="service-note">
+      A cinematic celebration of connection before the wedding day —
+      natural, personal, elegant, and unmistakably yours.
+    </p>
+
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- =======================================================
+       WEDDINGS
+  ======================================================== -->
+
+  <section class="studio-section" id="weddings">
+
+    <div class="gallery-header">
+
+      <div class="gold-line"></div>
+
+      <div class="gallery-kicker">
+        Ceremony · Emotion · Details
+      </div>
+
       <h2 class="section-title">Weddings</h2>
+
       <p class="section-intro">
         Wedding photography focused on atmosphere, emotion, connection,
         details, and the quiet in-between moments that make the day
         feel alive.
       </p>
+
     </div>
 
-    <div class="gallery-grid">
-      <div class="photo-tile tall"><span>Wedding 01</span></div>
-      <div class="photo-tile"><span>Wedding 02</span></div>
-      <div class="photo-tile wide"><span>Wedding 03</span></div>
-      <div class="photo-tile"><span>Wedding 04</span></div>
-      <div class="photo-tile"><span>Wedding 05</span></div>
-      <div class="photo-tile"><span>Wedding 06</span></div>
-      <div class="photo-tile tall"><span>Wedding 07</span></div>
-      <div class="photo-tile"><span>Wedding 08</span></div>
-      <div class="photo-tile wide"><span>Wedding 09</span></div>
-      <div class="photo-tile"><span>Wedding 10</span></div>
-      <div class="photo-tile"><span>Wedding 11</span></div>
-      <div class="photo-tile"><span>Wedding 12</span></div>
-      <div class="photo-tile wide"><span>Wedding 13</span></div>
-      <div class="photo-tile"><span>Wedding 14</span></div>
-      <div class="photo-tile"><span>Wedding 15</span></div>
+    <div class="gallery-grid people-grid">
+
+      <div class="photo-tile tall">
+        <img src="images/weddings/IMG_2629 - Copy.jpg" alt="HAYVN Studio wedding photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile large">
+        <img src="images/weddings/IMG_2739(1) - Copy.jpg" alt="HAYVN Studio wedding photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile tall">
+        <img src="images/weddings/IMG_2754 - Copy.jpg" alt="HAYVN Studio wedding photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile feature">
+        <img src="images/weddings/IMG_2774 - Copy.jpg" alt="HAYVN Studio wedding photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile side">
+        <img src="images/weddings/IMG_2779 - Copy.jpg" alt="HAYVN Studio wedding photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile tall">
+        <img src="images/weddings/IMG_2838 - Copy.jpg" alt="HAYVN Studio wedding photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile large">
+        <img src="images/weddings/IMG_2971 - Copy.jpg" alt="HAYVN Studio wedding photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile tall">
+        <img src="images/weddings/IMG_3153 - Copy.jpg" alt="HAYVN Studio wedding photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile wide">
+        <img src="images/weddings/IMG_3267 - Copy.jpg" alt="HAYVN Studio wedding photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile wide">
+        <img src="images/weddings/IMG_3275 - Copy.jpg" alt="HAYVN Studio wedding photography" loading="lazy">
+      </div>
+
+      <div class="photo-tile large">
+        <img src="images/weddings/IMG_5475 - Copy.jpg" alt="HAYVN Studio wedding photography" loading="lazy">
+      </div>
+
     </div>
 
     <p class="service-note">
       Designed for couples who want timeless, elegant, emotional
       coverage with a polished editorial feel.
     </p>
+
   </section>
+
+  <!-- =======================================================
+       BOOKING
+  ======================================================== -->
 
   <section class="booking-section">
+
     <div class="booking-card">
+
       <h2>Book HAYVN Studio</h2>
+
       <p>
         Whether you are preparing a listing, planning a portrait session,
-        launching a brand, celebrating love, or creating a cinematic
+        celebrating an engagement or wedding, or creating a cinematic
         visual story, your session begins with a simple conversation.
       </p>
-      <a href="#" class="booking-btn">Start Your Studio Inquiry</a>
+
+      <a href="#" class="booking-btn">
+        Start Your Studio Inquiry
+      </a>
+
     </div>
+
   </section>
 
+  <!-- =======================================================
+       FOOTER
+  ======================================================== -->
+
   <footer class="footer">
-    <span>HAYVN Studio</span> · Real Estate · Flying Dress · Portraits · Weddings
+
+    <span>HAYVN Studio</span>
+    · Real Estate
+    · Flying Dress
+    · Portraits
+    · Engagement
+    · Weddings
+
   </footer>
 
+  <!-- =======================================================
+       AUDIO SCRIPT
+  ======================================================== -->
+
   <script>
-    const studioAmbient = document.getElementById("studioAmbient");
-    const audioToggle = document.getElementById("audioToggle");
+
+    const studioAmbient =
+      document.getElementById("studioAmbient");
+
+    const audioToggle =
+      document.getElementById("audioToggle");
 
     let muted = false;
+
     let targetVolume = 0.18;
+
     let fadeInterval = null;
 
+
     function updateAudioButton(){
-      audioToggle.textContent = muted ? "♪̸" : "♪";
-      audioToggle.classList.toggle("muted", muted);
+
+      audioToggle.textContent =
+        muted ? "♪̸" : "♪";
+
+      audioToggle.classList.toggle(
+        "muted",
+        muted
+      );
+
     }
 
+
     function fadeAudioIn(){
+
       clearInterval(fadeInterval);
+
       studioAmbient.volume = 0;
 
       fadeInterval = setInterval(() => {
+
         if(muted){
+
           clearInterval(fadeInterval);
+
           return;
+
         }
 
         if(studioAmbient.volume < targetVolume){
-          studioAmbient.volume = Math.min(studioAmbient.volume + 0.01, targetVolume);
+
+          studioAmbient.volume =
+            Math.min(
+              studioAmbient.volume + 0.01,
+              targetVolume
+            );
+
         }else{
+
           clearInterval(fadeInterval);
+
         }
+
       },140);
+
     }
+
 
     function startAmbient(){
+
       if(muted) return;
 
-      studioAmbient.play()
+      studioAmbient
+        .play()
         .then(() => {
+
           fadeAudioIn();
+
         })
         .catch(() => {});
+
     }
+
 
     function stopAmbient(){
+
       clearInterval(fadeInterval);
+
       studioAmbient.pause();
+
     }
 
-    audioToggle.addEventListener("click", () => {
-      muted = !muted;
-      updateAudioButton();
 
-      if(muted){
-        stopAmbient();
-      }else{
-        startAmbient();
+    audioToggle.addEventListener(
+      "click",
+      () => {
+
+        muted = !muted;
+
+        updateAudioButton();
+
+        if(muted){
+
+          stopAmbient();
+
+        }else{
+
+          startAmbient();
+
+        }
+
       }
-    });
+    );
 
-    window.addEventListener("pageshow", () => {
-      updateAudioButton();
-      startAmbient();
-    });
 
-    window.addEventListener("pointerdown", startAmbient, { once:true });
-    window.addEventListener("touchstart", startAmbient, { once:true });
+    window.addEventListener(
+      "pageshow",
+      () => {
+
+        updateAudioButton();
+
+        startAmbient();
+
+      }
+    );
+
+
+    window.addEventListener(
+      "pointerdown",
+      startAmbient,
+      { once:true }
+    );
+
+
+    window.addEventListener(
+      "touchstart",
+      startAmbient,
+      { once:true }
+    );
+
 
     updateAudioButton();
+
     startAmbient();
+
   </script>
+
+  <!-- =======================================================
+       TITLE GLOW SCRIPT
+  ======================================================== -->
+
   <script>
-  const sectionTitles = document.querySelectorAll('.section-title, .booking-card h2');
 
-  const titleObserver = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          entry.target.classList.add('title-glow');
+    const sectionTitles =
+      document.querySelectorAll(
+        '.section-title, .booking-card h2'
+      );
 
-          setTimeout(() => {
-            entry.target.classList.remove('title-glow');
-          }, 1800);
 
-          titleObserver.unobserve(entry.target);
+    const titleObserver =
+      new IntersectionObserver(
+
+        entries => {
+
+          entries.forEach(entry => {
+
+            if(entry.isIntersecting){
+
+              entry.target
+                .classList
+                .add('title-glow');
+
+
+              setTimeout(() => {
+
+                entry.target
+                  .classList
+                  .remove('title-glow');
+
+              },1800);
+
+
+              titleObserver
+                .unobserve(entry.target);
+
+            }
+
+          });
+
+        },
+
+        {
+          threshold:.55
         }
-      });
-    },
-    {
-      threshold:.55
-    }
-  );
 
-  sectionTitles.forEach(title => {
-    titleObserver.observe(title);
-  });
-</script>
+      );
+
+
+    sectionTitles.forEach(title => {
+
+      titleObserver.observe(title);
+
+    });
+
+  </script>
 
 </body>
 </html>
