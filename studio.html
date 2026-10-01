@@ -93,21 +93,15 @@
       top:18px;
       left:18px;
       z-index:50;
-
       padding:12px 18px;
-
       border:1px solid rgba(233,211,154,.35);
-
       background:rgba(0,0,0,.30);
       backdrop-filter:blur(10px);
-
       color:#e9d39a;
       text-decoration:none;
-
       font-family:"Cinzel",serif;
       font-size:14px;
       letter-spacing:.08em;
-
       transition:
         transform .25s ease,
         box-shadow .25s ease,
@@ -117,7 +111,6 @@
     .portal-return:hover{
       transform:translateY(-2px);
       border-color:rgba(233,211,154,.65);
-
       box-shadow:
         0 0 10px rgba(233,211,154,.20),
         0 0 24px rgba(233,211,154,.08);
@@ -132,27 +125,19 @@
       right:18px;
       bottom:18px;
       z-index:50;
-
       width:46px;
       height:46px;
-
       border:none;
       border-radius:999px;
-
       background:rgba(0,0,0,.38);
       backdrop-filter:blur(12px);
-
       color:#f1d48b;
-
       cursor:pointer;
-
       font-size:18px;
       font-weight:900;
-
       display:flex;
       align-items:center;
       justify-content:center;
-
       transition:
         transform .25s ease,
         opacity .25s ease,
@@ -161,7 +146,6 @@
 
     .audio-toggle:hover{
       transform:scale(1.08);
-
       box-shadow:
         0 0 10px rgba(241,212,139,.32),
         0 0 24px rgba(215,173,95,.18);
@@ -177,37 +161,28 @@
 
     .hero{
       min-height:100vh;
-
       display:flex;
       align-items:center;
       justify-content:center;
       flex-direction:column;
-
       text-align:center;
-
       padding:40px;
     }
 
     .hero-logo-wrap{
       position:relative;
-
       display:flex;
       align-items:center;
       justify-content:center;
-
       animation:logoAwaken 4.2s ease forwards;
     }
 
     .hero-logo-wrap::before{
       content:"";
-
       position:absolute;
-
       width:130%;
       height:130%;
-
       border-radius:50%;
-
       background:
         radial-gradient(
           circle,
@@ -216,25 +191,18 @@
           rgba(215,173,95,.12) 46%,
           transparent 72%
         );
-
       filter:blur(44px);
-
       opacity:0;
-
       animation:logoFlash 4.2s ease forwards;
-
       pointer-events:none;
     }
 
     .hero-logo{
       width:min(900px,94vw);
-
       opacity:0;
-
       animation:
         logoReveal 2.2s ease forwards,
         logoFloat 5.5s ease-in-out infinite alternate 2.3s;
-
       filter:
         brightness(1.18)
         drop-shadow(0 0 28px rgba(241,212,139,.42))
@@ -244,22 +212,15 @@
 
     .hero-sub{
       margin-top:38px;
-
       max-width:940px;
-
       font-size:clamp(24px,2.2vw,38px);
       line-height:1.7;
       letter-spacing:.06em;
-
       opacity:0;
-
       animation:textReveal 2s ease forwards;
       animation-delay:.9s;
-
       color:rgba(246,228,185,.92);
-
       text-shadow:0 0 24px rgba(0,0,0,.62);
-
       font-family:"Cinzel",serif;
       font-weight:400;
     }
@@ -270,19 +231,12 @@
 
     .section-title{
       text-align:center;
-
       color:#e9d39a;
-
       font-family:"Cinzel",serif;
-
       font-size:clamp(42px,5vw,72px);
-
       font-weight:400;
-
       margin-bottom:20px;
-
       text-shadow:0 0 14px rgba(233,211,154,.18);
-
       transition:
         color 1.2s ease,
         text-shadow 1.2s ease,
@@ -292,37 +246,27 @@
     .section-title.title-glow,
     .booking-card h2.title-glow{
       color:#fff4cc;
-
       text-shadow:
         0 0 8px rgba(255,255,255,.55),
         0 0 22px rgba(233,211,154,.60),
         0 0 46px rgba(233,211,154,.35);
-
       transform:scale(1.025);
     }
 
     .section-intro{
       max-width:980px;
-
       margin:0 auto 70px;
-
       text-align:center;
-
       font-size:clamp(22px,1.8vw,30px);
-
       line-height:1.9;
-
       color:rgba(255,255,255,.88);
     }
 
     .gold-line{
       width:160px;
       height:1px;
-
       margin:0 auto 38px;
-
       background:rgba(233,211,154,.52);
-
       box-shadow:0 0 14px rgba(233,211,154,.18);
     }
 
@@ -332,31 +276,21 @@
 
     .bio-section{
       min-height:100vh;
-
       display:flex;
       align-items:center;
       justify-content:center;
-
       padding:120px 40px;
     }
 
     .bio-card{
       width:min(1200px,100%);
-
       display:grid;
-
       grid-template-columns:360px 1fr;
-
       gap:54px;
-
       padding:42px;
-
       border:1px solid rgba(233,211,154,.35);
-
       background:rgba(5,5,5,.38);
-
       backdrop-filter:blur(10px);
-
       box-shadow:
         0 0 30px rgba(233,211,154,.08),
         inset 0 0 50px rgba(255,255,255,.012);
@@ -364,27 +298,30 @@
 
     .bio-photo{
       aspect-ratio:3/4;
-
       border:1px solid rgba(233,211,154,.45);
-
       display:flex;
       align-items:center;
       justify-content:center;
-
       color:#e9d39a;
-
       font-family:"Cinzel",serif;
-
       letter-spacing:.12em;
-
       text-align:center;
-
       background:
         linear-gradient(
           135deg,
           rgba(233,211,154,.04),
           rgba(255,255,255,.01)
         );
+      overflow:hidden;
+      position:relative;
+    }
+
+    .bio-photo img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center center;
+      display:block;
     }
 
     .bio-content{
@@ -395,23 +332,16 @@
 
     .bio-content h2{
       color:#e9d39a;
-
       font-family:"Cinzel",serif;
-
       font-size:clamp(34px,4vw,54px);
-
       margin-bottom:25px;
-
       font-weight:400;
     }
 
     .bio-content p{
       font-size:clamp(22px,1.6vw,28px);
-
       line-height:1.9;
-
       color:rgba(255,255,255,.88);
-
       margin-bottom:20px;
     }
 
@@ -421,31 +351,22 @@
 
     .studio-section{
       padding:150px 40px;
-
       max-width:1540px;
-
       margin:0 auto;
     }
 
     .gallery-header{
       max-width:1120px;
-
       margin:0 auto 60px;
     }
 
     .gallery-kicker{
       text-align:center;
-
       color:rgba(233,211,154,.72);
-
       font-family:"Cinzel",serif;
-
       font-size:15px;
-
       letter-spacing:.22em;
-
       text-transform:uppercase;
-
       margin-bottom:18px;
     }
 
@@ -455,29 +376,19 @@
 
     .gallery-grid{
       display:grid;
-
       grid-template-columns:repeat(12,1fr);
-
       grid-auto-flow:dense;
-
       gap:18px;
     }
 
     .photo-tile{
       position:relative;
-
       overflow:hidden;
-
       grid-column:span 3;
-
       height:340px;
-
       border:1px solid rgba(233,211,154,.22);
-
       background:#090909;
-
       box-shadow:0 14px 40px rgba(0,0,0,.20);
-
       transition:
         transform .45s ease,
         border-color .45s ease,
@@ -487,15 +398,11 @@
     .photo-tile img{
       width:100%;
       height:100%;
-
       display:block;
-
       object-fit:cover;
-
       transition:
         transform 1s cubic-bezier(.2,.7,.2,1),
         filter .7s ease;
-
       filter:
         brightness(.94)
         contrast(1.03)
@@ -504,30 +411,22 @@
 
     .photo-tile::after{
       content:"";
-
       position:absolute;
-
       inset:0;
-
       pointer-events:none;
-
       background:
         linear-gradient(
           to top,
           rgba(0,0,0,.18),
           transparent 42%
         );
-
       opacity:.55;
-
       transition:opacity .5s ease;
     }
 
     .photo-tile:hover{
       transform:translateY(-6px);
-
       border-color:rgba(233,211,154,.55);
-
       box-shadow:
         0 20px 45px rgba(0,0,0,.32),
         0 0 28px rgba(233,211,154,.12),
@@ -536,7 +435,6 @@
 
     .photo-tile:hover img{
       transform:scale(1.045);
-
       filter:
         brightness(1.02)
         contrast(1.02)
@@ -571,8 +469,6 @@
       height:560px;
     }
 
-    /* Portrait-heavy galleries */
-
     .people-grid .photo-tile{
       height:420px;
     }
@@ -592,15 +488,10 @@
 
     .service-note{
       max-width:900px;
-
       margin:58px auto 0;
-
       text-align:center;
-
       color:rgba(255,255,255,.82);
-
       font-size:clamp(21px,1.5vw,26px);
-
       line-height:1.8;
     }
 
@@ -610,11 +501,8 @@
 
     .section-divider{
       width:min(760px,70vw);
-
       height:1px;
-
       margin:20px auto;
-
       background:
         linear-gradient(
           90deg,
@@ -632,23 +520,16 @@
 
     .booking-section{
       padding:150px 40px;
-
       max-width:1200px;
-
       margin:0 auto;
-
       text-align:center;
     }
 
     .booking-card{
       border:1px solid rgba(233,211,154,.38);
-
       background:rgba(5,5,5,.42);
-
       backdrop-filter:blur(12px);
-
       padding:70px 40px;
-
       box-shadow:
         0 0 34px rgba(233,211,154,.08),
         inset 0 0 60px rgba(255,255,255,.012);
@@ -656,15 +537,10 @@
 
     .booking-card h2{
       color:#e9d39a;
-
       font-family:"Cinzel",serif;
-
       font-size:clamp(42px,5vw,72px);
-
       font-weight:400;
-
       margin-bottom:24px;
-
       transition:
         color 1.2s ease,
         text-shadow 1.2s ease,
@@ -673,31 +549,20 @@
 
     .booking-card p{
       max-width:850px;
-
       margin:0 auto 46px;
-
       font-size:clamp(22px,1.7vw,30px);
-
       line-height:1.9;
-
       color:rgba(255,255,255,.88);
     }
 
     .booking-btn{
       display:inline-flex;
-
       padding:18px 36px;
-
       border:1px solid rgba(233,211,154,.55);
-
       color:#e9d39a;
-
       text-decoration:none;
-
       font-family:"Cinzel",serif;
-
       letter-spacing:.08em;
-
       transition:
         background .3s ease,
         box-shadow .3s ease,
@@ -707,11 +572,8 @@
 
     .booking-btn:hover{
       transform:translateY(-3px);
-
       background:rgba(233,211,154,.08);
-
       border-color:rgba(233,211,154,.85);
-
       box-shadow:
         0 0 20px rgba(233,211,154,.18),
         0 8px 30px rgba(0,0,0,.25);
@@ -723,19 +585,14 @@
 
     .footer{
       padding:60px 30px 80px;
-
       text-align:center;
-
       color:rgba(255,255,255,.55);
-
       font-size:18px;
-
       letter-spacing:.06em;
     }
 
     .footer span{
       color:#e9d39a;
-
       font-family:"Cinzel",serif;
     }
 
@@ -753,7 +610,6 @@
       34%{
         opacity:1;
         transform:scale(1.05) translateY(0);
-
         filter:
           brightness(1.55)
           drop-shadow(0 0 44px rgba(241,212,139,.62))
@@ -763,7 +619,6 @@
       100%{
         opacity:1;
         transform:scale(1) translateY(0);
-
         filter:
           brightness(1.18)
           drop-shadow(0 0 28px rgba(241,212,139,.42))
@@ -892,9 +747,7 @@
       .portal-return{
         top:14px;
         left:14px;
-
         padding:10px 14px;
-
         font-size:12px;
       }
 
@@ -923,23 +776,18 @@
 
       .bio-card{
         grid-template-columns:1fr;
-
         padding:26px;
-
         gap:30px;
       }
 
       .bio-photo{
         max-width:340px;
-
         width:100%;
-
         margin:0 auto;
       }
 
       .gallery-grid{
         grid-template-columns:1fr;
-
         gap:16px;
       }
 
@@ -955,9 +803,7 @@
       .people-grid .photo-tile.feature,
       .people-grid .photo-tile.side{
         grid-column:1;
-
         height:auto;
-
         aspect-ratio:4/5;
       }
 
@@ -972,7 +818,6 @@
       .audio-toggle{
         width:42px;
         height:42px;
-
         right:14px;
         bottom:14px;
       }
@@ -987,12 +832,10 @@
 
 <body>
 
-  <!-- RETURN TO MAIN HAYVN PORTAL -->
   <a href="index.html" class="portal-return">
     ← Return to HAYVN
   </a>
 
-  <!-- AMBIENT AUDIO -->
   <audio
     id="studioAmbient"
     src="audio/studio-ambient.mp3"
@@ -1008,7 +851,6 @@
     ♪
   </button>
 
-  <!-- BACKGROUND -->
   <div class="bg-wrap">
     <div class="bg"></div>
     <div class="ambient"></div>
@@ -1046,8 +888,12 @@
     <div class="bio-card">
 
       <div class="bio-photo">
-  <img src="images/portraits/IMG_0054.webp" alt="HAYVN Studio photography">
-</div>
+        <img
+          src="images/portraits/IMG_0054.webp"
+          alt="HAYVN Studio photography"
+        >
+      </div>
+
       <div class="bio-content">
 
         <h2>Photography with Purpose</h2>
@@ -1547,11 +1393,8 @@
       document.getElementById("audioToggle");
 
     let muted = false;
-
     let targetVolume = 0.18;
-
     let fadeInterval = null;
-
 
     function updateAudioButton(){
 
@@ -1564,7 +1407,6 @@
       );
 
     }
-
 
     function fadeAudioIn(){
 
@@ -1600,7 +1442,6 @@
 
     }
 
-
     function startAmbient(){
 
       if(muted) return;
@@ -1616,7 +1457,6 @@
 
     }
 
-
     function stopAmbient(){
 
       clearInterval(fadeInterval);
@@ -1624,7 +1464,6 @@
       studioAmbient.pause();
 
     }
-
 
     audioToggle.addEventListener(
       "click",
@@ -1647,7 +1486,6 @@
       }
     );
 
-
     window.addEventListener(
       "pageshow",
       () => {
@@ -1659,13 +1497,11 @@
       }
     );
 
-
     window.addEventListener(
       "pointerdown",
       startAmbient,
       { once:true }
     );
-
 
     window.addEventListener(
       "touchstart",
@@ -1673,9 +1509,7 @@
       { once:true }
     );
 
-
     updateAudioButton();
-
     startAmbient();
 
   </script>
@@ -1691,7 +1525,6 @@
         '.section-title, .booking-card h2'
       );
 
-
     const titleObserver =
       new IntersectionObserver(
 
@@ -1705,7 +1538,6 @@
                 .classList
                 .add('title-glow');
 
-
               setTimeout(() => {
 
                 entry.target
@@ -1713,7 +1545,6 @@
                   .remove('title-glow');
 
               },1800);
-
 
               titleObserver
                 .unobserve(entry.target);
@@ -1729,7 +1560,6 @@
         }
 
       );
-
 
     sectionTitles.forEach(title => {
 
