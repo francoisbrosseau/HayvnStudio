@@ -226,6 +226,98 @@
     }
 
     /* =========================================================
+       HERO BOOKING CTA
+    ========================================================= */
+
+    .hero-booking-wrap{
+      margin-top:38px;
+      opacity:0;
+      animation:heroButtonReveal 1.8s ease forwards;
+      animation-delay:1.55s;
+    }
+
+    .hero-booking-btn{
+      position:relative;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:220px;
+      padding:16px 34px;
+      overflow:hidden;
+
+      border:1px solid rgba(233,211,154,.52);
+      background:rgba(0,0,0,.24);
+      backdrop-filter:blur(8px);
+
+      color:#ead59b;
+      text-decoration:none;
+
+      font-family:"Cinzel",serif;
+      font-size:14px;
+      font-weight:500;
+      letter-spacing:.18em;
+
+      box-shadow:
+        0 0 18px rgba(233,211,154,.06),
+        inset 0 0 24px rgba(233,211,154,.025);
+
+      transition:
+        transform .35s ease,
+        color .35s ease,
+        border-color .35s ease,
+        background .35s ease,
+        box-shadow .35s ease;
+    }
+
+    .hero-booking-btn::before{
+      content:"";
+      position:absolute;
+      top:0;
+      left:-130%;
+      width:70%;
+      height:100%;
+
+      background:
+        linear-gradient(
+          110deg,
+          transparent,
+          rgba(255,239,190,.16),
+          transparent
+        );
+
+      transform:skewX(-20deg);
+      transition:left .75s ease;
+      pointer-events:none;
+    }
+
+    .hero-booking-btn::after{
+      content:"";
+      position:absolute;
+      inset:4px;
+      border:1px solid rgba(233,211,154,.07);
+      pointer-events:none;
+    }
+
+    .hero-booking-btn:hover{
+      transform:translateY(-3px);
+
+      color:#fff3c8;
+
+      border-color:rgba(233,211,154,.85);
+
+      background:rgba(233,211,154,.065);
+
+      box-shadow:
+        0 0 16px rgba(233,211,154,.16),
+        0 0 38px rgba(233,211,154,.09),
+        0 10px 34px rgba(0,0,0,.28);
+    }
+
+    .hero-booking-btn:hover::before{
+      left:150%;
+    }
+
+    /* =========================================================
        GENERAL TITLES
     ========================================================= */
 
@@ -680,6 +772,18 @@
       }
     }
 
+    @keyframes heroButtonReveal{
+      0%{
+        opacity:0;
+        transform:translateY(16px);
+      }
+
+      100%{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
     @keyframes logoFloat{
       0%{
         transform:translateY(0);
@@ -766,6 +870,17 @@
       .hero-sub{
         font-size:21px;
         line-height:1.7;
+      }
+
+      .hero-booking-wrap{
+        margin-top:30px;
+      }
+
+      .hero-booking-btn{
+        min-width:205px;
+        padding:15px 28px;
+        font-size:13px;
+        letter-spacing:.16em;
       }
 
       .bio-section,
@@ -876,6 +991,16 @@
       Professional photography, cinematic storytelling,
       and visual work crafted with intention.
     </p>
+
+    <div class="hero-booking-wrap">
+      <a
+        href="https://wa.me/14432922342?text=Hi%21%20I%20found%20you%20through%20the%20HAYVN%20website%20and%20I%27m%20interested%20in%20booking%20a%20Studio%20photography%20session.%20I%27d%20love%20to%20get%20more%20information."
+        class="hero-booking-btn"
+        target="_blank"
+        rel="noopener noreferrer">
+        BOOK A SESSION
+      </a>
+    </div>
 
   </section>
 
