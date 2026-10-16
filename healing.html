@@ -1794,6 +1794,22 @@
     }
 
   </style>
+
+  <!-- Lunara integration: scoped styles preserve all existing Healing styles. -->
+  <style id="hayvn-lunara-styles">
+    .hayvn-lunara { position:relative; isolation:isolate; overflow:hidden; display:grid; grid-template-columns:1fr 1fr; align-items:center; margin:0 0 70px; border:1px solid rgba(220,188,121,.38); border-radius:18px; background:#0d0a11; scroll-margin-top:70px; }
+    .hayvn-lunara-art { height:100%; min-height:410px; object-fit:cover; object-position:center; }
+    .hayvn-lunara-copy { padding:44px; }
+    .hayvn-lunara-label { color:#d9bd83; font-family:Cinzel,serif; font-size:11px; letter-spacing:.23em; line-height:1.8; }
+    .hayvn-lunara h3 { margin:15px 0 10px; color:#f0dcac; font-family:Cinzel,serif; font-size:clamp(32px,4vw,52px); font-weight:400; letter-spacing:.13em; }
+    .hayvn-lunara p { color:rgba(255,255,255,.85); font-size:22px; line-height:1.7; margin:16px 0 24px; }
+    .hayvn-lunara .hayvn-lunara-languages { margin-top:18px; margin-bottom:0; color:#c5bcae; font-size:15px; letter-spacing:.06em; }
+    .hayvn-lunara-quick { display:inline-block; margin-top:24px; color:#e9d39a; font-size:19px; text-decoration:none; text-underline-offset:6px; }
+    .hayvn-lunara-quick:hover { text-decoration:underline; }
+    .hayvn-lunara a:focus-visible, .hayvn-lunara-quick:focus-visible { outline:2px solid #e9d39a; outline-offset:6px; }
+    @media(max-width:760px) { .hayvn-lunara { grid-template-columns:1fr; margin-bottom:45px; } .hayvn-lunara-art { min-height:0; height:240px; } .hayvn-lunara-copy { padding:30px 24px; } .hayvn-lunara p { font-size:21px; } }
+  </style>
+
 </head>
 
 
@@ -1868,6 +1884,9 @@
       </a>
 
     </div>
+
+
+    <a class="hayvn-lunara-quick" href="#lunara">Discover Lunara · Tarot & Reflection ↓</a>
 
     <div class="scroll-cue">
       Explore ↓
@@ -2199,6 +2218,19 @@
 
     </div>
 
+
+
+    <!-- Lunara is isolated on its own page; the original tarot site stays intact. -->
+    <article class="hayvn-lunara" id="lunara" aria-labelledby="hayvn-lunara-title">
+      <img class="hayvn-lunara-art" src="https://francoisbrosseau.github.io/lunara/images/lunara-hero-v4.png" alt="Lunara's celestial tarot sanctuary" loading="lazy">
+      <div class="hayvn-lunara-copy">
+        <div class="hayvn-lunara-label">THE TAROT SANCTUARY · WITHIN HAYVN HEALING</div>
+        <h3 id="hayvn-lunara-title">LUNARA</h3>
+        <p>A quiet space for your questions. Explore seven cards, their symbolism, and the reflections they invite — at your own pace.</p>
+        <a class="gold-btn" href="lunara.html">Enter Lunara <span aria-hidden="true">✦</span></a>
+        <p class="hayvn-lunara-languages">English · Français · Español</p>
+      </div>
+    </article>
 
     <div class="oracle-layout">
 
