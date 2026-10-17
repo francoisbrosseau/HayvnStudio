@@ -1,0 +1,14 @@
+
+/* Footer-only links to the owner's independent brands. */
+.hayvn-network{max-width:1050px;margin:48px auto 0;padding:35px 0 0;border-top:1px solid rgba(233,211,154,.2);text-align:center}
+.hayvn-network-label{font-family:"Cinzel",serif;font-size:11px;letter-spacing:.2em;color:#e9d39a;margin:0 0 18px}
+.hayvn-network-brands{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:45px;max-width:720px;margin:auto}
+.hayvn-network-brands a{display:flex;flex-direction:column;align-items:center;text-decoration:none;min-width:0;color:#dfd4c1}
+.hayvn-network-art{display:flex;align-items:center;justify-content:center;width:280px;max-width:100%;height:155px}
+.hayvn-network-art img{display:block;width:100%;height:100%;object-fit:contain}
+.hayvn-network-caption{font-family:"Cormorant Garamond",serif!important;font-size:16px!important;letter-spacing:.025em;color:#c6bfae!important;line-height:1.5}
+.hayvn-network-caption span{font-family:inherit!important;color:#e9d39a}
+.hayvn-network-brands a:hover .hayvn-network-caption{color:#fff!important}
+.hayvn-network-brands a:focus-visible{outline:2px solid #e9d39a;outline-offset:8px;border-radius:2px}
+.hayvn-network-footer{padding:12px 30px 65px;background:rgba(0,0,0,.2)}
+@media(max-width:650px){.hayvn-network-brands{grid-template-columns:1fr;gap:28px}.hayvn-network-art{width:270px;height:145px}.hayvn-network{margin-top:35px;padding-top:28px}}
