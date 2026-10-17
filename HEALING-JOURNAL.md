@@ -1,0 +1,30 @@
+# HAYVN Healing — A moment for yourself
+
+Approved October 17, 2026. Owner authorized the sample, champagne/Lora/Cinzel design, publication directly after the Healing hero, and unattended daily reflections. Do not request daily approval. This is an addition to `healing.html`, never a new website. Preserve Studio, Boudoir, Lunara, services, booking, audio, navigation, and all assets.
+
+## Editorial brief
+
+Write one original 500–600-word reflection in English, excluding headline and closing intention. Warm, nurturing, quietly spiritual, thoughtful, grounded, and conversational. Themes rotate: friendship, self-respect, womanhood, self-kindness, meditation, boundaries, everyday joy, relationships, meaningful choices, curiosity, rest, gratitude, and reconnecting with oneself. Women's experiences should not become stereotypes or obligations to care for others. Spirituality is an invitation to reflect, not a promise of supernatural results. Offer modest, practical suggestions with room for different circumstances. Positivity must leave room for grief, uncertainty, and hard days.
+
+Keep a distinctive headline, 5–12 natural paragraphs, one central idea, and a final question or intention. Avoid generic motivational formulas, recycled openings, endings, or ideas. No fake autobiography, invented client anecdotes, quotes attributed to the practitioner, personal memories, medical claims, diagnosis, treatment, financial/legal advice, or claims that this is personally authored or approved by her. Do not add generation labels, a personal signature, or a redundant HAYVN Healing heading. The feature name is “A moment for yourself”. The approved October 17 entry is the reference for voice, not a template to paraphrase.
+
+## Runtime and schedule
+
+The cloud scheduled task “HAYVN Morning Reflection” starts at 07:00 America/Toronto, including daylight saving changes. It generates and publishes through the already-connected GitHub app, without requiring an open chat or an extra text-generation API key. Generation and GitHub Pages deployment take time after the trigger; 07:00 is the start time, not a promise of instant availability. No paid service, API spending increase, image generation, or new hosting is introduced. Pause the task to disable future updates without removing existing content.
+
+## Publication procedure
+
+1. Read the current main branch of `francoisbrosseau/HayvnStudio`. Fetch this guide, `scripts/healing_journal.py`, `healing.html`, `healing-journal/index.html`, and the directory listing plus recent JSON entries under `content/healing-journal`. Always derive today's date using America/Toronto, never UTC. Do not rely on a previous conversation's date.
+2. If today's JSON and matching `data-publication-date` already exist on main, verify the live page and stop. Never generate a second entry for the same date or replace a previously published JSON. If today's JSON exists but the homepage is stale, rerender that entry rather than generating another.
+3. Compare the archive's headlines/themes and last 14 complete texts. Choose a distinct angle and vary emotional tone. Compose JSON with `date`, `headline`, `theme`, `paragraphs` (array of plain prose strings), `intention`, and `publishedAt` (current UTC ISO timestamp). Do not repeat the preceding two entries' main themes. A maximum of two writing candidates is permitted. On failure, preserve the last good reflection and report the failed check.
+4. Run `python scripts/healing_journal.py <candidate.json> --check` and then the same command without `--check`. Fetch archive JSONs into the local working directory before validating; all fetched history is read-only. No need to clone large image/video files. The script writes exactly four paths: `healing.html`, `content/healing-journal/YYYY-MM-DD.json`, `healing-journal/YYYY-MM-DD.html`, `healing-journal/index.html`. All rendering and validation finish before local writes. Keep layout/fonts/colors unchanged. The only permitted change in `healing.html` is between `HEALING_REFLECTION_START` and `HEALING_REFLECTION_END`.
+5. Publish those four files in ONE GitHub Git tree and commit, based on the latest main tree. Use `create_tree` (base tree), `create_commit` (parent main), and `update_ref` with `expected_sha` and no force. This preserves unrelated files and prevents partial publication. On a changed-main conflict, refetch main, check for today's date, regenerate outputs against the new Healing HTML, and retry at most once. Never force-push. No deploy credentials, secrets, settings, other repositories, or unrelated files may be changed.
+6. GitHub Pages automatically deploys main. Inspect its Actions run and verify the public URL `https://www.hayvnstudio.com/healing.html#healing-reflection` contains the new date and headline, plus the new permanent URL. Limit deployment polling to ten minutes. A successful commit is not proof of a live deployment. If verification fails, report the commit/run URL and exact failed stage; leave the existing site intact. Keep the dated commit as the publication audit trail and the task result as the success/failure log. Return a concise result and the live link, not just the draft.
+
+## Local checks and protections
+
+`python -m unittest discover -s tests -p 'test_healing_journal.py'`
+
+The renderer validates length, plain text, date shape, duplicate dates/headlines, strong text/conclusion similarity, common invented autobiography patterns, and several unsupported or generic claims. These checks supplement the editorial review; they do not prove originality or factual accuracy. New entries must pass a human-style editorial review by the scheduled writer before publication. No endless retries. Existing JSON entries and permanent URLs are never deleted. GitHub's expected-head lease rejects concurrent main changes.
+
+Design is isolated in `css/healing-journal.css`: Lora body text, Cinzel title, Cormorant Garamond intention, champagne #d8bd95 on a dark panel. Do not touch global Healing CSS. Today's note remains visible if generation fails. To recover, rerun the enabled scheduled task; its date check makes a retry safe.

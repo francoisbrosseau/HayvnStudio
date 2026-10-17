@@ -1,0 +1,28 @@
+
+    #healing-reflection { color:#d8bd95 !important; background:#0d0a11; font-family:"Cormorant Garamond",Georgia,serif !important; padding:24px 16px; box-sizing:border-box; color-scheme:dark; }
+    #healing-reflection * { box-sizing:border-box; }
+    #healing-reflection p, #healing-reflection h2, #healing-reflection time, #healing-reflection span { color:#d8bd95 !important; -webkit-text-fill-color:#d8bd95 !important; font-family:"Cormorant Garamond",Georgia,serif !important; opacity:1 !important; }
+    #healing-reflection .hv-reflection { max-width:830px; margin:0 auto; padding:32px clamp(20px,6vw,66px) 34px; border:1px solid #69583e; background:radial-gradient(ellipse at top,#242017 0%,#141117 60%); position:relative; }
+    #healing-reflection .hv-ornament { display:flex; align-items:center; justify-content:center; gap:15px; color:#e9d39a !important; margin-bottom:22px; }
+    #healing-reflection .hv-ornament::before, #healing-reflection .hv-ornament::after { content:""; width:55px; height:1px; background:#766444; }
+    #healing-reflection .hv-kicker { text-align:center; font-family:Cinzel,serif !important; font-size:13px; line-height:1.6; letter-spacing:.17em; color:#e9d39a !important; -webkit-text-fill-color:#e9d39a !important; margin:0 0 12px; }
+    #healing-reflection .hv-meta, #healing-reflection .hv-meta time { text-align:center; font-size:17px; color:#bfa580 !important; -webkit-text-fill-color:#bfa580 !important; line-height:1.5; margin:0 0 24px; }
+    #healing-reflection h2 { font-family:Cinzel,Georgia,serif !important; font-size:clamp(25px,4.4vw,35px); line-height:1.45; text-align:center; color:#f3dda8 !important; -webkit-text-fill-color:#f3dda8 !important; font-weight:400; margin:0 auto 30px; max-width:600px; }
+    #healing-reflection .hv-body { font-family:"Cormorant Garamond",Georgia,serif !important; font-size:24px; line-height:1.75; font-weight:500; color:#d8bd95 !important; }
+    #healing-reflection .hv-body p { font-size:inherit !important; line-height:inherit !important; font-weight:500; margin:0 0 22px; }
+    #healing-reflection .hv-intention { margin:27px 0 0; padding:21px 0 0; border-top:1px solid #69583e; }
+    #healing-reflection .hv-intention span { display:block; font-family:Cinzel,serif !important; color:#e9d39a !important; -webkit-text-fill-color:#e9d39a !important; font-size:12px; letter-spacing:.16em; margin-bottom:12px; }
+    #healing-reflection .hv-intention p { font-size:26px; line-height:1.5; font-style:italic; margin:0; }
+    @media(max-width:480px) { #healing-reflection { padding:12px 8px; } #healing-reflection .hv-reflection { padding:26px 20px; } #healing-reflection .hv-body { font-size:22px; } }
+    #healing-reflection .hv-reflection { padding-top:38px; padding-bottom:42px; }
+    #healing-reflection h2#hv-reflection-title { font-family:Cinzel,Georgia,serif !important; font-style:normal; font-weight:400; font-size:clamp(25px,4.4vw,35px); line-height:1.45; letter-spacing:0; margin-bottom:32px; }
+    #healing-reflection .hv-body { max-width:620px; margin:0 auto; font-size:19px; line-height:1.95; font-weight:400; }
+    #healing-reflection .hv-body p { font-family:"Lora",Georgia,serif !important; font-weight:400; margin-bottom:25px; }
+    #healing-reflection .hv-meta, #healing-reflection .hv-meta time { font-family:"Cormorant Garamond",Georgia,serif !important; font-size:18px; letter-spacing:.025em; }
+    #healing-reflection .hv-intention p { font-family:"Cormorant Garamond",Georgia,serif !important; font-size:29px; font-weight:500; line-height:1.45; }
+    @media(max-width:480px) { #healing-reflection .hv-body { font-size:18px; line-height:1.9; } #healing-reflection .hv-reflection { padding:30px 22px; } }
+  
+#healing-reflection { margin:0 auto 65px; max-width:1100px; background:transparent; scroll-margin-top:35px; }
+#healing-reflection .hv-ornament { font-size:26px; line-height:1; }
+#healing-reflection .hv-archive { display:block; margin-top:25px; color:#cbb086; font-family:Cinzel,serif; font-size:12px; line-height:1.8; letter-spacing:.08em; text-align:center; text-underline-offset:5px; }
+#healing-reflection .hv-archive:focus-visible { outline:2px solid #e9d39a; outline-offset:6px; }
