@@ -1796,20 +1796,6 @@
   </style>
 
   <!-- Lunara integration: scoped styles preserve all existing Healing styles. -->
-  <style id="hayvn-lunara-styles">
-    .hayvn-lunara { position:relative; isolation:isolate; overflow:hidden; display:grid; grid-template-columns:1fr 1fr; align-items:center; margin:0 0 70px; border:1px solid rgba(220,188,121,.38); border-radius:18px; background:#0d0a11; scroll-margin-top:70px; }
-    .hayvn-lunara-art { height:100%; min-height:410px; object-fit:cover; object-position:center; }
-    .hayvn-lunara-copy { padding:44px; }
-    .hayvn-lunara-label { color:#d9bd83; font-family:Cinzel,serif; font-size:11px; letter-spacing:.23em; line-height:1.8; }
-    .hayvn-lunara h3 { margin:15px 0 10px; color:#f0dcac; font-family:Cinzel,serif; font-size:clamp(32px,4vw,52px); font-weight:400; letter-spacing:.13em; }
-    .hayvn-lunara-byline { display:block; margin-top:10px; font-size:14px; line-height:1.5; letter-spacing:.2em; color:#d9bd83; font-weight:400; }
-    .hayvn-lunara p { color:rgba(255,255,255,.85); font-size:22px; line-height:1.7; margin:16px 0 24px; }
-    .hayvn-lunara .hayvn-lunara-languages { margin-top:18px; margin-bottom:0; color:#c5bcae; font-size:15px; letter-spacing:.06em; }
-    .hayvn-lunara-quick { display:inline-block; margin-top:24px; color:#e9d39a; font-size:19px; text-decoration:none; text-underline-offset:6px; }
-    .hayvn-lunara-quick:hover { text-decoration:underline; }
-    .hayvn-lunara a:focus-visible, .hayvn-lunara-quick:focus-visible { outline:2px solid #e9d39a; outline-offset:6px; }
-    @media(max-width:760px) { .hayvn-lunara { grid-template-columns:1fr; margin-bottom:45px; } .hayvn-lunara-art { min-height:0; height:240px; } .hayvn-lunara-copy { padding:30px 24px; } .hayvn-lunara p { font-size:21px; } }
-  </style>
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500&amp;display=swap">
   <link rel="stylesheet" href="css/healing-journal.css?v=20261017">
@@ -1826,6 +1812,34 @@
     @media(max-width:640px){.healing-companions{gap:9px;width:min(95vw,430px);margin:10px auto}.healing-companion{min-height:123px;padding:9px 8px}.healing-companion img{height:81px;max-width:170px}.healing-companion span{font-size:8px;letter-spacing:.04em}.hero{padding:48px 16px}}
     @media(max-width:350px){.healing-companions{grid-template-columns:1fr;width:min(290px,92vw)}.healing-companion{min-height:112px}}
   </style>
+
+  <style id="healing-discovery-styles">
+    .healing-discovery{position:relative;z-index:2;width:min(980px,100%);margin:22px auto 8px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;text-align:left}
+    .healing-banner{position:relative;isolation:isolate;display:flex;align-items:flex-end;min-height:218px;overflow:hidden;border:1px solid rgba(233,211,154,.42);border-radius:16px;color:#fff2cf;text-decoration:none;background:#13110d;box-shadow:0 16px 38px rgba(0,0,0,.25);transition:border-color .25s ease,box-shadow .25s ease}
+    .healing-banner>img{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .6s ease}
+    .healing-banner::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(5,7,8,.86),rgba(5,7,8,.38) 65%,rgba(5,7,8,.12)),linear-gradient(0deg,rgba(5,7,8,.65),transparent 80%)}
+    .healing-banner-copy{display:block;padding:28px;max-width:100%}
+    .healing-banner-kicker{display:block;margin-bottom:10px;font:500 10px/1.5 "Cinzel",serif;letter-spacing:.2em;color:#e9d39a}
+    .healing-banner-title{display:block;font:400 clamp(25px,2.5vw,34px)/1.25 "Cormorant Garamond",serif;color:#fff2cf}
+    .healing-banner-description{display:block;margin-top:9px;font:400 18px/1.45 "Cormorant Garamond",serif;color:#eee2c9;max-width:29ch}
+    .healing-banner-action{display:block;margin-top:19px;font:500 10px/1.6 "Cinzel",serif;letter-spacing:.12em;color:#f4dca1}
+    .healing-banner:hover{border-color:#e9d39a;box-shadow:0 16px 42px rgba(0,0,0,.4)}
+    .healing-banner:hover>img{transform:scale(1.025)}
+    .healing-banner:focus-visible{outline:3px solid #f1d48b;outline-offset:5px}
+    .healing-community-banner{grid-column:1/-1;min-height:0;display:flex;align-items:center;gap:22px;padding:24px 28px;background:radial-gradient(ellipse at 92% 15%,rgba(195,151,72,.19),transparent 60%),linear-gradient(120deg,#17140f,#0c0d0c)}
+    .healing-community-banner::before{display:none}
+    .healing-community-mark{flex:0 0 46px;width:46px;height:46px;border:1px solid rgba(233,211,154,.5);border-radius:50%;display:grid;place-items:center;font:600 32px/1 Georgia,serif;color:#f1d48b}
+    .healing-community-copy{flex:1;min-width:0}
+    .healing-community-copy .healing-banner-kicker{margin-bottom:6px}
+    .healing-community-copy .healing-banner-title{font-size:26px}
+    .healing-community-copy .healing-banner-description{max-width:none;margin-top:5px}
+    .healing-community-arrow{font-size:27px;color:#e9d39a;flex:none}
+    #moon-rituals{scroll-margin-top:85px}
+    .hero .scroll-cue{position:static;margin-top:42px}
+    @media(max-width:640px){.healing-discovery{gap:12px;margin-top:18px;grid-template-columns:1fr;max-width:460px}.healing-banner{min-height:185px;border-radius:12px}.healing-banner-copy{padding:23px}.healing-banner-title{font-size:30px}.healing-banner-description{font-size:18px;max-width:27ch}.healing-banner-action{margin-top:14px}.healing-community-banner{min-height:0;padding:22px 20px;gap:14px}.healing-community-mark{flex-basis:36px;width:36px;height:36px;font-size:26px}.healing-community-copy .healing-banner-title{font-size:25px}.healing-community-copy .healing-banner-description{font-size:17px}.healing-community-arrow{font-size:23px}}
+    @media(prefers-reduced-motion:reduce){.healing-banner,.healing-banner>img{transition:none}.healing-banner:hover>img{transform:none}}
+  </style>
+
 </head>
 
 
@@ -1893,6 +1907,36 @@
       <a class="healing-companion" href="https://francoisbrosseau.github.io/Hayvnsanctuary/" aria-label="Explore HAYVN Sanctuary">
         <img src="https://francoisbrosseau.github.io/Hayvnsanctuary/assets/hayvn-sanctuary-logo-transparent.png" width="1024" height="1024" alt="HAYVN Sanctuary gold emblem and wordmark" decoding="async">
         <span>STILLNESS &amp; REFLECTION <span aria-hidden="true">↗</span></span>
+      </a>
+    </nav>
+
+    <nav class="healing-discovery" aria-label="Rituals, events and community">
+      <a class="healing-banner" href="#moon-rituals">
+        <img src="images/healing/moonlight-rituals-banner.webp" width="1400" height="600" alt="" decoding="async">
+        <span class="healing-banner-copy">
+          <span class="healing-banner-kicker">RITUAL · INTENTION · CONNECTION</span>
+          <span class="healing-banner-title">Moonlight Rituals</span>
+          <span class="healing-banner-description">A sacred pause. A moment to reconnect.</span>
+          <span class="healing-banner-action">EXPLORE MOON RITUALS <span aria-hidden="true">↗</span></span>
+        </span>
+      </a>
+      <a class="healing-banner" href="https://www.facebook.com/share/1E4decBCPo/" target="_blank" rel="noopener noreferrer">
+        <img src="images/healing/live-events-banner.webp" width="1400" height="525" alt="" decoding="async">
+        <span class="healing-banner-copy">
+          <span class="healing-banner-kicker">GATHER · SHARE · BE INSPIRED</span>
+          <span class="healing-banner-title">Exclusive Live Events</span>
+          <span class="healing-banner-description">Moments of connection, shared together.</span>
+          <span class="healing-banner-action">FIND UPDATES ON FACEBOOK <span aria-hidden="true">↗</span></span>
+        </span>
+      </a>
+      <a class="healing-banner healing-community-banner" href="https://www.facebook.com/share/1E4decBCPo/" target="_blank" rel="noopener noreferrer">
+        <span class="healing-community-mark" aria-hidden="true">f</span>
+        <span class="healing-community-copy">
+          <span class="healing-banner-kicker">THE HAYVN CIRCLE</span>
+          <span class="healing-banner-title">Join Our Facebook Community</span>
+          <span class="healing-banner-description">Stay close to the rituals, gatherings and moments we share.</span>
+        </span>
+        <span class="healing-community-arrow" aria-hidden="true">↗</span>
       </a>
     </nav>
 
@@ -2109,7 +2153,7 @@
        MOON RITUALS
   ======================================================== -->
 
-  <section class="ritual-section">
+  <section class="ritual-section" id="moon-rituals">
 
     <div class="ritual-header reveal">
 
@@ -2271,20 +2315,6 @@
       </p>
 
     </div>
-
-
-
-    <!-- Lunara is isolated on its own page; the original tarot site stays intact. -->
-    <article class="hayvn-lunara" id="lunara" aria-labelledby="hayvn-lunara-title">
-      <img class="hayvn-lunara-art" src="https://francoisbrosseau.github.io/lunara/images/lunara-hero-v4.png" alt="Lunara's celestial tarot sanctuary" loading="lazy">
-      <div class="hayvn-lunara-copy">
-        <div class="hayvn-lunara-label">THE TAROT SANCTUARY · WITHIN HAYVN HEALING</div>
-        <h3 id="hayvn-lunara-title">LUNARA<small class="hayvn-lunara-byline">by HAYVN</small></h3>
-        <p>A quiet space for your questions. Explore seven cards, their symbolism, and the reflections they invite — at your own pace.</p>
-        <a class="gold-btn" href="lunara.html">Enter Lunara by HAYVN <span aria-hidden="true">✦</span></a>
-        <p class="hayvn-lunara-languages">English · Français · Español</p>
-      </div>
-    </article>
 
     <div class="oracle-layout">
 
@@ -2472,71 +2502,6 @@
         >
 
       </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =======================================================
-       HAYVN CIRCLE
-  ======================================================== -->
-
-  <section class="community-section">
-
-    <div class="community-inner">
-
-      <div class="eyebrow reveal">
-        Connection Beyond the Session
-      </div>
-
-      <h2 class="community-title reveal">
-        The HAYVN Circle
-      </h2>
-
-
-      <div class="community-image reveal">
-
-        <img
-          src="images/healing/Screenshot_20250707-104835~2.jpg"
-          alt="HAYVN Healing community"
-          loading="lazy"
-        >
-
-      </div>
-
-
-      <p class="community-text reveal">
-        Continue your journey beyond individual sessions.
-        The HAYVN Circle is a welcoming community for those seeking
-        connection, inspiration, healing insights, lunar wisdom,
-        and meaningful support along their path.
-      </p>
-
-
-      <div class="community-benefits reveal">
-
-        <div class="community-benefit">
-          🌙 Moon Ritual Updates
-        </div>
-
-        <div class="community-benefit">
-          🔮 Exclusive Live Events
-        </div>
-
-      </div>
-
-
-      <!-- Official HAYVN community destination supplied by the owner. -->
-
-      <a
-        href="https://www.facebook.com/share/1E4decBCPo/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="gold-btn reveal"
-      >
-        Join Our Facebook Community
-      </a>
 
     </div>
 
