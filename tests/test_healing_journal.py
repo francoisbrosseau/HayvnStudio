@@ -13,7 +13,8 @@ spec.loader.exec_module(journal)
 
 class JournalTests(unittest.TestCase):
     def setUp(self):
-        self.note = json.loads((ROOT/'content/healing-journal/2026-10-17.json').read_text())
+        latest = sorted((ROOT/'content/healing-journal').glob('*.json'))[-1]
+        self.note = json.loads(latest.read_text())
 
     def test_approved_note_and_idempotent_render(self):
         journal.validate(self.note, [])
@@ -47,7 +48,7 @@ class JournalTests(unittest.TestCase):
         self.assertEqual(strip(current), strip(output))
         self.assertLess(current.index('class="hero"'), current.index(journal.START))
         self.assertLess(current.index(journal.END), current.index('class="bio-section"'))
-        self.assertIn('Enter Lunara by HAYVN', output)
+        self.assertIn('aria-label="Explore Lunara by HAYVN tarot"', output)
 
     def test_invalid_markers_fail_without_writing(self):
         with tempfile.TemporaryDirectory() as directory:
