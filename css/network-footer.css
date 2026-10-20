@@ -1,20 +1,12 @@
-
-/* Footer-only links to the owner's independent brands. */
-.hayvn-network{max-width:1050px;margin:48px auto 0;padding:35px 0 0;border-top:1px solid rgba(233,211,154,.2);text-align:center}
-.hayvn-network-label{font-family:"Cinzel",serif;font-size:11px;letter-spacing:.2em;color:#e9d39a;margin:0 0 18px}
-.hayvn-network-brands{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:45px;max-width:720px;margin:auto}
-.hayvn-network-brands a{display:flex;flex-direction:column;align-items:center;text-decoration:none;min-width:0;color:#dfd4c1}
-.hayvn-network-art{display:flex;align-items:center;justify-content:center;width:280px;max-width:100%;height:155px}
-.hayvn-network-art img{display:block;width:100%;height:100%;object-fit:contain}
-.hayvn-network-caption{font-family:"Cormorant Garamond",serif!important;font-size:16px!important;letter-spacing:.025em;color:#c6bfae!important;line-height:1.5}
-.hayvn-network-caption span{font-family:inherit!important;color:#e9d39a}
-.hayvn-network-brands a:hover .hayvn-network-caption{color:#fff!important}
-.hayvn-network-brands a:focus-visible{outline:2px solid #e9d39a;outline-offset:8px;border-radius:2px}
-.hayvn-network-footer{padding:12px 30px 65px;background:rgba(0,0,0,.2)}
-@media(max-width:650px){.hayvn-network-brands{grid-template-columns:1fr;gap:28px}.hayvn-network-art{width:270px;height:145px}.hayvn-network{margin-top:35px;padding-top:28px}}
-
-/* RIFTBOUND connected publication. */
-.hayvn-network-brands{grid-template-columns:repeat(3,minmax(0,1fr));max-width:1040px;gap:25px}
-.hayvn-network-brands .hayvn-network-art img[src*="riftbound-logo"]{height:120px;object-fit:contain}
-@media(max-width:760px){.hayvn-network-brands{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:520px){.hayvn-network-brands{grid-template-columns:1fr}}
+/* Shared footer-only network: entire official artwork, no clipping. */
+.hayvn-network{max-width:1180px;margin:45px auto 0;padding:40px 0 25px;border-top:1px solid #e9d39a33;text-align:center}
+.hayvn-network-label{font:12px/1.6 Cinzel,Georgia,serif!important;letter-spacing:.18em;color:#e9d39a!important;margin:0 0 30px}
+.hayvn-network-brands{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:35px 28px;margin:auto}
+.hayvn-network-brands a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-decoration:none;min-width:0;color:#dfd4c1}
+.hayvn-network-art{display:flex!important;align-items:center;justify-content:center;width:270px;max-width:100%;height:180px;overflow:visible!important}
+.hayvn-network .hayvn-network-art img{display:block!important;position:static!important;transform:none!important;inset:auto!important;width:100%!important;max-width:100%!important;height:100%!important;max-height:none!important;object-fit:contain!important;border:0!important;border-radius:0!important;opacity:1!important}
+.hayvn-network-caption{font:17px/1.6 "Cormorant Garamond",Georgia,serif!important;color:#c6bfae!important;letter-spacing:.015em}
+.hayvn-network-brands a:hover .hayvn-network-caption{color:#fff!important}.hayvn-network-brands a:focus-visible{outline:2px solid #e9d39a;outline-offset:8px}
+.hayvn-network-footer{padding:12px 30px 60px;background:#0003}
+@media(max-width:760px){.hayvn-network-brands{grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 20px}.hayvn-network-art{height:155px}.hayvn-network{padding-top:30px}}
+@media(max-width:480px){.hayvn-network-brands{grid-template-columns:1fr}.hayvn-network-art{width:260px;height:180px}.hayvn-network-footer{padding-inline:22px}}

@@ -84,14 +84,16 @@ def render(note, archive_href='healing-journal/index.html'):
 
 def page(title, description, canonical, content):
     esc = html.escape
+    footer = (Path(__file__).resolve().parents[1] / 'network-footer.html').read_text().replace('src="images/', 'src="../images/')
     return f'''<!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{esc(title)} | HAYVN Healing</title><meta name="description" content="{esc(description)}">
 <link rel="canonical" href="https://www.hayvnstudio.com/healing-journal/{canonical}">
-<link rel="stylesheet" href="{FONT}"><link rel="stylesheet" href="../css/healing-journal.css?v=20261017">
+<link rel="stylesheet" href="{FONT}"><link rel="stylesheet" href="../css/healing-journal.css?v=20261017"><link rel="stylesheet" href="../css/network-footer.css?v=20261020">
 <style>body{{margin:0;background:#0d0a11;color:#d8bd95}} .journal-return{{display:block;max-width:830px;margin:25px auto;padding:0 20px;color:#d8bd95;font:16px Georgia,serif;text-underline-offset:5px}} a:focus-visible{{outline:2px solid #e9d39a;outline-offset:5px}}</style>
 </head><body><a class="journal-return" href="../healing.html#healing-reflection">← HAYVN Healing</a>
 {content}
+{footer}
 </body></html>
 '''
 
