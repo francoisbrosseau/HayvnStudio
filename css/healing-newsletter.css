@@ -10,3 +10,9 @@
 @media(max-width:640px){.hv-newsletter-top{margin:18px auto 32px;gap:14px;padding:0 2px}.hv-newsletter-button{padding:21px 14px;gap:11px}.hv-newsletter-label{font-size:14px;line-height:1.55}.hv-newsletter-caption{font-size:16px}.hv-newsletter-note{font-size:13px}.hv-newsletter-moon{width:31px;height:31px;font-size:25px}.hv-newsletter-arrow{width:28px;height:28px;font-size:20px}}
 @media(max-width:350px){.hv-newsletter-moon{display:none}.hv-newsletter-label{font-size:13px}.hv-newsletter-caption{font-size:15px}}
 @media(prefers-reduced-motion:reduce){.hv-newsletter-button{transition:none}.hv-newsletter-button:hover,.hv-newsletter-button:active{transform:none}}
+
+/* A quiet, slow halo; the button and its text remain still. */
+.hv-newsletter-button{isolation:isolate}
+.hv-newsletter-button:after{content:"";position:absolute;inset:-4px;border-radius:16px;z-index:-1;pointer-events:none;border:1px solid #e7c68222;box-shadow:0 0 30px 6px #e7c68242;opacity:.35;animation:hv-newsletter-halo 6.5s ease-in-out infinite}
+@keyframes hv-newsletter-halo{0%,100%{opacity:.3}50%{opacity:.7}}
+@media(prefers-reduced-motion:reduce){.hv-newsletter-button:after{animation:none;opacity:.4}}
