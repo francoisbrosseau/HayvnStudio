@@ -1,0 +1,9 @@
+/* Isolated HAYVN newsletter addition. */
+.hv-newsletter-top{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px;margin:0 auto 30px;padding:0 10px;text-align:center;max-width:100%}
+.hv-newsletter-button{display:inline-flex;align-items:center;justify-content:center;gap:12px;max-width:100%;padding:15px 25px;border:1px solid #eed7b4;border-radius:999px;background:linear-gradient(135deg,#ead2ae,#d8bd95);color:#241a2c!important;font-family:"Lora",Georgia,serif;font-size:15px;font-weight:500;line-height:1.5;letter-spacing:.015em;text-decoration:none;box-shadow:0 4px 22px #d8bd951b;transition:transform .2s,box-shadow .2s}
+.hv-newsletter-button:hover{transform:translateY(-2px);box-shadow:0 6px 28px #d8bd9538}
+.hv-newsletter-button:focus-visible{outline:3px solid #f4e4ce;outline-offset:5px}
+.hv-newsletter-button>span{font-size:21px;line-height:1}
+.hv-newsletter-note{color:#d8bd95;font-family:"Lora",Georgia,serif;font-size:11px;line-height:1.6;letter-spacing:.055em}
+@media(max-width:640px){.hv-newsletter-top{margin-bottom:24px;gap:9px}.hv-newsletter-button{font-size:13px;padding:13px 17px;gap:9px}.hv-newsletter-note{font-size:10px;letter-spacing:.02em}}
+@media(prefers-reduced-motion:reduce){.hv-newsletter-button{transition:none}.hv-newsletter-button:hover{transform:none}}
