@@ -1,9 +1,11 @@
-/* Isolated HAYVN newsletter addition. */
-.hv-newsletter-top{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px;margin:0 auto 30px;padding:0 10px;text-align:center;max-width:100%}
-.hv-newsletter-button{display:inline-flex;align-items:center;justify-content:center;gap:12px;max-width:100%;padding:15px 25px;border:1px solid #eed7b4;border-radius:999px;background:linear-gradient(135deg,#ead2ae,#d8bd95);color:#241a2c!important;font-family:"Lora",Georgia,serif;font-size:15px;font-weight:500;line-height:1.5;letter-spacing:.015em;text-decoration:none;box-shadow:0 4px 22px #d8bd951b;transition:transform .2s,box-shadow .2s}
-.hv-newsletter-button:hover{transform:translateY(-2px);box-shadow:0 6px 28px #d8bd9538}
-.hv-newsletter-button:focus-visible{outline:3px solid #f4e4ce;outline-offset:5px}
-.hv-newsletter-button>span{font-size:21px;line-height:1}
-.hv-newsletter-note{color:#d8bd95;font-family:"Lora",Georgia,serif;font-size:11px;line-height:1.6;letter-spacing:.055em}
-@media(max-width:640px){.hv-newsletter-top{margin-bottom:24px;gap:9px}.hv-newsletter-button{font-size:13px;padding:13px 17px;gap:9px}.hv-newsletter-note{font-size:10px;letter-spacing:.02em}}
+/* Scoped newsletter invitation, between the Healing logo and companion spaces. */
+.hv-newsletter-top{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:13px;margin:12px auto 34px;padding:0 8px;text-align:center;width:min(440px,100%)}
+.hv-newsletter-button{position:relative;display:flex;align-items:center;justify-content:center;gap:22px;width:100%;padding:19px 24px;border:1px solid #a38b5f;border-radius:4px;background:linear-gradient(120deg,#17131bd9,#2a2319ad,#17131bd9);color:#ead5a3!important;text-decoration:none;box-shadow:0 8px 35px #0004,inset 0 0 25px #d8bd9508;transition:border-color .25s,box-shadow .25s,transform .25s}
+.hv-newsletter-button:before,.hv-newsletter-button:after{content:"";position:absolute;left:12px;right:12px;height:1px;background:linear-gradient(90deg,transparent,#b89c625c,transparent)}
+.hv-newsletter-button:before{top:5px}.hv-newsletter-button:after{bottom:5px}
+.hv-newsletter-copy{display:flex;flex-direction:column;gap:5px}.hv-newsletter-label{font:400 17px/1.5 "Cinzel",Georgia,serif;letter-spacing:.035em}.hv-newsletter-caption{font:400 17px/1.4 "Cormorant Garamond",Georgia,serif;color:#d8bd95}.hv-newsletter-moon{font:400 36px/1 Georgia,serif;color:#eed8a0}.hv-newsletter-arrow{font-size:23px;color:#cbb27c}
+.hv-newsletter-note{color:#c5ad84;font:400 14px/1.6 "Cormorant Garamond",Georgia,serif;letter-spacing:.04em}
+.hv-newsletter-button:hover{border-color:#eed8a0;box-shadow:0 8px 38px #d8bd951c,inset 0 0 25px #d8bd950a;transform:translateY(-2px)}
+.hv-newsletter-button:focus-visible{outline:2px solid #f4e4ce;outline-offset:6px}
+@media(max-width:640px){.hv-newsletter-top{margin:14px auto 28px;gap:11px}.hv-newsletter-button{padding:17px 16px;gap:17px}.hv-newsletter-label{font-size:14px}.hv-newsletter-caption{font-size:16px}.hv-newsletter-note{font-size:13px}.hv-newsletter-moon{font-size:31px}}
 @media(prefers-reduced-motion:reduce){.hv-newsletter-button{transition:none}.hv-newsletter-button:hover{transform:none}}
