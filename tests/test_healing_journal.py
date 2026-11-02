@@ -4,6 +4,8 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+import xml.etree.ElementTree as ET
+from html.parser import HTMLParser
 
 ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location('journal', ROOT/'scripts/healing_journal.py')
@@ -27,6 +29,31 @@ class JournalTests(unittest.TestCase):
         changed['headline'] = 'A different headline'
         with self.assertRaisesRegex(ValueError, 'already exists'):
             journal.validate(changed, [self.note])
+
+    def test_feed_delivers_complete_reflection_with_stable_identity(self):
+        feed = journal.render_feed(self.note)
+        channel = ET.fromstring(feed).find('channel')
+        self.assertEqual(len(channel.findall('item')), 1)
+        item = channel.find('item')
+        self.assertEqual(item.findtext('title'), self.note['headline'])
+        self.assertEqual(item.findtext('guid'), 'https://www.hayvnstudio.com/healing-journal/' + self.note['date'] + '.html')
+        text = []
+        class Text(HTMLParser):
+            def handle_data(self, value):
+                text.append(value)
+        Text().feed(item.findtext('description'))
+        for paragraph in self.note['paragraphs'] + [self.note['intention']]:
+            self.assertIn(paragraph, text)
+        self.assertEqual(feed, journal.render_feed(copy.deepcopy(self.note)))
+
+    def test_feed_markup_is_escaped_and_timestamp_is_validated(self):
+        note = copy.deepcopy(self.note)
+        note['paragraphs'][0] = 'A & B <do not run> 🌙'
+        feed = ET.fromstring(journal.render_feed(note))
+        self.assertIn('A &amp; B &lt;do not run&gt; 🌙', feed.findtext('channel/item/description'))
+        note['publishedAt'] = '2026-11-01T07:00:00'
+        with self.assertRaisesRegex(ValueError, 'timezone'):
+            journal.render_feed(note)
 
     def test_recycled_note_rejected(self):
         recycled = copy.deepcopy(self.note)

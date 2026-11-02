@@ -4,6 +4,8 @@ import argparse
 import datetime as dt
 import difflib
 import html
+from email.utils import format_datetime
+import xml.etree.ElementTree as ET
 import json
 from pathlib import Path
 import re
@@ -98,6 +100,32 @@ def page(title, description, canonical, content):
 '''
 
 
+def render_feed(note):
+    """One complete reflection per item; stable identity prevents resend on retries."""
+    origin = 'https://www.hayvnstudio.com/'
+    permanent = origin + 'healing-journal/' + note['date'] + '.html'
+    published = dt.datetime.fromisoformat(note['publishedAt'].replace('Z', '+00:00'))
+    if published.tzinfo is None:
+        raise ValueError('Feed publication timestamp must include a timezone')
+    rss = ET.Element('rss', {'version': '2.0'})
+    channel = ET.SubElement(rss, 'channel')
+    for tag, value in [('title', 'HAYVN Healing — A moment for yourself'),
+                       ('link', origin + 'healing.html#healing-reflection'),
+                       ('description', 'Your complete daily morning reflection from HAYVN Healing.'),
+                       ('language', 'en'), ('ttl', '60')]:
+        ET.SubElement(channel, tag).text = value
+    item = ET.SubElement(channel, 'item')
+    for tag, value in [('title', note['headline']), ('link', permanent),
+                       ('pubDate', format_datetime(published.astimezone(dt.timezone.utc))),
+                       ('category', note['theme'])]:
+        ET.SubElement(item, tag).text = value
+    ET.SubElement(item, 'guid', {'isPermaLink': 'true'}).text = permanent
+    body = ''.join('<p>' + html.escape(p) + '</p>' for p in note['paragraphs'])
+    body += '<p><strong>Carry this into today</strong></p><p>' + html.escape(note['intention']) + '</p>'
+    ET.SubElement(item, 'description').text = body
+    return '<?xml version="1.0" encoding="UTF-8"?>\n' + ET.tostring(rss, encoding='unicode') + '\n'
+
+
 def prepare(root, note):
     directory = root / 'content/healing-journal'
     archive = [json.loads(p.read_text()) for p in sorted(directory.glob('*.json'))]
@@ -120,6 +148,7 @@ def prepare(root, note):
     rows = '\n'.join(f'<p><time datetime="{n["date"]}">{n["date"]}</time><br><a href="{n["date"]}.html">{html.escape(n["headline"])}</a></p>' for n in sorted(notes.values(), key=lambda n: n['date'], reverse=True))
     listing = '<section id="healing-reflection"><div class="hv-reflection"><p class="hv-kicker">A moment for yourself</p><h2>Earlier reflections</h2><div class="hv-body">'+rows+'</div></div></section>'
     listing = listing.replace('<a href=', '<a style="color:#e9d39a;text-underline-offset:5px" href=')
+    outputs['healing-reflections.xml'] = render_feed(note)
     outputs['healing-journal/index.html'] = page('A moment for yourself', 'Morning reflections on self-kindness, friendship, and a more intentional life.', 'index.html', listing)
     return outputs
 
