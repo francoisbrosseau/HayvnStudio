@@ -120,8 +120,11 @@ def render_feed(note):
                        ('category', note['theme'])]:
         ET.SubElement(item, tag).text = value
     ET.SubElement(item, 'guid', {'isPermaLink': 'true'}).text = permanent
-    body = ''.join('<p>' + html.escape(p) + '</p>' for p in note['paragraphs'])
-    body += '<p><strong>Carry this into today</strong></p><p>' + html.escape(note['intention']) + '</p>'
+    # Inline paragraph margins survive email clients that reset all <p> spacing.
+    paragraph_style = 'margin:0 0 18px;font-family:Lora,Georgia,serif;line-height:1.75;color:#d8bd95;'
+    body = ''.join('<p style="' + paragraph_style + '">' + html.escape(p) + '</p>' for p in note['paragraphs'])
+    body += '<p style="margin:24px 0 12px;padding-top:18px;border-top:1px solid #69583e;font-family:Cinzel,Georgia,serif;font-size:12px;letter-spacing:1px;color:#e9d39a;"><strong>Carry this into today</strong></p>'
+    body += '<p style="margin:0;font-family:Georgia,serif;font-size:23px;line-height:1.45;font-style:italic;color:#d8bd95;">' + html.escape(note['intention']) + '</p>'
     ET.SubElement(item, 'description').text = body
     return '<?xml version="1.0" encoding="UTF-8"?>\n' + ET.tostring(rss, encoding='unicode') + '\n'
 
