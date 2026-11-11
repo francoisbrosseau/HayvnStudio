@@ -99,7 +99,7 @@ def page(title, description, canonical, content):
 <meta property="og:image" content="https://www.hayvnstudio.com/images/healing-bg-v2.webp">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="{FONT}"><link rel="stylesheet" href="../css/healing-journal.css?v=20261017"><link rel="stylesheet" href="../css/network-footer.css?v=20261020">
-<style>body{{margin:0;background:#0d0a11;color:#d8bd95}} .journal-return{{display:block;max-width:830px;margin:25px auto;padding:0 20px;color:#d8bd95;font:16px Georgia,serif;text-underline-offset:5px}} .hv-body a{{color:#e9d39a;text-underline-offset:5px}} a:focus-visible{{outline:2px solid #e9d39a;outline-offset:5px}}</style>
+<style>#healing-reflection h1{{font:400 clamp(25px,4.4vw,35px)/1.45 Cinzel,Georgia,serif;text-align:center;color:#f3dda8;margin:0 auto 30px;max-width:600px}}body{{margin:0;background:#0d0a11;color:#d8bd95}} .journal-return{{display:block;max-width:830px;margin:25px auto;padding:0 20px;color:#d8bd95;font:16px Georgia,serif;text-underline-offset:5px}} .hv-body a{{color:#e9d39a;text-underline-offset:5px}} a:focus-visible{{outline:2px solid #e9d39a;outline-offset:5px}}</style>
 </head><body><a class="journal-return" href="../healing.html#healing-reflection">← HAYVN Healing</a>
 {content}
 {footer}
