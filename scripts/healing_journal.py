@@ -92,8 +92,14 @@ def page(title, description, canonical, content):
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{esc(title)} | HAYVN Healing</title><meta name="description" content="{esc(description)}">
 <link rel="canonical" href="https://www.hayvnstudio.com/healing-journal/{canonical}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="{esc(title)} | HAYVN Healing">
+<meta property="og:description" content="{esc(description)}">
+<meta property="og:url" content="https://www.hayvnstudio.com/healing-journal/{canonical}">
+<meta property="og:image" content="https://www.hayvnstudio.com/images/healing-bg-v2.webp">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="{FONT}"><link rel="stylesheet" href="../css/healing-journal.css?v=20261017"><link rel="stylesheet" href="../css/network-footer.css?v=20261020">
-<style>body{{margin:0;background:#0d0a11;color:#d8bd95}} .journal-return{{display:block;max-width:830px;margin:25px auto;padding:0 20px;color:#d8bd95;font:16px Georgia,serif;text-underline-offset:5px}} a:focus-visible{{outline:2px solid #e9d39a;outline-offset:5px}}</style>
+<style>#healing-reflection h1{{font:400 clamp(25px,4.4vw,35px)/1.45 Cinzel,Georgia,serif;text-align:center;color:#f3dda8;margin:0 auto 30px;max-width:600px}}body{{margin:0;background:#0d0a11;color:#d8bd95}} .journal-return{{display:block;max-width:830px;margin:25px auto;padding:0 20px;color:#d8bd95;font:16px Georgia,serif;text-underline-offset:5px}} .hv-body a{{color:#e9d39a;text-underline-offset:5px}} a:focus-visible{{outline:2px solid #e9d39a;outline-offset:5px}}</style>
 </head><body><a class="journal-return" href="../healing.html#healing-reflection">← HAYVN Healing</a>
 {content}
 {footer}
@@ -150,10 +156,10 @@ def prepare(root, note):
     outputs[path] = json.dumps(note, ensure_ascii=False, indent=2) + '\n'
     outputs[f"healing-journal/{note['date']}.html"] = page(note['headline'], note['paragraphs'][0][:155], note['date']+'.html', render(note, 'index.html'))
     rows = '\n'.join(f'<p><time datetime="{n["date"]}">{n["date"]}</time><br><a href="{n["date"]}.html">{html.escape(n["headline"])}</a></p>' for n in sorted(notes.values(), key=lambda n: n['date'], reverse=True))
-    listing = '<section id="healing-reflection"><div class="hv-reflection"><p class="hv-kicker">A moment for yourself</p><h2>Earlier reflections</h2><div class="hv-body">'+rows+'</div></div></section>'
+    listing = '<section id="healing-reflection"><div class="hv-reflection"><p class="hv-kicker">A moment for yourself</p><h1>Morning reflection archive</h1><p>Browse daily reflections on self-kindness, friendship, boundaries and rest. Each entry offers a small intention to carry into your day.</p><p><a href="collections.html">Find a reflection by theme</a></p><div class="hv-body">'+rows+'</div></div></section>'
     listing = listing.replace('<a href=', '<a style="color:#e9d39a;text-underline-offset:5px" href=')
     outputs['healing-reflections.xml'] = render_feed(note)
-    outputs['healing-journal/index.html'] = page('A moment for yourself', 'Morning reflections on self-kindness, friendship, and a more intentional life.', 'index.html', listing)
+    outputs['healing-journal/index.html'] = page('Daily morning reflection archive', 'Browse original daily reflections on self-kindness, friendship, boundaries and rest, with a gentle intention for each day.', 'index.html', listing)
     return outputs
 
 
