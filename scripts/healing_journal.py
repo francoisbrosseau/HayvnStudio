@@ -79,6 +79,7 @@ def render(note, archive_href='healing-journal/index.html'):
 {paragraphs}
     </div>
     <footer class="hv-intention"><span>Carry this into today</span><p>{esc(note['intention'])}</p></footer>
+    <p><a class="hv-archive" href="{'../' if archive_href == 'index.html' else ''}healing-newsletter.html">Get the free morning reflection in your inbox</a></p>
     <a class="hv-archive" href="{archive_href}">Earlier reflections</a>
   </article>
 </section>'''
