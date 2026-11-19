@@ -41,6 +41,22 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Check API access during the one-time manual test
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          python - <<'PYAPI'
+          import sys
+          sys.path.insert(0, "scripts")
+          from publish_healing import response
+          schema = {"type": "object", "additionalProperties": False,
+                    "properties": {"ready": {"type": "boolean"}}, "required": ["ready"]}
+          result = response("Return JSON with ready set to true. This is an API connectivity test.", schema)
+          if result.get("ready") is not True:
+              raise RuntimeError("API connectivity test failed")
+          print("API_ACCESS_VERIFIED")
+          PYAPI
       - name: Select the Cancun publication date
         id: date
         run: echo "value=$(TZ=America/Cancun date +%F)" >> "$GITHUB_OUTPUT"

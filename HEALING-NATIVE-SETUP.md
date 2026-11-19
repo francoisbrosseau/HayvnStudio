@@ -15,7 +15,7 @@ permissions.
 3. Change GitHub Pages Source to GitHub Actions, using the prepared
    healing-pages.yml deployment workflow.
 4. Merge the reviewed implementation and manually run Publish HAYVN morning
-   reflection. First test an already-published date to exercise deployment
+   reflection. The manual run first makes a minimal structured API connectivity check. Test an already-published date to exercise deployment
    without generating another reflection. A newly generated API sample must also
    pass editorial review, renderer validation and public verification before
    treating this path as proven.
