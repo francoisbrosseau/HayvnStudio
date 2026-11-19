@@ -1,0 +1,104 @@
+name: Publish HAYVN morning reflection
+on:
+  schedule:
+    # UTC clock, equivalent to 03:23, 05:23, 06:23 and 07:23 Cancun.
+    - cron: '23 8,10,11,12 * * *'
+    # Post-target recovery, while the existing newsletter guard remains at 08:00.
+    - cron: '3 13 * * *'
+  workflow_dispatch:
+  pull_request:
+    paths: ['scripts/*healing*.py', 'tests/test_*healing*.py', '.github/workflows/healing-*.yml']
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: hayvn-healing-publisher
+  cancel-in-progress: false
+jobs:
+  validate:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest discover -s tests -p 'test_healing*.py'
+      - run: python -m unittest discover -s tests -p 'test_publish_healing.py'
+  publish:
+    # Owner activates this only after secure credential setup and a live API test.
+    if: github.event_name != 'pull_request' && vars.HAYVN_NATIVE_PUBLISH == 'enabled'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    outputs:
+      revision: ${{ steps.commit.outputs.revision }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Select the Cancun publication date
+        id: date
+        run: echo "value=$(TZ=America/Cancun date +%F)" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache/restore@v4
+        with:
+          path: .hayvn-runs
+          key: hayvn-healing-${{ steps.date.outputs.value }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            hayvn-healing-${{ steps.date.outputs.value }}-
+      - name: Generate or recover the original dated reflection
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python scripts/publish_healing.py
+      - uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: .hayvn-runs
+          key: hayvn-healing-${{ steps.date.outputs.value }}-${{ github.run_id }}-${{ github.run_attempt }}
+      - name: Preserve concurrent publication and commit the five outputs
+        id: commit
+        env:
+          EDITION_DATE: ${{ steps.date.outputs.value }}
+        run: |
+          set -euo pipefail
+          cp "content/healing-journal/$EDITION_DATE.json" "$RUNNER_TEMP/healing-note.json"
+          git fetch origin main
+          if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+            git reset --hard origin/main
+            if [ -f "content/healing-journal/$EDITION_DATE.json" ]; then
+              python scripts/healing_journal.py "content/healing-journal/$EDITION_DATE.json"
+            else
+              python scripts/healing_journal.py "$RUNNER_TEMP/healing-note.json"
+            fi
+          fi
+          python -m unittest discover -s tests -p 'test_healing*.py'
+          python -m unittest discover -s tests -p 'test_publish_healing.py'
+          python scripts/healing_newsletter_guard.py
+          git add healing.html "content/healing-journal/$EDITION_DATE.json" "healing-journal/$EDITION_DATE.html" healing-journal/index.html healing-reflections.xml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if ! git diff --cached --quiet; then
+            git commit -m "Publish HAYVN morning reflection $EDITION_DATE"
+            git push origin HEAD:main
+          fi
+          echo "revision=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+  deploy:
+    needs: publish
+    uses: ./.github/workflows/healing-pages.yml
+    with:
+      revision: ${{ needs.publish.outputs.revision }}
+  verify:
+    needs: [publish, deploy]
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.publish.outputs.revision }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python scripts/verify_healing_live.py
