@@ -1,0 +1,42 @@
+name: Deploy HAYVN Pages
+on:
+  push:
+    branches: [main]
+    paths-ignore: ['.github/**', '**/*.md']
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      revision:
+        type: string
+        required: true
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: hayvn-pages
+  cancel-in-progress: false
+jobs:
+  deploy:
+    if: vars.HAYVN_NATIVE_PUBLISH == 'enabled'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.revision || github.sha }}
+      - uses: actions/configure-pages@v5
+      - uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+      - uses: actions/deploy-pages@v4
+        id: deployment
+        with:
+          timeout: '1800000'
