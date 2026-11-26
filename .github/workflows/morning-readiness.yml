@@ -1,0 +1,68 @@
+name: Verify public morning editions
+on:
+  schedule:
+    # 08:07 and 09:07 in America/Cancun.
+    - cron: '7 13,14 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/morning-readiness.yml']
+permissions:
+  contents: read
+jobs:
+  public-edition:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        publication: [HAYVN, RIFTBOUND, WILDWIRE]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout: scripts
+      - name: Check the date readers see
+        env:
+          PUBLICATION: ${{ matrix.publication }}
+        shell: python
+        run: |
+          import datetime, json, os, re, sys, time
+          import urllib.request
+          import xml.etree.ElementTree as ET
+          from zoneinfo import ZoneInfo
+
+          today = datetime.datetime.now(ZoneInfo('America/Cancun')).date().isoformat()
+          publication = os.environ['PUBLICATION']
+          sites = {
+              'HAYVN': ('https://www.hayvnstudio.com/healing.html', r'data-publication-date="([^"]+)"'),
+              'RIFTBOUND': ('https://riftboundmag.com/', r'THE RIFTBOUND DAILY.*?<time datetime="([^"]+)"'),
+              'WILDWIRE': ('https://wildwiremag.com/', r'THE WILDWIRE JOURNAL.*?<time datetime="([^"]+)"'),
+          }
+          def read(url):
+              with urllib.request.urlopen(url + '?readiness=' + str(time.time_ns()), timeout=30) as response:
+                  return response.read().decode('utf-8')
+
+          url, pattern = sites[publication]
+          for attempt in range(3):
+              try:
+                  page = read(url)
+                  match = re.search(pattern, page, re.S)
+                  actual = match.group(1) if match else 'no edition date'
+                  if actual != today:
+                      raise ValueError(f'{url} shows {actual}, expected {today}')
+                  if publication == 'HAYVN':
+                      sys.path.insert(0, 'scripts')
+                      from healing_newsletter_guard import guarded_feed
+                      base = 'https://www.hayvnstudio.com/'
+                      note = json.loads(read(base + f'content/healing-journal/{today}.json'))
+                      feed = read(base + 'healing-reflections.xml')
+                      if len(ET.fromstring(feed).findall('./channel/item')) != 1 or guarded_feed(feed, page, note, today)[1]:
+                          raise ValueError('Public newsletter feed does not match today’s reflection')
+                  print(f'{publication} publicly current for {today}')
+                  break
+              except Exception as error:
+                  print(f'{publication}: {error}', flush=True)
+                  if attempt == 2:
+                      raise
+                  time.sleep(15)
