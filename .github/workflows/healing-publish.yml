@@ -26,6 +26,37 @@ jobs:
           python-version: '3.12'
       - run: python -m unittest discover -s tests -p 'test_healing*.py'
       - run: python -m unittest discover -s tests -p 'test_publish_healing.py'
+  check-api-setup:
+    # One bounded readiness probe on this owner-owned draft branch only.
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'maintenance/native-healing-publisher'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify repository activation flag and API access without publishing
+        env:
+          HAYVN_NATIVE_PUBLISH: ${{ vars.HAYVN_NATIVE_PUBLISH }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          python - <<'PYAPI'
+          import os
+          import sys
+          sys.path.insert(0, "scripts")
+          from publish_healing import response
+          print("Native activation flag: " + ("enabled" if os.environ.get("HAYVN_NATIVE_PUBLISH") == "enabled" else "not enabled"))
+          schema = {"type": "object", "additionalProperties": False,
+                    "properties": {"ready": {"type": "boolean"}}, "required": ["ready"]}
+          if response("Return JSON with ready set to true. This tests publisher connectivity only.", schema).get("ready") is not True:
+              raise RuntimeError("API connectivity test did not produce the expected response")
+          print("API_ACCESS_VERIFIED; no content generated, published or emailed")
+          PYAPI
   publish:
     # Owner activates this only after secure credential setup and a live API test.
     if: github.event_name != 'pull_request' && vars.HAYVN_NATIVE_PUBLISH == 'enabled'
