@@ -1870,6 +1870,12 @@
     }
   </style>
   <link rel="stylesheet" href="css/healing-newsletter.css?v=20261102-glow">
+  <style id="healing-reading-shortcuts">
+    .hv-read-today{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 18px;max-width:100%;border:1px solid #e9d39a80;border-radius:8px;background:#15111ae6;color:#f7e6bd;text-decoration:none;font:500 14px/1.4 "Cinzel",Georgia,serif}
+    .hv-read-today:hover{border-color:#f1d48b;background:#211926}
+    .hv-read-today:focus-visible{outline:2px solid #f1d48b;outline-offset:4px}
+    #healing-reflection,#lunara{scroll-margin-top:28px}
+  </style>
   <link rel="alternate" type="application/rss+xml" title="HAYVN Healing — Morning Reflections" href="healing-reflections.xml">
 <meta property="og:title" content="Daily Morning Reflection | HAYVN Healing"><meta property="og:description" content="A fresh reflection on self-kindness, everyday joy and living with intention. Read today’s reflection and subscribe free."><meta property="og:url" content="https://www.hayvnstudio.com/healing.html"><meta property="og:type" content="website"><meta property="og:image" content="https://www.hayvnstudio.com/images/healing-bg-v2.webp"><meta name="twitter:card" content="summary_large_image"></head>
 
@@ -1888,7 +1894,7 @@
   <audio
     id="healingAmbient"
     src="audio/healing-ambient.mp3"
-    preload="auto"
+    preload="none"
     loop
   ></audio>
 
@@ -1896,9 +1902,10 @@
     class="audio-toggle"
     id="audioToggle"
     type="button"
-    aria-label="Toggle ambient sound"
+    aria-label="Ambient sound"
+    aria-pressed="false"
   >
-    ♪
+    ♪̸
   </button>
 
 
@@ -1930,13 +1937,14 @@
 
 
     <div class="hv-newsletter-top">
-      <a class="hv-newsletter-button" href="healing-newsletter.html"><span class="hv-newsletter-moon" aria-hidden="true">☾</span><span class="hv-newsletter-copy"><span class="hv-newsletter-label">Get the free morning reflection</span><span class="hv-newsletter-caption">Subscribe for a little moment of calm, every day.</span></span><span class="hv-newsletter-arrow" aria-hidden="true">→</span></a>
-      <span class="hv-newsletter-note">In your inbox at 9 a.m. · Free to join · Unsubscribe anytime</span>
+      <a class="hv-read-today" href="#healing-reflection">Read today’s reflection</a>
+      <a class="hv-newsletter-button" href="healing-newsletter.html"><span class="hv-newsletter-moon" aria-hidden="true">☾</span><span class="hv-newsletter-copy"><span class="hv-newsletter-label">Get it by email</span><span class="hv-newsletter-caption">Receive the free morning reflection every day.</span></span><span class="hv-newsletter-arrow" aria-hidden="true">→</span></a>
+      <span class="hv-newsletter-note">Scheduled for 9 a.m. Cancún time · Free to join · Unsubscribe anytime</span>
     </div>
 
     <!-- The two companion spaces are intentionally visible on the first screen. -->
     <nav class="healing-companions" aria-label="Explore HAYVN's companion experiences">
-      <a class="healing-companion" href="lunara.html" aria-label="Explore Lunara by HAYVN tarot">
+      <a class="healing-companion" id="lunara" href="lunara.html" aria-label="Explore Lunara by HAYVN tarot">
         <img src="https://wildwiremag.com/images/lunara-network-logo.webp" width="1000" height="500" alt="Lunara by HAYVN celestial gold wordmark" decoding="async">
         <span>THE TAROT SANCTUARY <span aria-hidden="true">↗</span></span>
       </a>
@@ -2562,7 +2570,8 @@
       document.getElementById("audioToggle");
 
 
-    let muted = false;
+    let muted = true;
+    let audioAttempt = 0;
 
     const targetVolume = 0.20;
 
@@ -2578,6 +2587,8 @@
         "muted",
         muted
       );
+
+      audioToggle.setAttribute("aria-pressed", String(!muted));
 
     }
 
@@ -2626,23 +2637,32 @@
 
       if(muted) return;
 
+      const attempt = ++audioAttempt;
+      healingAmbient.volume = 0;
 
       healingAmbient
         .play()
 
         .then(() => {
 
-          fadeAudioIn();
+          if(attempt === audioAttempt && !muted) fadeAudioIn();
 
         })
 
-        .catch(() => {});
+        .catch(() => {
+
+          if(attempt !== audioAttempt) return;
+          muted = true;
+          updateAudioButton();
+
+        });
 
     }
 
 
     function stopAmbient(){
 
+      audioAttempt++;
       clearInterval(fadeInterval);
 
       healingAmbient.pause();
@@ -2673,35 +2693,7 @@
     );
 
 
-    window.addEventListener(
-      "pageshow",
-      () => {
-
-        updateAudioButton();
-
-        startAmbient();
-
-      }
-    );
-
-
-    window.addEventListener(
-      "pointerdown",
-      startAmbient,
-      { once:true }
-    );
-
-
-    window.addEventListener(
-      "touchstart",
-      startAmbient,
-      { once:true }
-    );
-
-
     updateAudioButton();
-
-    startAmbient();
 
 
     /* -------------------------

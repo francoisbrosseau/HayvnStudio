@@ -1,0 +1,23 @@
+---
+layout: null
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {% assign origin = 'https://www.hayvnstudio.com' -%}
+  {% assign pages = '/|/studio.html|/boudoir.html|/healing.html|/lunara.html|/healing-newsletter.html|/healing-journal/index.html|/healing-journal/collections.html|/healing-journal/self-kindness.html|/healing-journal/boundaries.html|/healing-journal/friendship.html|/healing-journal/rest.html' | split: '|' -%}
+  {% for path in pages -%}
+  <url><loc>{{ origin }}{{ path }}</loc></url>
+  {% endfor -%}
+  {% comment %}The publisher writes dated reflections as static HTML without front matter.{% endcomment -%}
+  {% assign html_files = site.static_files | where: 'extname', '.html' | sort: 'path' -%}
+  {% for file in html_files -%}
+  {% assign date = file.basename -%}
+  {% assign path = '/healing-journal/' | append: date | append: '.html' -%}
+  {% assign first_separator = date | slice: 4, 1 -%}
+  {% assign second_separator = date | slice: 7, 1 -%}
+  {% assign separators = date | remove: '0' | remove: '1' | remove: '2' | remove: '3' | remove: '4' | remove: '5' | remove: '6' | remove: '7' | remove: '8' | remove: '9' -%}
+  {% if file.path == path and date.size == 10 and first_separator == '-' and second_separator == '-' and separators == '--' -%}
+  <url><loc>{{ origin }}{{ path }}</loc></url>
+  {% endif -%}
+  {% endfor -%}
+</urlset>
