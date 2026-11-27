@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        publication: [HAYVN, RIFTBOUND, WILDWIRE]
+        publication: [HAYVN, RIFTBOUND]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -37,7 +37,6 @@ jobs:
           sites = {
               'HAYVN': ('https://www.hayvnstudio.com/healing.html', r'data-publication-date="([^"]+)"'),
               'RIFTBOUND': ('https://riftboundmag.com/', r'THE RIFTBOUND DAILY.*?<time datetime="([^"]+)"'),
-              'WILDWIRE': ('https://wildwiremag.com/', r'THE WILDWIRE JOURNAL.*?<time datetime="([^"]+)"'),
           }
           def read(url):
               with urllib.request.urlopen(url + '?readiness=' + str(time.time_ns()), timeout=30) as response:
