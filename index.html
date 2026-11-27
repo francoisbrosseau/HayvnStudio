@@ -10,10 +10,18 @@
 
   <meta name="theme-color" content="#030302">
 
-  <title>Hayvn | Three Paths. One Purpose.</title>
+  <title>HAYVN | Healing, Photography &amp; Boudoir</title>
+  <meta name="description" content="Explore the HAYVN world: daily reflections and healing, cinematic photography, and intimate boudoir portraiture. Three paths, one purpose.">
+  <link rel="canonical" href="https://www.hayvnstudio.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="HAYVN | Three Paths. One Purpose.">
+  <meta property="og:description" content="Find your path: HAYVN Healing, HAYVN Studio, or HAYVN Boudoir.">
+  <meta property="og:url" content="https://www.hayvnstudio.com/">
+  <meta property="og:image" content="https://www.hayvnstudio.com/images/hayvn-logo-gold.png">
+  <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="preload" as="image" href="images/hayvn-logo-gold.png">
-  <link rel="preload" as="image" href="images/hayvn-portal-mobile.png">
+  <link rel="preload" as="image" href="images/hayvn-logo-gold.png" media="(min-width:761px)">
+  <link rel="preload" as="image" href="images/hayvn-portal-mobile.png" media="(max-width:760px)">
 
   <style>
 
@@ -1442,6 +1450,24 @@
 
     }
 
+    /* Text paths preserve the artwork while offering immediate, accessible routes. */
+    html, body { height:auto; overflow-x:clip; overflow-y:auto; }
+    .portal-sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; border:0; }
+    .portal-quick-link { position:absolute; z-index:5; top:max(12px,env(safe-area-inset-top)); left:max(14px,env(safe-area-inset-left)); min-height:44px; display:inline-flex; align-items:center; padding:0 .85rem; border:1px solid #785a30; border-radius:4px; color:#f4dfac; background:#080603e8; font-size:.81rem; text-decoration:none; }
+    .portal-paths { max-width:65rem; margin:0 auto; padding:0 max(1.25rem,env(safe-area-inset-right)) 3.5rem max(1.25rem,env(safe-area-inset-left)); }
+    .portal-paths ul { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); list-style:none; margin:0; padding:0; gap:.8rem 1.2rem; }
+    .portal-paths a { display:block; padding:.75rem 0; border-top:1px solid #594328; color:#f4dfac; text-decoration:none; }
+    .portal-paths strong { display:block; font-family:Georgia,serif; letter-spacing:.06em; font-size:1.1rem; font-weight:normal; margin-bottom:.35rem; }
+    .portal-paths span { display:block; color:#d1bda2; font-size:.91rem; line-height:1.45; }
+    .portal-paths a:hover strong, .portal-quick-link:hover { text-decoration:underline; text-underline-offset:.2em; }
+    .portal-quick-link:focus-visible, .portal-paths a:focus-visible, .portal-skip:focus-visible { outline:2px solid #f5d686; outline-offset:3px; }
+    .portal-skip { position:absolute; z-index:4; right:max(16px,env(safe-area-inset-right)); bottom:max(18px,env(safe-area-inset-bottom)); min-height:44px; padding:.62rem 1rem; border:1px solid #ba9457; border-radius:4px; color:#fff0cb; background:#100b05f0; font:inherit; cursor:pointer; }
+    .portal-skip[hidden] { display:none; }
+    .portal-skip:hover { background:#322211; }
+    @media(max-width:600px) {
+      .portal-paths ul { grid-template-columns:1fr; gap:.3rem; }
+      .portal-paths a { padding:.7rem 0; }
+    }
   </style>
 </head>
 
@@ -1452,9 +1478,12 @@
        MAIN HAYVN PORTAL
   ======================================================== -->
 
-  <main class="portal">
+  <main id="portalContent">
+    <h1 class="portal-sr-only">HAYVN: Healing, Studio and Boudoir</h1>
+    <section class="portal" aria-label="Choose your path">
+      <a class="portal-quick-link" href="healing.html#healing-reflection">Read today’s reflection</a>
 
-    <div class="portal-stage">
+      <div class="portal-stage">
 
       <picture>
 
@@ -1508,8 +1537,16 @@
         aria-label="Hayvn Boudoir"
       ></a>
 
-    </div>
+      </div>
+    </section>
 
+    <nav class="portal-paths" aria-label="Go straight to a HAYVN portal">
+      <ul>
+        <li><a href="healing.html"><strong>Healing</strong><span>Morning reflections, rituals and guided self-reflection.</span></a></li>
+        <li><a href="studio.html?skipIntro=1"><strong>Studio</strong><span>Real estate, portraits and cinematic photography.</span></a></li>
+        <li><a href="boudoir.html"><strong>Boudoir</strong><span>Private portrait sessions, with guidance at every step.</span></a></li>
+      </ul>
+    </nav>
   </main>
 
 
@@ -1520,13 +1557,15 @@
   <div
     class="transition-layer"
     id="videoTransition"
+    aria-hidden="true"
   >
+    <button type="button" class="portal-skip" id="portalSkip" hidden>Skip intro</button>
 
     <video
       id="healingVideo"
       src="videos/healing-transition.mp4"
       playsinline
-      preload="auto"
+      preload="none"
       loop
     ></video>
 
@@ -1535,7 +1574,7 @@
       id="studioVideo"
       src="videos/studio-transition.mp4"
       playsinline
-      preload="auto"
+      preload="none"
       loop
     ></video>
 
@@ -1544,7 +1583,7 @@
       id="boudoirVideo"
       src="videos/boudoir-transition.mp4"
       playsinline
-      preload="auto"
+      preload="none"
       loop
     ></video>
 
@@ -1558,7 +1597,7 @@
   <audio
     id="portalMusic"
     src="audio/intro-reveal.mp3"
-    preload="auto"
+    preload="none"
     loop
   ></audio>
 
@@ -1605,7 +1644,11 @@
     ];
 
 
+    const portalSkip = document.getElementById("portalSkip");
+    const portalContent = document.getElementById("portalContent");
     let muted = false;
+    let musicEnabled = false;
+    let finishIntro = null;
 
     let navigating = false;
 
@@ -1621,6 +1664,11 @@
     function resetPortalState(){
 
       navigating = false;
+      finishIntro = null;
+      portalSkip.hidden = true;
+      portalContent.inert = false;
+      audioToggle.inert = false;
+      videoTransition.setAttribute("aria-hidden", "true");
 
       document.body.style.opacity = "1";
       document.body.style.filter = "none";
@@ -1652,7 +1700,7 @@
 
         video.pause();
 
-        video.currentTime = 0;
+        if(video.readyState > 0) video.currentTime = 0;
 
         video.onended = null;
 
@@ -1675,7 +1723,7 @@
 
         portalMusic.muted = muted;
 
-        if(!muted){
+        if(musicEnabled && !muted){
           portalMusic.play().catch(() => {});
         }
 
@@ -1693,32 +1741,6 @@
     );
 
 
-    window.addEventListener(
-      "focus",
-      () => setTimeout(
-        resetPortalState,
-        80
-      )
-    );
-
-
-    document.addEventListener(
-      "visibilitychange",
-      () => {
-
-        if(!document.hidden){
-
-          setTimeout(
-            resetPortalState,
-            80
-          );
-
-        }
-
-      }
-    );
-
-
     /* =========================================================
        AUDIO
     ========================================================= */
@@ -1726,12 +1748,15 @@
     function updateAudioButton(){
 
       audioToggle.textContent =
-        muted ? "♪̸" : "♪";
+        musicEnabled ? "♪" : "♪̸";
+
+      audioToggle.setAttribute("aria-pressed", String(musicEnabled));
+      audioToggle.setAttribute("aria-label", musicEnabled ? "Pause ambient music" : "Play ambient music");
 
 
       audioToggle.classList.toggle(
         "muted",
-        muted
+        !musicEnabled
       );
 
 
@@ -1743,7 +1768,7 @@
 
     function startMusic(){
 
-      if(muted) return;
+      if(muted || !musicEnabled) return;
 
 
       portalMusic.volume = 0.38;
@@ -1816,8 +1841,9 @@
       videoId
     ){
 
+      if(event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button > 0) return;
+      if(window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       event.preventDefault();
-
 
       if(navigating) return;
 
@@ -1837,7 +1863,7 @@
 
           video.pause();
 
-          video.currentTime = 0;
+          if(video.readyState > 0) video.currentTime = 0;
 
           video.classList.remove(
             "active-video"
@@ -1880,7 +1906,7 @@
         "block";
 
 
-      selectedVideo.currentTime = 0;
+      if(selectedVideo.readyState > 0) selectedVideo.currentTime = 0;
 
 
       selectedVideo.muted =
@@ -1918,10 +1944,22 @@
       );
 
 
-      fadePortalMusic(
-        0.04,
-        1600
-      );
+      if(musicEnabled) fadePortalMusic(0.04, 1600);
+
+      videoTransition.setAttribute("aria-hidden", "false");
+      portalContent.inert = true;
+      audioToggle.inert = true;
+      portalSkip.hidden = false;
+      portalSkip.focus({preventScroll:true});
+
+      finishIntro = () => {
+        if(!navigating || !finishIntro) return;
+        finishIntro = null;
+        clearTimeout(fallbackTimeout);
+        clearTimeout(redirectTimeout);
+        selectedVideo.pause();
+        window.location.assign(url);
+      };
 
 
       /*
@@ -1929,14 +1967,7 @@
          still skips directly to the selected site.
       */
 
-      selectedVideo.onclick =
-        () => {
-
-          window.location.assign(
-            url
-          );
-
-        };
+      selectedVideo.onclick = () => finishIntro?.();
 
 
       selectedVideo
@@ -1945,13 +1976,7 @@
 
           redirectTimeout =
             setTimeout(
-              () => {
-
-                window.location.assign(
-                  url
-                );
-
-              },
+              () => finishIntro?.(),
               2200
             );
 
@@ -1975,13 +2000,7 @@
 
             redirectTimeout =
               setTimeout(
-                () => {
-
-                  window.location.assign(
-                    url
-                  );
-
-                },
+                () => finishIntro?.(),
                 1600
               );
 
@@ -1997,30 +2016,20 @@
     ========================================================= */
 
     updateAudioButton();
-
-    startMusic();
-
-
-    window.addEventListener(
-      "pointerdown",
-      startMusic,
-      { once:true }
-    );
-
-
-    window.addEventListener(
-      "touchstart",
-      startMusic,
-      { once:true }
-    );
+    portalSkip.addEventListener("click", () => finishIntro?.());
+    window.addEventListener("keydown", event => {
+      if(!finishIntro || event.repeat || !["Escape", " ", "Spacebar"].includes(event.key)) return;
+      event.preventDefault();
+      finishIntro();
+    });
 
 
     audioToggle.addEventListener(
       "click",
       () => {
 
-        muted = !muted;
-
+        musicEnabled = !musicEnabled;
+        muted = !musicEnabled;
 
         updateAudioButton();
 

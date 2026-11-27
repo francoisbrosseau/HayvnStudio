@@ -3,7 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>HAYVN Studio</title>
+  <title>HAYVN Studio Photography | Portfolio &amp; Booking</title>
+  <meta name="description" content="Explore HAYVN Studio’s photography portfolio: portraits, flying dress sessions, engagements, weddings and real estate. Ask about availability or book via WhatsApp." />
+  <link rel="canonical" href="https://www.hayvnstudio.com/studio.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="HAYVN Studio" />
+  <meta property="og:title" content="HAYVN Studio Photography | Portfolio &amp; Booking" />
+  <meta property="og:description" content="Explore portraits, flying dress sessions, engagements, weddings and real estate photography. Ask about a session on WhatsApp." />
+  <meta property="og:url" content="https://www.hayvnstudio.com/studio.html" />
+  <meta property="og:image" content="https://www.hayvnstudio.com/images/hayvn-logo-studio.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1536" />
+  <meta property="og:image:height" content="1024" />
+  <meta property="og:image:alt" content="HAYVN Studio photography logo" />
+  <meta name="twitter:card" content="summary_large_image" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -161,12 +174,13 @@
 
     .hero{
       min-height:100vh;
+      min-height:100svh;
       display:flex;
       align-items:center;
       justify-content:center;
       flex-direction:column;
       text-align:center;
-      padding:40px;
+      padding:68px 28px 42px;
     }
 
     .hero-logo-wrap{
@@ -198,7 +212,9 @@
     }
 
     .hero-logo{
-      width:min(900px,94vw);
+      width:min(740px,90vw,66vh);
+      height:auto;
+      display:block;
       opacity:0;
       animation:
         logoReveal 2.2s ease forwards,
@@ -211,11 +227,11 @@
     }
 
     .hero-sub{
-      margin-top:38px;
-      max-width:940px;
-      font-size:clamp(24px,2.2vw,38px);
-      line-height:1.7;
-      letter-spacing:.06em;
+      margin-top:12px;
+      max-width:860px;
+      font-size:clamp(19px,2.2vw,30px);
+      line-height:1.45;
+      letter-spacing:.035em;
       opacity:0;
       animation:textReveal 2s ease forwards;
       animation-delay:.9s;
@@ -230,10 +246,60 @@
     ========================================================= */
 
     .hero-booking-wrap{
-      margin-top:38px;
-      opacity:0;
-      animation:heroButtonReveal 1.8s ease forwards;
-      animation-delay:1.55s;
+      margin-top:24px;
+    }
+
+    .studio-portfolio-nav{
+      max-width:780px;
+      margin:22px auto 0;
+    }
+
+    .studio-portfolio-label{
+      margin-bottom:6px;
+      color:#ead59b;
+      font:600 13px "Cinzel",serif;
+      letter-spacing:.08em;
+    }
+
+    .studio-portfolio-nav ul{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:2px 12px;
+      padding:0;
+      list-style:none;
+    }
+
+    .studio-portfolio-nav a{
+      display:inline-flex;
+      align-items:center;
+      min-height:44px;
+      padding:4px 7px;
+      color:#fff1ce;
+      font:600 16px "Cormorant Garamond",serif;
+      text-decoration:underline;
+      text-underline-offset:4px;
+    }
+
+    .studio-portfolio-nav a:hover{
+      color:#ffe097;
+    }
+
+    .studio-portfolio-nav a:focus-visible,
+    .hero-booking-btn:focus-visible{
+      outline:2px solid #ffe097;
+      outline-offset:3px;
+    }
+
+    .studio-section[id],
+    .catrina-event[id]{
+      scroll-margin-top:56px;
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      .hero-logo-wrap,.hero-logo-wrap::before,.hero-logo,.hero-sub{animation:none}
+      .hero-logo,.hero-sub{opacity:1}
     }
 
     .hero-booking-btn{
@@ -246,7 +312,7 @@
       overflow:hidden;
 
       border:1px solid rgba(233,211,154,.52);
-      background:rgba(0,0,0,.24);
+      background:rgba(16,12,7,.88);
       backdrop-filter:blur(8px);
 
       color:#ead59b;
@@ -860,20 +926,27 @@
       }
 
       .hero{
-        padding:28px;
+        padding:64px 20px 32px;
       }
 
       .hero-logo{
-        width:100vw;
+        width:min(520px,92vw,64vh);
       }
 
       .hero-sub{
-        font-size:21px;
-        line-height:1.7;
+        font-size:clamp(17px,4.5vw,21px);
       }
 
       .hero-booking-wrap{
-        margin-top:30px;
+        margin-top:20px;
+      }
+
+      .studio-portfolio-nav{
+        margin-top:16px;
+      }
+
+      .studio-portfolio-nav ul{
+        gap:0 6px;
       }
 
       .hero-booking-btn{
@@ -953,15 +1026,12 @@
 .catrina-event-eyebrow span:last-child{transform:rotate(180deg)}
 .catrina-event h2{font:400 clamp(37px,5.5vw,72px)/1.04 "Cormorant Garamond",serif;color:#f5e7d3;max-width:850px;margin:0 auto 17px}
 .catrina-event h2 em{color:#e7b56e;font-weight:400}
-.catrina-event-lead{color:#d7b87d;font:12px "Cinzel",serif;letter-spacing:.21em;margin-bottom:37px}
+.catrina-event-lead{max-width:570px;margin:0 auto 30px;color:#e3d2b7;font:600 20px/1.45 "Cormorant Garamond",serif}
 .catrina-event-visual{max-width:790px;margin:0 auto;padding:9px;border:1px solid rgba(218,163,85,.58);background:linear-gradient(140deg,#21130d,#090808);box-shadow:0 20px 85px rgba(0,0,0,.65),0 0 65px rgba(155,74,26,.12)}
 .catrina-event-visual img{display:block;width:100%;height:auto;object-fit:contain}
-.catrina-event-details{margin:30px auto 24px;color:#e3d2b7;font:12px "Cinzel",serif;letter-spacing:.1em;line-height:2}
+.catrina-event-details{margin:0 auto 12px;color:#d7b87d;font:12px "Cinzel",serif;letter-spacing:.1em;line-height:2}
 .catrina-event-details span{color:#d59e51;margin:0 13px}
-.catrina-event-book{display:inline-flex;align-items:center;justify-content:center;gap:15px;padding:18px 27px;border:1px solid #dfb76d;background:linear-gradient(115deg,#b9803a,#f0cd87 52%,#b9803a);color:#211208!important;text-decoration:none;font:600 12px "Cinzel",serif;letter-spacing:.07em;box-shadow:0 10px 34px rgba(151,90,29,.23);transition:transform .25s,box-shadow .25s}
-.catrina-event-book:hover{transform:translateY(-3px);box-shadow:0 13px 45px rgba(200,125,45,.4)}
-.catrina-event-note{margin-top:18px;color:#b9a48c;font:17px "Cormorant Garamond",serif;letter-spacing:.05em}
-@media(max-width:640px){.catrina-event{padding:64px 13px 75px}.catrina-event-eyebrow{font-size:9px;gap:9px;letter-spacing:.16em}.catrina-event-eyebrow span{width:24px}.catrina-event h2{font-size:clamp(35px,9vw,51px)}.catrina-event-lead{font-size:10px;line-height:1.8;margin-bottom:25px}.catrina-event-visual{padding:5px}.catrina-event-details{font-size:10px;line-height:1.8}.catrina-event-details span{display:block;margin:0}.catrina-event-book{font-size:10px;padding:16px 13px;width:min(100%,340px)}}
+@media(max-width:640px){.catrina-event{padding:64px 13px 75px}.catrina-event-eyebrow{font-size:9px;gap:9px;letter-spacing:.16em}.catrina-event-eyebrow span{width:24px}.catrina-event h2{font-size:clamp(35px,9vw,51px)}.catrina-event-lead{font-size:18px;margin-bottom:22px}.catrina-event-visual{padding:5px}.catrina-event-details{font-size:10px;line-height:1.8}.catrina-event-details span{display:block;margin:0}}
 </style>
 </head>
 
@@ -997,19 +1067,20 @@
        HERO
   ======================================================== -->
 
-  <section class="hero">
+  <section class="hero" aria-labelledby="studio-heading">
 
-    <div class="hero-logo-wrap">
+    <h1 class="hero-logo-wrap" id="studio-heading">
       <img
         src="images/hayvn-logo-studio.png"
         alt="HAYVN Studio"
         class="hero-logo"
+        width="1536"
+        height="1024"
       />
-    </div>
+    </h1>
 
     <p class="hero-sub">
-      Professional photography, cinematic storytelling,
-      and visual work crafted with intention.
+      Professional photography for people, spaces, and meaningful moments.
     </p>
 
     <div class="hero-booking-wrap">
@@ -1018,25 +1089,22 @@
         class="hero-booking-btn"
         target="_blank"
         rel="noopener noreferrer">
-        BOOK A SESSION
+        Book or ask on WhatsApp <span aria-hidden="true">&nbsp;↗</span>
       </a>
     </div>
 
-  </section>
+    <nav class="studio-portfolio-nav" aria-label="Studio portfolio">
+      <p class="studio-portfolio-label">Explore the portfolio</p>
+      <ul>
+        <li><a href="#real-estate">Real Estate</a></li>
+        <li><a href="#flying-dress">Flying Dress</a></li>
+        <li><a href="#portraits">Portraits</a></li>
+        <li><a href="#engagement">Engagements</a></li>
+        <li><a href="#weddings">Weddings</a></li>
+        <li><a href="#catrina-event">Catrina Archive</a></li>
+      </ul>
+    </nav>
 
-  <!-- CAT RINA 2026 — STUDIO-ONLY EVENT PROMOTION -->
-  <section class="catrina-event" id="catrina-event" aria-labelledby="catrina-title">
-    <div class="catrina-event-inner">
-      <div class="catrina-event-eyebrow"><span></span> HAYVN STUDIO PRESENTS <span></span></div>
-      <h2 id="catrina-title">A celebration of beauty <em>and remembrance.</em></h2>
-      <p class="catrina-event-lead">THE CATRINA PHOTOSHOOT EXPERIENCE</p>
-      <div class="catrina-event-visual">
-        <img src="./images/IMG-20261018-WA0016.jpg?v=20261018-2" alt="HAYVN Studio Catrina Photoshoot Event, October 18 to November 7, 2026, in Puerto Morelos and Playa del Carmen. Package A: 5,000 MXN with one-hour session, makeup, accessories and 15 edited photos. Package B: 7,000 MXN with extended session, makeup, accessories, 30 edited photos and video reel." loading="eager" decoding="async" fetchpriority="high" onerror="if(!this.dataset.retried){this.dataset.retried=&#39;1&#39;;this.src=&#39;https://raw.githubusercontent.com/francoisbrosseau/HayvnStudio/main/images/IMG-20261018-WA0016.jpg&#39;}" />
-      </div>
-      <p class="catrina-event-details">OCTOBER 18 — NOVEMBER 7, 2026 <span aria-hidden="true">✦</span> PUERTO MORELOS &amp; PLAYA DEL CARMEN</p>
-      <a class="catrina-event-book" href="https://wa.me/14432922342?text=Hello%21%20I%27d%20like%20to%20book%20the%20HAYVN%20Studio%20Catrina%20Photoshoot%20Event%20%28October%2018%E2%80%93November%207%2C%202026%29.%20Could%20you%20tell%20me%20which%20dates%20are%20available%20and%20how%20to%20reserve%20Package%20A%20or%20B%3F" target="_blank" rel="noopener noreferrer" aria-label="Inquire about booking the Catrina photoshoot event via WhatsApp">INQUIRE &amp; RESERVE YOUR SESSION <span aria-hidden="true">↗</span></a>
-      <p class="catrina-event-note">Limited dates · Packages from $5,000 MXN</p>
-    </div>
   </section>
 
   <!-- =======================================================
@@ -1501,6 +1569,19 @@
 
   </section>
 
+  <!-- CATRINA 2026 — STUDIO PORTFOLIO ARCHIVE -->
+  <section class="catrina-event" id="catrina-event" aria-labelledby="catrina-title">
+    <div class="catrina-event-inner">
+      <div class="catrina-event-eyebrow"><span></span> FROM THE STUDIO ARCHIVE <span></span></div>
+      <h2 id="catrina-title">The Catrina <em>Photoshoot Experience</em></h2>
+      <p class="catrina-event-details">OCTOBER 18 — NOVEMBER 7, 2026 <span aria-hidden="true">✦</span> PUERTO MORELOS &amp; PLAYA DEL CARMEN</p>
+      <p class="catrina-event-lead">A celebration of beauty and remembrance. This event has ended; the original poster is shown as past work.</p>
+      <figure class="catrina-event-visual">
+        <img src="./images/IMG-20261018-WA0016.jpg?v=20261018-2" alt="Original poster for HAYVN Studio’s past Catrina photoshoot event." loading="lazy" decoding="async" onerror="if(!this.dataset.retried){this.dataset.retried=&#39;1&#39;;this.src=&#39;https://raw.githubusercontent.com/francoisbrosseau/HayvnStudio/main/images/IMG-20261018-WA0016.jpg&#39;}" />
+      </figure>
+    </div>
+  </section>
+
   <!-- =======================================================
        BOOKING
   ======================================================== -->
@@ -1522,7 +1603,7 @@
         class="booking-btn"
         target="_blank"
         rel="noopener noreferrer">
-        Start Your Studio Inquiry
+        Start Your Inquiry on WhatsApp
       </a>
 
     </div>

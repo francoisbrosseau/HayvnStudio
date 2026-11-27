@@ -3,7 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>HAYVN Boudoir</title>
+  <title>Boudoir Photography | HAYVN Boudoir</title>
+  <meta name="description" content="Discover HAYVN Boudoir’s private, guided photography sessions, explore four editorial experiences, and inquire about availability." />
+  <link rel="canonical" href="https://www.hayvnstudio.com/boudoir.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Boudoir Photography | HAYVN Boudoir" />
+  <meta property="og:description" content="Private, guided boudoir photography with an editorial touch. Explore the experience and inquire about availability." />
+  <meta property="og:url" content="https://www.hayvnstudio.com/boudoir.html" />
+  <meta property="og:image" content="https://www.hayvnstudio.com/images/boudoir-share.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="HAYVN Boudoir gold logo on a dark background" />
+  <meta name="twitter:card" content="summary_large_image" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -253,6 +264,7 @@
 
     .hero-logo{
       width:min(900px,94vw);
+      height:auto;
 
       opacity:0;
 
@@ -267,8 +279,40 @@
         drop-shadow(0 0 130px rgba(180,92,92,.12));
     }
 
+    .hero-title{
+      margin-top:18px;
+      color:#e9d39a;
+      font:400 clamp(19px,2.5vw,36px)/1.3 "Cinzel", serif;
+      letter-spacing:.06em;
+    }
+
+    .hero-inquiry{
+      margin-top:18px;
+      padding:11px 19px;
+      display:inline-block;
+      border:1px solid rgba(233,211,154,.55);
+      background:rgba(5,5,5,.48);
+      color:#f6e4b9;
+      font:400 14px/1.4 "Cinzel", serif;
+      text-decoration:none;
+    }
+
+    .hero-inquiry:hover,
+    .hero-inquiry:focus-visible{
+      border-color:#f6e4b9;
+      background:rgba(233,211,154,.15);
+    }
+
+    .hero-privacy{
+      max-width:34ch;
+      margin-top:9px;
+      color:#f2e8d5;
+      font-size:clamp(16px,1.5vw,20px);
+      line-height:1.25;
+    }
+
     .hero-sub{
-      margin-top:38px;
+      margin-top:10px;
 
       max-width:900px;
 
@@ -1292,17 +1336,26 @@
     <div class="hero-logo-wrap">
 
       <img
-        src="images/boudoir-logo.png"
+        src="images/boudoir-logo-768.webp"
+        srcset="images/boudoir-logo-768.webp 768w, images/boudoir-logo-1440.webp 1440w"
+        sizes="(max-width: 900px) 100vw, (max-width: 957px) 94vw, 900px"
+        width="768"
+        height="512"
         alt="HAYVN Boudoir"
         class="hero-logo"
+        fetchpriority="high"
       />
 
     </div>
 
+    <h1 class="hero-title">Boudoir Photography</h1>
     <p class="hero-sub">
       Elegant editorial intimacy,
       confidence, beauty, and cinematic storytelling.
     </p>
+    <a class="hero-inquiry" href="https://wa.me/14432922342?text=Hi%21%20I%20found%20you%20through%20the%20HAYVN%20website%20and%20I%27m%20interested%20in%20booking%20a%20Boudoir%20session.%20I%27d%20love%20to%20get%20more%20information."
+      target="_blank" rel="noopener noreferrer">Ask about availability</a>
+    <p class="hero-privacy">Images are never shared publicly without your permission and clear approval.</p>
 
   </section>
 
@@ -1318,7 +1371,13 @@
       <div class="bio-photo">
 
         <img
-          src="images/boudoir/IMG_4783.jpg"
+          src="images/boudoir/intro-540.webp"
+          srcset="images/boudoir/intro-540.webp 540w, images/boudoir/intro-1000.webp 1000w"
+          sizes="(max-width: 386px) calc(100vw - 96px), (max-width: 900px) 340px, (max-width: 1250px) 35vw, 440px"
+          width="540"
+          height="810"
+          loading="lazy"
+          decoding="async"
           alt="HAYVN Boudoir photography"
         >
 
